@@ -1,0 +1,23 @@
+:root {
+  --primary: rgba(215, 87, 17, 1);
+  --primary-80: rgba(223, 121, 65, 1);
+  --primary-60: rgba(231, 154, 112, 1);
+  --primary-40: rgba(239, 188, 160, 1);
+  --primary-20: rgba(247, 221, 207, 1);
+  --secondary: rgba(17, 145, 215, 1);
+  --secondary-80: rgba(65, 167, 223, 1);
+  --secondary-60: rgba(112, 189, 231, 1);
+  --secondary-40: rgba(160, 211, 239, 1);
+  --secondary-20: rgba(207, 233, 247, 1);
+  --img-border: rgba(223, 224, 235, 1);
+  --grey: rgba(159, 162, 180, 1);
+  --position-staff: rgba(197, 199, 205, 1);
+  --header-mobile: rgb(244, 244, 248);
+  --text-disable: rgba(134, 146, 166, 1);
+
+  /* fonts */
+  --inter: "Inter", sans-serif;
+  --dosis: "Dosis", sans-serif;
+  --sans-pro: "Source Sans 3", sans-serif;
+  --gayathri: "Gayathri", sans-serif;
+}
