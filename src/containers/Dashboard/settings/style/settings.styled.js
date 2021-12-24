@@ -11,6 +11,9 @@ export const SettingsWrapper = styled.div`
   .profile-wrapper {
     height: 70px;
     width: 70px;
+    border: 2px solid var(--img-border);
+    border-radius: 50%;
+    padding: 3px 3px 3px 3px;
 
     img {
       width: 100%;
