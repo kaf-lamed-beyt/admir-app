@@ -12,12 +12,11 @@ const Contact = () => {
 
   const changeHandler = (value) => {
     setValue(value);
-    console.log(`Option selected:`, value);
   };
 
   return (
     <React.Fragment>
-      <Fade direction="up" cascade triggerOnce>
+      <Fade cascade triggerOnce>
         <h1>Complete Your profile!</h1>
         <p className="auth-instruction">
           For the purpose of industry regulation, your details are required.
