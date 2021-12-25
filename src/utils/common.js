@@ -18,3 +18,7 @@ export const overview_stats = [
   { title: "reports", value: 43, _id: 2 },
   { title: "average hour", value: 16, _id: 3 },
 ];
+
+// signup form counter constant that indicates the amount of
+// steps remaining in form filling process
+export const MAX_FORM_STEPS = 3;

@@ -12,11 +12,17 @@ export const AuthWrapper = styled.div`
 
     p {
       margin-left: 7px;
+      color: var(--text-disable);
+      margin-top: 9px;
     }
 
     svg {
       margin-top: 11px;
     }
+  }
+
+  .signup-form {
+    margin-top: -27px;
   }
 
   form {
@@ -49,10 +55,58 @@ export const AuthWrapper = styled.div`
 
     button {
       margin-top: 25px;
+      color: #fff;
 
-      a {
-        color: #fff;
+      :hover {
+        cursor: pointer;
       }
+    }
+  }
+
+  .auth-instruction {
+    color: var(--text-disable);
+    border-bottom: 1px solid var(--img-border);
+    padding-bottom: 6px;
+  }
+
+  button {
+    margin-top: 25px;
+    height: 45px;
+    width: 100%;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+
+    a {
+      color: #fff !important;
+    }
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  .staff-country {
+    height: 45px;
+    border-radius: 6px;
+    padding: 0 19px 0 22px;
+
+    :focus {
+      border: 1px solid var(--primary) !important;
+    }
+
+    :hover {
+      border: 1px solid var(--primary);
+    }
+  }
+
+  .have-account {
+    text-align: center;
+    color: var(--text-disable);
+    padding: 8px 0;
+
+    span {
+      color: var(--primary);
 
       :hover {
         cursor: pointer;
@@ -72,6 +126,10 @@ export const AuthWrapper = styled.div`
     width: 100%;
     padding: 0 200px;
     height: 100%;
+    margin-top: 30px;
+  }
+
+  @media only screen and (min-width: 576px) and (max-width: 992px) {
     margin-top: 30px;
   }
 `;
