@@ -17,7 +17,7 @@ const Btn = styled.button`
   }
 `;
 
-const Button = ({
+export const Button = ({
   fill,
   name,
   children,

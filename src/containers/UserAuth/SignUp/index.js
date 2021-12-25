@@ -1,15 +1,13 @@
 import React from "react";
 import { InputGroup, AuthWrapper } from "../style/user-auth.styled";
-import { IoIosArrowBack } from "react-icons/io";
 import { Fade } from "react-awesome-reveal";
 import Input from "../../../components/Inputs";
-import Link from "next/link";
 import { AuthSteps } from "./style/signup.styled";
 import Contact from "./contact";
 import Role from "./staff-role";
 import { SignUpButtons } from "../../../components/Buttons";
 import { MAX_FORM_STEPS } from "../../../utils/common";
-import { FormInfo } from "../../../components/FormInfo";
+import { AuthController, FormInfo } from "../../../components/FormInfo";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
@@ -38,12 +36,7 @@ const SignUp = () => {
     <React.Fragment>
       <AuthSteps>
         <Fade>
-          <div className="auth-controller" onClick={prevForm}>
-            <span>
-              <IoIosArrowBack />
-            </span>
-            <p>Back</p>
-          </div>
+          <AuthController steps={formStep} prevForm={prevForm} />
           {formStep < MAX_FORM_STEPS && (
             <div className="info">
               <p className="text-disabled">

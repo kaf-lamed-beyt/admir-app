@@ -61,6 +61,10 @@ export const AuthWrapper = styled.div`
         cursor: pointer;
       }
     }
+
+    .signin-btn {
+      background: var(--primary);
+    }
   }
 
   .auth-instruction {

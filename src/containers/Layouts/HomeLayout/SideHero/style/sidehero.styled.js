@@ -8,6 +8,12 @@ export const Onboarding = styled.aside`
   box-shadow: inset 0 0 0 2000px rgba(215, 87, 17, 0.4);
   padding: 35px 75px;
 
+  .brand {
+    :hover {
+      cursor: pointer;
+    }
+  }
+
   @media only screen and (min-width: 0px) and (max-width: 768px) {
     display: none;
   }

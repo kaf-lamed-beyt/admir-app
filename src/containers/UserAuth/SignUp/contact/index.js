@@ -17,7 +17,7 @@ const Contact = () => {
 
   return (
     <React.Fragment>
-      <Fade direction="right" cascade triggerOnce>
+      <Fade direction="up" cascade triggerOnce>
         <h1>Complete Your profile!</h1>
         <p className="auth-instruction">
           For the purpose of industry regulation, your details are required.

@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "../../../components/Inputs";
 import { InputGroup, AuthWrapper } from "../style/user-auth.styled";
-import Button from "../../../components/Buttons";
+import { Button } from "../../../components/Buttons";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
 
@@ -59,7 +59,11 @@ const SignIn = () => {
               </span>
               <p className="forgot-pwd">Forgot password?</p>
             </InputGroup>
-            <Button fill="var(--primary)" name="signin-button">
+            <Button
+              fill="var(--primary)"
+              name="signin-button"
+              className="signin-btn"
+            >
               <Link href="/dashboard">Log in</Link>
             </Button>
           </Fade>
