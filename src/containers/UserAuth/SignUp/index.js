@@ -8,13 +8,15 @@ import Role from "./staff-role";
 import { SignUpButtons } from "../../../components/Buttons";
 import { MAX_FORM_STEPS } from "../../../utils/common";
 import { AuthController, FormInfo } from "../../../components/FormInfo";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
-  const [fullname, setFullname] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  // const [fullname, setFullname] = React.useState("");
+  // const [email, setEmail] = React.useState("");
+  // const [password, setPassword] = React.useState("");
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
+  const { watch, register } = useForm();
 
   const nextForm = () => {
     setFormStep((currentStep) => currentStep + 1);
@@ -61,30 +63,34 @@ const SignUp = () => {
                   <label htmlFor="fullname">Your fullname*</label>
                   <Input
                     name="fullname"
+                    id="fullname"
                     type="text"
                     placeholder="Tom Cruise"
-                    value={fullname}
-                    onChange={(e) => setFullname(e.target.value)}
+                    // value={fullname}
+                    // onChange={(e) => setFullname(e.target.value)}
+                    ref={register()}
                   />
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="email">Email address*</label>
                   <Input
                     name="email"
+                    id="email"
                     type="email"
                     placeholder="Enter email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    // value={email}
+                    // onChange={(e) => setEmail(e.target.value)}
                   />
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="password">Create password*</label>
                   <Input
                     name="password"
+                    id="password"
                     type={passwordVisibility ? "text" : "password"}
                     placeholder="Create password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    // value={password}
+                    // onChange={(e) => setPassword(e.target.value)}
                   />
                   <span className="show-pwd" onClick={handlePwdVisibility}>
                     show
@@ -96,6 +102,7 @@ const SignUp = () => {
           {formStep === 1 && <Contact />}
           {formStep === 2 && <Role />}
           <SignUpButtons step={formStep} onClick={nextForm} />
+          <pre>{JSON.stringify(watch(), null, 2)}</pre>
         </form>
       </AuthWrapper>
     </React.Fragment>
