@@ -25,6 +25,10 @@ export const AuthWrapper = styled.div`
     margin-top: -27px;
   }
 
+  .signin-form {
+    margin-top: 15px;
+  }
+
   form {
     h1 {
       font-weight: 700;

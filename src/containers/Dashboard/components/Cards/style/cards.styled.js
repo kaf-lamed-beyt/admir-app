@@ -1,41 +1,52 @@
 import styled from "styled-components";
 
 export const CardWrapper = styled.div`
-  width: 250px;
+  width: 375px;
   height: 134px;
   border-radius: 8px;
-  border: 1px solid var(--img-border);
-  background: var(--primary-20);
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 28px;
+  color: #fff;
+  margin: 0 21px 0 0;
+  flex: 0 0 auto;
 
   :hover {
     cursor: pointer;
-    color: var(--primary);
-    border: 1px solid var(--primary);
+  }
 
-    .title,
-    .value {
-      color: var(--primary);
+  .icon-wrapper {
+    height: 97px;
+
+    & svg {
+      width: 100%;
+      height: 100%;
     }
   }
 
-  .title {
-    color: var(--grey);
-    font-size: 19px;
-    font-weight: bold;
-    text-transform: capitalize;
-    text-align: center;
-    padding-top: 7px;
-  }
+  .card-details {
+    margin-top: 15px;
 
-  .value {
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: -2px;
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      padding-top: 7px;
+      line-height: 19px;
+      color: #fff;
+      margin-top: -45px;
+    }
+
+    .value {
+      font-size: 40px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 48px;
+      color: #fff;
+    }
   }
 
   @media only screen and (min-width: 0px) and (max-width: 768px) {
-    margin-bottom: 10px;
-    width: 49%;
+    margin-bottom: 20px;
+    width: 100%;
   }
 `;

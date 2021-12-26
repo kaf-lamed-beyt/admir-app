@@ -24,6 +24,7 @@ export const Button = ({
   height,
   width,
   text_color,
+  radius,
   ...props
 }) => {
   return (
@@ -34,6 +35,7 @@ export const Button = ({
         height: height,
         width: width,
         color: text_color,
+        borderRadius: radius,
       }}
       {...props}
     >

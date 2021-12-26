@@ -5,6 +5,7 @@ import SideHero from "./SideHero";
 
 const HomeLayoutWrapper = styled.section`
   display: flex;
+  align-items: stretch;
   height: 100%;
 
   .dashboard-content {

@@ -13,10 +13,20 @@ export const sideNavItems = [
 
 // dashboard stats card
 export const overview_stats = [
-  { title: "all staffs", value: 60, _id: 0 },
-  { title: "active staffs", value: 16, _id: 1 },
-  { title: "reports", value: 43, _id: 2 },
-  { title: "average hour", value: 16, _id: 3 },
+  {
+    title: "Check out your tasks",
+    value: 20,
+    _id: 0,
+    icon: "tasks",
+    fill: "var(--primary-60)",
+  },
+  {
+    title: "Daily and weeekly reports",
+    value: 7,
+    _id: 1,
+    icon: "feedbacks",
+    fill: "var(--pink)",
+  },
 ];
 
 // signup form counter constant that indicates the amount of

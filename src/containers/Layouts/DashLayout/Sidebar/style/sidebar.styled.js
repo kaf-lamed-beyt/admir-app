@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const SidebarMenu = styled.aside`
   background: var(--primary);
-  height: 100vh;
   width: 20%;
 
   .brand {
