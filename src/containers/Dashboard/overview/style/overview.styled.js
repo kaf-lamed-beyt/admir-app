@@ -109,6 +109,7 @@ export const Tables = styled.div`
     .time-tracker {
       width: 100%;
       border: 1px solid var(--img-border);
+      margin-bottom: 30px;
     }
 
     .reports {
