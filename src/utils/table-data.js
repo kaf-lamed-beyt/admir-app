@@ -300,3 +300,69 @@ export const individual_reports = [
     status: "pending",
   },
 ];
+
+export const time_tracker = [
+  {
+    key: 1,
+    day: "Monday",
+    date: "22/11/2021",
+    time_in: "7:45am",
+    time_out: "6:00pm",
+  },
+  {
+    key: 2,
+    day: "Tuesday",
+    date: "23/11/2021",
+    time_in: "7:45am",
+    time_out: "6:00pm",
+  },
+  {
+    key: 3,
+    day: "Wednesday",
+    date: "24/11/2021",
+    time_in: "7:45am",
+    time_out: "6:00pm",
+  },
+  {
+    key: 4,
+    day: "Thursday",
+    date: "25/11/2021",
+    time_in: "7:45am",
+    time_out: "6:00pm",
+  },
+  {
+    key: 5,
+    day: "Friday",
+    date: "26/11/2021",
+    time_in: "7:45am",
+    time_out: "6:00pm",
+  },
+  {
+    key: 6,
+    day: "Monday",
+    date: "29/11/2021",
+    time_in: "7:45am",
+    time_out: "6:00pm",
+  },
+  {
+    key: 7,
+    day: "Tuesday",
+    date: "30/11/2021",
+    time_in: "7:45am",
+    time_out: "6:00pm",
+  },
+  {
+    key: 8,
+    day: "Wednesday",
+    date: "01/12/2021",
+    time_in: "7:45am",
+    time_out: "6:00pm",
+  },
+  {
+    key: 9,
+    day: "Monday",
+    date: "02/11/2021",
+    time_in: "7:45am",
+    time_out: "6:00pm",
+  },
+];

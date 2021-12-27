@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const MenuCard = styled.div`
-  height: 189px;
+  height: 85px;
   width: 180px;
-  border-radius: 20px;
+  border-radius: 4px;
   box-shadow: 0px 0px 10px 3px rgba(79, 79, 79, 0.05);
   padding: 0;
   border: 1px solid #fff;
   position: absolute;
-  margin-left: 70px;
+  // margin-left: 70px;
   margin-top: 62px;
   padding-top: 10px;
   z-index: 3;

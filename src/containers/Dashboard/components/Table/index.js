@@ -101,7 +101,7 @@ export const PersonalizedReport = ({ reports }) => {
     <TableWrapper>
       <thead>
         <tr>
-          <th>Day/Date</th>
+          <th>Date/Days</th>
           <th>Activities and Location</th>
           <th className="status-head">Status</th>
         </tr>
@@ -131,17 +131,45 @@ export const PersonalizedReport = ({ reports }) => {
   );
 };
 
-// using Next.js's data fetching methods to get
-// the unique report of the staff when the admin clicks
-// their report.
+// time tracker report
+export const TimeTrackerTable = ({
+  reports,
+  firstHeader,
+  secondHeader,
+  thirdHeader,
+}) => {
+  return (
+    <TableWrapper>
+      <thead>
+        <tr>
+          <th>{firstHeader}</th>
+          <th>{secondHeader}</th>
+          <th className="status-head">{thirdHeader}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {reports.map((staff) => {
+          return (
+            <tr key={staff.key}>
+              <td>
+                <div className="day-date">
+                  <p className="weekday">{staff.day}</p>
+                  <p className="date">{staff.date}</p>
+                </div>
+              </td>
+              <td className="activities">{staff.time_in}</td>
+              <td className="status">{staff.time_out}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </TableWrapper>
+  );
+};
 
-// export const getStaticProps = async () => {
-//   const response = await fetch("url");
-//   const data = response.json();
-
-//   return {
-//     props: {
-//       reports: data,
-//     },
-//   };
-// };
+TimeTrackerTable.propTypes = {
+  reports: propTypes.array.isRequired,
+  firstHeader: propTypes.string.isRequired,
+  secondHeader: propTypes.string.isRequired,
+  thirdHeader: propTypes.string.isRequired,
+};

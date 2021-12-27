@@ -1,8 +1,9 @@
 import React from "react";
 import DashHeader from "../components/DashHeader";
 import styled from "styled-components";
-import { ReportTable } from "../components/Table";
-import { employee_reports } from "../../../utils/table-data";
+// import { ReportTable } from "../components/Table";
+// import { employee_reports } from "../../../utils/table-data";
+import IndividualReport from "./individual";
 
 export const ReportContainer = styled.div`
   height: 600px;
@@ -53,16 +54,11 @@ const Reports = () => {
   return (
     <React.Fragment>
       <DashHeader
-        dashboardTitle="Daily Employee Reports"
-        user="Invictus Innocent"
-        profile_img="/img/user.png"
+        dashboardTitle="Reports"
+        user="Tom Cruise"
+        profile_img="/img/tom.png"
       />
-      <ReportContainer>
-        <div className="table-title">
-          <p>All staffs</p>
-        </div>
-        <ReportTable reports={employee_reports} />
-      </ReportContainer>
+      <IndividualReport />
     </React.Fragment>
   );
 };

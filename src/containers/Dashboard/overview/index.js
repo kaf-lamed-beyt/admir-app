@@ -6,16 +6,16 @@ import Cards from "../components/Cards";
 import { CardWrapper } from "../components/Cards/style/cards.styled";
 import Icon from "../../../components/Icons";
 import Button from "../../../components/Buttons";
-import { PersonalizedReport } from "../components/Table";
-import { individual_reports } from "../../../utils/table-data";
+import { PersonalizedReport, TimeTrackerTable } from "../components/Table";
+import { individual_reports, time_tracker } from "../../../utils/table-data";
 
 const Overview = () => {
   return (
     <React.Fragment>
       <DashHeader
         dashboardTitle="Overview"
-        user="Invictus Innocent"
-        profile_img="/img/user.png"
+        user="Tom Cruise"
+        profile_img="/img/tom.png"
       />
       <Stats>
         <CardWrapper style={{ background: "var(--secondary)" }}>
@@ -39,11 +39,16 @@ const Overview = () => {
       </Stats>
       <Tables>
         <div className="time-tracker">
-          <p>Tracker</p>
-          <PersonalizedReport reports={individual_reports} />
+          <p className="table-title">Tracker</p>
+          <TimeTrackerTable
+            firstHeader="Date/Days"
+            secondHeader="Clock-in Time"
+            thirdHeader="Clock-out Time"
+            reports={time_tracker}
+          />
         </div>
         <div className="reports">
-          <p>Reports</p>
+          <p className="table-title">Reports</p>
           <PersonalizedReport reports={individual_reports} />
         </div>
       </Tables>

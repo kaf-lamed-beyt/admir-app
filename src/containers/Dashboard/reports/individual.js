@@ -45,11 +45,6 @@ const IndividualReport = () => {
           return <title>{staff.name}'s Report</title>;
         })}
       </Head>
-      <DashHeader
-        dashboardTitle="Daily Employee Reports"
-        user="Invictus Innocent"
-        profile_img="/img/user.png"
-      />
       <ReportContainer>
         <div className="table-title">
           {user.map((staff) => {

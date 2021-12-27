@@ -1,8 +1,8 @@
 import React from "react";
 import DashHeader from "../components/DashHeader";
-import { individual_reports } from "../../../utils/table-data";
+import { time_tracker } from "../../../utils/table-data";
 import styled from "styled-components";
-import { PersonalizedReport } from "../components/Table";
+import { TimeTrackerTable } from "../components/Table";
 
 const TrackerContainer = styled.div`
   height: 585px !important;
@@ -62,7 +62,12 @@ const TimeTracker = () => {
         <div className="table-title">
           <p>All entries</p>
         </div>
-        <PersonalizedReport reports={individual_reports} />
+        <TimeTrackerTable
+          firstHeader="Date/Days"
+          secondHeader="Clock-in Time"
+          thirdHeader="Clock-out Time"
+          reports={time_tracker}
+        />
       </TrackerContainer>
     </React.Fragment>
   );

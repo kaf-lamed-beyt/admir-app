@@ -61,7 +61,7 @@ export const DashHeadWrapper = styled.div`
         img {
           width: 40px;
           height: 40px;
-          margin: 2.5px 1px 1px 2px;
+          margin: 2.5px 3px 2px 3px;
           border-radius: 50%;
         }
       }

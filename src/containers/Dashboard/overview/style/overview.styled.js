@@ -63,8 +63,15 @@ export const Stats = styled.div`
 
 export const Tables = styled.div`
   display: flex;
-  margin: 25px 0 0 0;
+  margin: 35px 0 0 0;
   justify-content: space-between;
+
+  .table-title {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    padding: 20px 0 0 16px;
+  }
 
   .time-tracker {
     height: 446px;
@@ -86,6 +93,13 @@ export const Tables = styled.div`
     ::-webkit-scrollbar {
       display: none;
     }
+
+    .table-title {
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      padding: 20px 0 0 16px;
+    }
   }
 
   @media only screen and (min-width: 0px) and (max-width: 992px) {
@@ -94,10 +108,12 @@ export const Tables = styled.div`
 
     .time-tracker {
       width: 100%;
+      border: 1px solid var(--img-border);
     }
 
     .reports {
       width: 100%;
+      border: 1px solid var(--img-border);
     }
   }
 `;

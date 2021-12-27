@@ -4,10 +4,11 @@ import Link from "next/link";
 import propTypes from "prop-types";
 
 const menu_items = [
-  { name: "My Account", path: "/profile/account" },
-  { name: "Company Account", path: "/profile/company-account" },
-  { name: "User Settings", path: "" },
-  { name: "Developer API", path: "" },
+  { name: "My Account", path: "/dashboard/settings" },
+  // { name: "Logout", path: "/" },
+  // { name: "Company Account", path: "/profile/company-account" },
+  // { name: "User Settings", path: "" },
+  // { name: "Developer API", path: "" },
 ];
 
 const UserMenu = ({ open }) => {
@@ -23,7 +24,9 @@ const UserMenu = ({ open }) => {
         })}
       </ul>
       <div className="sign-out">
-        <p>Sign out</p>
+        <Link href="/">
+          <p>Sign out</p>
+        </Link>
       </div>
     </MenuCard>
   );
