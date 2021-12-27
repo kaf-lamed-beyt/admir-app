@@ -5,7 +5,7 @@ import { ReportTable } from "../components/Table";
 import { employee_reports } from "../../../utils/table-data";
 
 export const ReportContainer = styled.div`
-  height: 530px;
+  height: 600px;
   padding-left: 0px;
   padding-right: -10px;
   margin-top: 9px;

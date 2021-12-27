@@ -2,11 +2,20 @@ import styled from "styled-components";
 
 export const SidebarMenu = styled.aside`
   background: var(--primary);
-  width: 20%;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  height: 100vh;
+  padding: 30px 0;
+  top: 0;
+  bottom: auto;
 
   .brand {
-    margin-top: 60px;
+    margin-top: 10px;
     padding: 8px 15px;
+    padding-bottom: 20px;
 
     :hover {
       cursor: pointer;

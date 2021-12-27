@@ -6,6 +6,8 @@ import Cards from "../components/Cards";
 import { CardWrapper } from "../components/Cards/style/cards.styled";
 import Icon from "../../../components/Icons";
 import Button from "../../../components/Buttons";
+import { PersonalizedReport } from "../components/Table";
+import { individual_reports } from "../../../utils/table-data";
 
 const Overview = () => {
   return (
@@ -38,9 +40,11 @@ const Overview = () => {
       <Tables>
         <div className="time-tracker">
           <p>Tracker</p>
+          <PersonalizedReport reports={individual_reports} />
         </div>
         <div className="reports">
           <p>Reports</p>
+          <PersonalizedReport reports={individual_reports} />
         </div>
       </Tables>
     </React.Fragment>

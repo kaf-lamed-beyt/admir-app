@@ -5,7 +5,7 @@ export const Stats = styled.div`
   justify-content: space-between;
   flex-wrap: nowwrap;
   overflow-x: auto;
-  width: 1101px;
+  width: 1109px;
   margin-top: 30px;
 
   // obtaining smooth scrolling on iOS
@@ -63,17 +63,41 @@ export const Stats = styled.div`
 
 export const Tables = styled.div`
   display: flex;
-  border: 3px solid blue;
+  margin: 25px 0 0 0;
+  justify-content: space-between;
 
   .time-tracker {
     height: 446px;
     width: 437px;
-    border: 1px solid red;
+    overflow-y: auto;
+    box-shadow: 0px 0px 25px 3px rgba(17, 145, 215, 0.05);
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .reports {
     height: 446px;
     width: 530px;
-    border: 1px solid red;
+    overflow-y: auto;
+    box-shadow: 0px 0px 25px 3px rgba(17, 145, 215, 0.05);
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  @media only screen and (min-width: 0px) and (max-width: 992px) {
+    flex-wrap: wrap;
+    width: 100%;
+
+    .time-tracker {
+      width: 100%;
+    }
+
+    .reports {
+      width: 100%;
+    }
   }
 `;

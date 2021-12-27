@@ -5,11 +5,13 @@ import styled from "styled-components";
 
 const LayoutWrapper = styled.section`
   display: flex;
+  align-items: stretch;
   height: 100%;
-  // align-items: stretch;
 
   .dashboard-content {
-    padding: 20px 13px 0 30px;
+    padding: 20px 13px;
+    width: 100%;
+    height: 100%;
   }
 
   @media only screen and (min-width: 0px) and (max-width: 992px) {

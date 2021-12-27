@@ -1,11 +1,11 @@
 import React from "react";
 import DashHeader from "../components/DashHeader";
-import { data } from "../../../utils/table-data";
-import Table from "../components/Table";
+import { individual_reports } from "../../../utils/table-data";
 import styled from "styled-components";
+import { PersonalizedReport } from "../components/Table";
 
 const TrackerContainer = styled.div`
-  height: 537px !important;
+  height: 585px !important;
   overflow: auto;
   padding-left: 0px;
   padding-right: -10px;
@@ -60,9 +60,9 @@ const TimeTracker = () => {
       />
       <TrackerContainer>
         <div className="table-title">
-          <p>All staffs</p>
+          <p>All entries</p>
         </div>
-        <Table employees={data} />
+        <PersonalizedReport reports={individual_reports} />
       </TrackerContainer>
     </React.Fragment>
   );

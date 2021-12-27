@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Onboarding = styled.aside`
+  height: 100vh;
   width: 80%;
   background: url(/img/onboarding.png);
   background-size: cover;

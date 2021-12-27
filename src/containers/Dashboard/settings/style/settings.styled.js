@@ -3,9 +3,8 @@ import styled from "styled-components";
 export const SettingsWrapper = styled.div`
   height: 100%;
   width: 100%;
-  height: 500px;
   justify-content: space-between;
-  margin-top: 50px;
+  margin-top: 45px;
   padding: 0 230px 0 100px;
 
   .profile-wrapper {
@@ -49,6 +48,7 @@ export const InputGroup = styled.div`
 
 export const SettingsForm = styled.form`
   width: 100%;
+  margin-top: 24px;
 
   .show-pwd {
     position: absolute;
@@ -93,7 +93,7 @@ export const SettingsForm = styled.form`
   .flex-buttons {
     display: flex;
     justify-content: flex-end;
-    margin-top: 78px;
+    margin-top: 75px;
 
     button {
       margin: 0 20px 0 10px;
