@@ -6,14 +6,7 @@ import { CountryPhoneInput } from "../../../../components/Inputs";
 import "react-phone-number-input/style.css";
 import { countries } from "../../../../utils/countries";
 
-const Contact = () => {
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [value, setValue] = React.useState("");
-
-  const changeHandler = (value) => {
-    setValue(value);
-  };
-
+const Contact = ({ phoneNumber, country, phoneChange, countryChange }) => {
   return (
     <React.Fragment>
       <Fade cascade triggerOnce>
@@ -25,20 +18,20 @@ const Contact = () => {
           <label htmlFor="email">Phone Number</label>
           <CountryPhoneInput
             value={phoneNumber}
-            onChange={setPhoneNumber}
+            onChange={phoneChange}
             className="number"
           />
         </InputGroup>
         <InputGroup>
           <label htmlFor="fullname">Country</label>
           <Select
-            value={value}
+            value={country}
             options={countries}
             placeholder="Please select your country"
             required={true}
             dropdownPosition="top"
             className="staff-country"
-            onChange={changeHandler}
+            onChange={countryChange}
           />
         </InputGroup>
       </Fade>

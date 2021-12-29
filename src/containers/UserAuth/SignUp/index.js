@@ -15,6 +15,9 @@ const SignUp = () => {
   const [fullname, setFullname] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [country, setCountry] = React.useState("");
+  const [role, setRole] = React.useState("");
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
   const { watch, register } = useForm();
 
@@ -99,8 +102,15 @@ const SignUp = () => {
               </Fade>
             </>
           )}
-          {formStep === 1 && <Contact />}
-          {formStep === 2 && <Role />}
+          {formStep === 1 && (
+            <Contact
+              phoneNumber={phoneNumber}
+              country={country}
+              countryChange={(country) => setCountry(country)}
+              phoneChange={setPhoneNumber}
+            />
+          )}
+          {formStep === 2 && <Role staffRole={role} roleChange={setRole} />}
           <SignUpButtons step={formStep} onClick={nextForm} />
         </form>
       </AuthWrapper>
