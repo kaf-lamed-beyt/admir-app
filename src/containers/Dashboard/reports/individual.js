@@ -6,8 +6,7 @@ import DashHeader from "../components/DashHeader";
 import Head from "next/head";
 import Button from "../../../components/Buttons";
 import Icon from "../../../components/Icons";
-import onClickOutside from "react-onclickoutside";
-import EntryCard, { ReportsEntry } from "../components/EntryCard";
+import { ReportsEntry } from "../components/EntryCard";
 
 export const getStaticPaths = async () => {
   const response = await fetch("same-api-endpoint");

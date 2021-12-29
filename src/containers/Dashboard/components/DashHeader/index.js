@@ -3,7 +3,6 @@ import propTypes from "prop-types";
 import { DashHeadWrapper } from "./style/dash-header.styled";
 import Icon from "../../../../components/Icons";
 import UserMenu from "../UserMenu";
-import { HiMenuAlt1 } from "react-icons/hi";
 import onClickOutside from "react-onclickoutside";
 
 const DashHeader = ({ dashboardTitle, user, profile_img }) => {
@@ -15,7 +14,6 @@ const DashHeader = ({ dashboardTitle, user, profile_img }) => {
 
   return (
     <DashHeadWrapper>
-      <HiMenuAlt1 className="burger" />
       <div className="dashboard-title">
         <h1>{dashboardTitle}</h1>
       </div>

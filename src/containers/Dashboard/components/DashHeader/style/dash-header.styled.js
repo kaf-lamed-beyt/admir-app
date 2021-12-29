@@ -7,6 +7,11 @@ export const DashHeadWrapper = styled.div`
   height: 55px;
   margin-top: -15px;
 
+  .sidebar {
+    display: none !important;
+    display: ${({ open }) => (open ? "block" : "none")};
+  }
+
   .dashboard-title {
     margin-top: 6px;
     font-size: 18px;
@@ -77,17 +82,15 @@ export const DashHeadWrapper = styled.div`
       display: none;
     }
 
-    .burger {
-      display: block;
-      font-size: 35px;
-      margin-left: -10px;
-      margin-top: 4px;
+    .dashboard-title {
+      margin-left: 20px;
     }
   }
 
   @media only screen and (min-width: 577px) and (max-width: 768px) {
     .dashboard-title {
       margin-top: 0px;
+      margin-left: 20px;
     }
 
     .user-details {
