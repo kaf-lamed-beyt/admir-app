@@ -8,6 +8,7 @@ import Icon from "../../../components/Icons";
 import Button from "../../../components/Buttons";
 import { PersonalizedReport, TimeTrackerTable } from "../components/Table";
 import { individual_reports, time_tracker } from "../../../utils/table-data";
+import Link from "next/link";
 
 const Overview = () => {
   return (
@@ -24,15 +25,17 @@ const Overview = () => {
           </div>
           <div className="card-details">
             <p className="info">You are currently clocked out</p>
-            <Button
-              height="39px"
-              width="130px"
-              text_color="var(--secondary)"
-              fill="#fff"
-              radius="none"
-            >
-              <Icon name="arrow-in" /> Clock in
-            </Button>
+            <Link href="/dashboard/time-tracker">
+              <Button
+                height="39px"
+                width="130px"
+                text_color="var(--secondary)"
+                fill="#fff"
+                radius="none"
+              >
+                <Icon name="arrow-in" /> Clock in
+              </Button>
+            </Link>
           </div>
         </CardWrapper>
         <Cards data={overview_stats} />

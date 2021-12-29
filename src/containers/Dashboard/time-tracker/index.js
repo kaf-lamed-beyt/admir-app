@@ -3,6 +3,8 @@ import DashHeader from "../components/DashHeader";
 import { time_tracker } from "../../../utils/table-data";
 import styled from "styled-components";
 import { TimeTrackerTable } from "../components/Table";
+import Button from "../../../components/Buttons";
+import Icon from "../../../components/Icons";
 
 const TrackerContainer = styled.div`
   height: 585px !important;
@@ -16,9 +18,31 @@ const TrackerContainer = styled.div`
 
   .table-title {
     margin-top: 27px;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    button {
+      font-weight: 700;
+      line-height: 19px;
+      border: none;
+
+      p {
+        display: flex;
+        font-size: 16px;
+        text-align: center;
+        margin: 10px 20px;
+        justify-content: space-between;
+
+        svg {
+          font-size: 12px;
+          font-weight: 700 !important;
+        }
+      }
+    }
 
     p {
-      padding-left: 15px;
       font-weight: 600;
       font-size: 21px;
     }
@@ -47,6 +71,10 @@ const TrackerContainer = styled.div`
     ::-webkit-scrollbar {
       display: none;
     }
+
+    .table-title {
+      flex-wrap: wrap;
+    }
   }
 `;
 
@@ -55,12 +83,23 @@ const TimeTracker = () => {
     <React.Fragment>
       <DashHeader
         dashboardTitle="Time Tracker"
-        user="Invictus Innocent"
+        user="Tom Cruise"
         profile_img="/img/user.png"
       />
       <TrackerContainer>
         <div className="table-title">
           <p>All entries</p>
+          <Button
+            height="44px"
+            width="150px"
+            fill="var(--secondary)"
+            text_color="#fff"
+          >
+            <p>
+              {" "}
+              <Icon name="plus" /> New Entry
+            </p>
+          </Button>
         </div>
         <TimeTrackerTable
           firstHeader="Date/Days"

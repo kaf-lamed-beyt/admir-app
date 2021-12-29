@@ -36,7 +36,7 @@ export const Stats = styled.div`
       line-height: 19px;
       justify-content: center;
       padding: 9px 0;
-      margin-left: 70px;
+      margin-left: 90px;
       border-radius: none !important;
 
       svg {

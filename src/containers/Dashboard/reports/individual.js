@@ -4,6 +4,8 @@ import { user, individual_reports } from "../../../utils/table-data";
 import { ReportContainer } from "../reports";
 import DashHeader from "../components/DashHeader";
 import Head from "next/head";
+import Button from "../../../components/Buttons";
+import Icon from "../../../components/Icons";
 
 export const getStaticPaths = async () => {
   const response = await fetch("same-api-endpoint");
@@ -62,6 +64,17 @@ const IndividualReport = () => {
               </div>
             );
           })}
+          <Button
+            height="44px"
+            width="150px"
+            fill="var(--secondary)"
+            text_color="#fff"
+          >
+            <p>
+              {" "}
+              <Icon name="plus" /> New Entry
+            </p>
+          </Button>
         </div>
         <PersonalizedReport reports={individual_reports} />
       </ReportContainer>

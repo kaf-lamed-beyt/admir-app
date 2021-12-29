@@ -16,11 +16,32 @@ export const ReportContainer = styled.div`
 
   .table-title {
     margin-top: 27px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 15px;
+    padding-left: 15px;
 
     p {
       padding-left: 15px;
       font-weight: 600;
       font-size: 21px;
+    }
+
+    button {
+      font-weight: 700;
+      line-height: 19px;
+      border: none;
+
+      p {
+        display: flex;
+        font-size: 16px;
+        text-align: center;
+        margin: 10px 10px;
+
+        svg {
+          font-size: 12px;
+        }
+      }
     }
   }
 
@@ -46,6 +67,10 @@ export const ReportContainer = styled.div`
 
     ::-webkit-scrollbar {
       display: none !important;
+    }
+
+    .table-title {
+      flex-wrap: wrap;
     }
   }
 `;

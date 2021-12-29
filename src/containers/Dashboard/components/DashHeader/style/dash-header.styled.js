@@ -90,6 +90,14 @@ export const DashHeadWrapper = styled.div`
       margin-top: 0px;
     }
 
+    .user-details {
+      p {
+        padding: 0;
+        width: 100% !important;
+        white-space: nowrap;
+      }
+    }
+
     .burger {
       display: block;
       font-size: 35px;
