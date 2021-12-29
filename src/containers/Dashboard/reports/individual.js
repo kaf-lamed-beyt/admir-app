@@ -6,6 +6,8 @@ import DashHeader from "../components/DashHeader";
 import Head from "next/head";
 import Button from "../../../components/Buttons";
 import Icon from "../../../components/Icons";
+import onClickOutside from "react-onclickoutside";
+import EntryCard, { ReportsEntry } from "../components/EntryCard";
 
 export const getStaticPaths = async () => {
   const response = await fetch("same-api-endpoint");
@@ -40,6 +42,12 @@ export const getStaticProps = async (context) => {
 };
 
 const IndividualReport = () => {
+  const [open, setOpen] = React.useState(false);
+
+  IndividualReport.handleClickOutside = () => {
+    setOpen(open);
+  };
+
   return (
     <React.Fragment>
       <Head>
@@ -69,6 +77,7 @@ const IndividualReport = () => {
             width="150px"
             fill="var(--secondary)"
             text_color="#fff"
+            onClick={() => setOpen(!open)}
           >
             <p>
               {" "}
@@ -76,6 +85,7 @@ const IndividualReport = () => {
             </p>
           </Button>
         </div>
+        <ReportsEntry title="New Entry" open={open} />
         <PersonalizedReport reports={individual_reports} />
       </ReportContainer>
     </React.Fragment>

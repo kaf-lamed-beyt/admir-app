@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { TimeTrackerTable } from "../components/Table";
 import Button from "../../../components/Buttons";
 import Icon from "../../../components/Icons";
+import EntryCard from "../components/EntryCard";
 
 const TrackerContainer = styled.div`
   height: 585px !important;
@@ -79,6 +80,12 @@ const TrackerContainer = styled.div`
 `;
 
 const TimeTracker = () => {
+  const [open, setOpen] = React.useState(false);
+
+  TimeTracker.handleClickOutside = () => {
+    setOpen(open);
+  };
+
   return (
     <React.Fragment>
       <DashHeader
@@ -94,6 +101,7 @@ const TimeTracker = () => {
             width="150px"
             fill="var(--secondary)"
             text_color="#fff"
+            onClick={() => setOpen(!open)}
           >
             <p>
               {" "}
@@ -101,6 +109,7 @@ const TimeTracker = () => {
             </p>
           </Button>
         </div>
+        <EntryCard title="New Entry" open={open} />
         <TimeTrackerTable
           firstHeader="Date/Days"
           secondHeader="Clock-in Time"
