@@ -7,6 +7,7 @@ import Head from "next/head";
 import Button from "../../../components/Buttons";
 import Icon from "../../../components/Icons";
 import { ReportsEntry } from "../components/EntryCard";
+import onClickOutside from "react-onclickoutside";
 
 export const getStaticPaths = async () => {
   const response = await fetch("same-api-endpoint");
@@ -91,4 +92,8 @@ const IndividualReport = () => {
   );
 };
 
-export default IndividualReport;
+const clickOutsideConfig = {
+  handleClickOutside: () => IndividualReport.handleClickOutside,
+};
+
+export default onClickOutside(IndividualReport, clickOutsideConfig);

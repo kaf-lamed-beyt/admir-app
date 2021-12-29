@@ -5,20 +5,10 @@ import { useRouter } from "next/router";
 import { sideNavItems } from "../../../../utils/common";
 import { HiMenuAlt1 } from "react-icons/hi";
 import style from "./scss/sidebar.module.scss";
-import onClickOutside from "react-onclickoutside";
 
 const Sidebar = () => {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-
-  // const handleSidebar = () => {
-  //   setOpen(!open);
-  //   console.log("sidebar is open");
-  // };
-
-  Sidebar.handleClickOutside = () => {
-    setOpen(open);
-  };
 
   return (
     <>
@@ -40,7 +30,11 @@ const Sidebar = () => {
                 }`}
               >
                 <Link href={item.path} key={index}>
-                  <div className={style.item_wrapper} id={item.unique_class}>
+                  <div
+                    className={style.item_wrapper}
+                    id={item.unique_class}
+                    onClick={() => setOpen(open)}
+                  >
                     <Icon name={item.icon} />
                     <li>{item.name}</li>
                   </div>
@@ -54,8 +48,4 @@ const Sidebar = () => {
   );
 };
 
-const clickOutsideConfig = {
-  handleClickOutside: () => Sidebar.handleClickOutside,
-};
-
-export default onClickOutside(Sidebar, clickOutsideConfig);
+export default Sidebar;
