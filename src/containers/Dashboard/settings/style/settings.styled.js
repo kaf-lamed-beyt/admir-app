@@ -23,7 +23,8 @@ export const SettingsWrapper = styled.div`
 
   @media only screen and (min-width: 0px) and (max-width: 992px) {
     flex-wrap: wrap;
-    margin-top: 48px;
+    margin-top: 70px !important;
+    margin-bottom: 20px;
     padding: 0;
 
     .role-input {

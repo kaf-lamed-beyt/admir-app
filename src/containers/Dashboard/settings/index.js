@@ -36,8 +36,8 @@ const Settings = () => {
     <React.Fragment>
       <DashHeader
         dashboardTitle="Settings"
-        user="Invictus Innocent"
-        profile_img="/img/user.png"
+        user="Tom Cruise"
+        profile_img="/img/tom.png"
       />
       <Fade>
         <SettingsWrapper>

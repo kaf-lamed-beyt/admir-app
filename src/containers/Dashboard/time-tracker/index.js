@@ -67,7 +67,8 @@ const TrackerContainer = styled.div`
 
   @media only screen and (min-width: 0px) and (max-width: 992px) {
     height: 100% !important;
-    margin-top: 48px;
+    margin-top: 70px !important;
+    margin-bottom: 20px;
 
     ::-webkit-scrollbar {
       display: none;
@@ -91,7 +92,7 @@ const TimeTracker = () => {
       <DashHeader
         dashboardTitle="Time Tracker"
         user="Tom Cruise"
-        profile_img="/img/user.png"
+        profile_img="/img/tom.png"
       />
       <TrackerContainer>
         <div className="table-title">

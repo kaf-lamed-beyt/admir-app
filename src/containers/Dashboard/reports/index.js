@@ -63,7 +63,8 @@ export const ReportContainer = styled.div`
 
   @media only screen and (min-width: 0px) and (max-width: 992px) {
     height: 100% !important;
-    margin-top: 48px;
+    margin-top: 70px !important;
+    margin-bottom: 20px;
 
     ::-webkit-scrollbar {
       display: none !important;

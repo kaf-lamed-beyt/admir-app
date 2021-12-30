@@ -48,6 +48,8 @@ export const Stats = styled.div`
   @media only screen and (min-width: 0px) and (max-width: 768px) {
     width: 100%;
     border: none;
+    margin-top: 70px !important;
+    margin-bottom: 20px;
 
     ::-webkit-scrollbar {
       display: none;

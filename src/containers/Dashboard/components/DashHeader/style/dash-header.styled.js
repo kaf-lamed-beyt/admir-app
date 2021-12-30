@@ -7,11 +7,6 @@ export const DashHeadWrapper = styled.div`
   height: 55px;
   margin-top: -15px;
 
-  .sidebar {
-    display: none !important;
-    display: ${({ open }) => (open ? "block" : "none")};
-  }
-
   .dashboard-title {
     margin-top: 6px;
     font-size: 18px;
@@ -100,32 +95,30 @@ export const DashHeadWrapper = styled.div`
         white-space: nowrap;
       }
     }
-
-    .burger {
-      display: block;
-      font-size: 35px;
-      margin-left: -10px;
-      margin-top: 4px;
-    }
   }
 
   // fixed dashboard header on mobile screens
 
   @media only screen and (min-width: 0px) and (max-width: 992px) {
     position: fixed;
-    padding: 0 10px;
+    padding: 4px 10px;
     background: var(--header-mobile);
     margin-top: -20px;
     z-index: 1;
     left: 0;
-    height: 50px;
+    height: 60px;
+    background: var(--primary);
 
     .dashboard-title {
       width: 100%;
       margin-top: 10px;
-      font-size: 10px;
-      padding: 0px 5px;
+      font-size: 13px;
+      padding: 0px 12px;
       white-space: nowrap;
+
+      h1 {
+        color: #fff;
+      }
     }
 
     .header-icons {
