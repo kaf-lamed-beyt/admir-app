@@ -1,7 +1,10 @@
 import axios from "axios";
 
-const public_routes = axios.create({
-  baseURL: process.env.BASE_API_ENDPOINT,
+// we should be able to distinguish between
+// API endpoints that are not required for an
+// authenticated user and a unathenticated one
+const publicRoute = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
 });
 
-export { public_routes };
+export { publicRoute };

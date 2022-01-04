@@ -4,18 +4,36 @@ import { InputGroup, AuthWrapper } from "../style/user-auth.styled";
 import { Button } from "../../../components/Buttons";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
+import { publicRoute } from "../../../utils/public-fetch";
+import { authEndpoints } from "../../../routes/endpoints";
+import { BarLoader } from "react-spinners";
+import axios from "axios";
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const handlePwdVisibility = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
   };
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e, email, password) => {
     e.preventDefault();
+
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        `https://admir-service.herokuapp.com/api/v1/${authEndpoints.login}`,
+        email,
+        password
+      );
+      console.log(data);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   return (
@@ -64,7 +82,7 @@ const SignIn = () => {
               name="signin-button"
               className="signin-btn"
             >
-              <Link href="/dashboard">Log in</Link>
+              {loading ? <BarLoader /> : "Log in"}
             </Button>
           </Fade>
         </form>

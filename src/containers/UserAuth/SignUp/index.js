@@ -8,7 +8,8 @@ import Role from "./staff-role";
 import { SignUpButtons } from "../../../components/Buttons";
 import { MAX_FORM_STEPS } from "../../../utils/common";
 import { AuthController, FormInfo } from "../../../components/FormInfo";
-import { useForm } from "react-hook-form";
+import { publicRoute } from "../../../utils/public-fetch";
+import { authEndpoints } from "../../../routes/endpoints";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
@@ -19,7 +20,9 @@ const SignUp = () => {
   const [country, setCountry] = React.useState("");
   const [role, setRole] = React.useState("");
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
-  const { watch, register } = useForm();
+  const [signUpSuccess, setSignUpSuccess] = React.useState();
+  const [signUpError, setSignUpError] = React.useState();
+  const [loading, setLoading] = React.useState(false);
 
   const nextForm = () => {
     setFormStep((currentStep) => currentStep + 1);
@@ -33,8 +36,19 @@ const SignUp = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = (e, staffInfo) => {
     e.preventDefault();
+
+    try {
+      setLoading(true);
+      const { data } = await publicRoute.post(authEndpoints.signup, staffInfo);
+      console.log(data);
+    } catch (error) {
+      setLoading(false);
+      const { data } = error.message;
+      setSignUpError(data.message);
+      setSignUpSuccess("");
+    }
   };
 
   return (
