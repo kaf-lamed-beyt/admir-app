@@ -4,10 +4,9 @@ import { InputGroup, AuthWrapper } from "../style/user-auth.styled";
 import { Button } from "../../../components/Buttons";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
-import { publicRoute } from "../../../utils/public-fetch";
 import { authEndpoints } from "../../../routes/endpoints";
-import { BarLoader } from "react-spinners";
 import axios from "axios";
+import { BarLoader } from "react-spinners";
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
@@ -24,11 +23,7 @@ const SignIn = () => {
 
     try {
       setLoading(true);
-      const { data } = await axios.post(
-        `https://admir-service.herokuapp.com/api/v1/${authEndpoints.login}`,
-        email,
-        password
-      );
+      const { data } = await axios.post(authEndpoints.login, email, password);
       console.log(data);
     } catch (error) {
       setLoading(false);

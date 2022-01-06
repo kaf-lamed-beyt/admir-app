@@ -8,8 +8,9 @@ import Role from "./staff-role";
 import { SignUpButtons } from "../../../components/Buttons";
 import { MAX_FORM_STEPS } from "../../../utils/common";
 import { AuthController, FormInfo } from "../../../components/FormInfo";
-import { publicRoute } from "../../../utils/public-fetch";
-import { authEndpoints } from "../../../routes/endpoints";
+// import { publicRoute } from "../../../utils/public-fetch";
+import { userEndpoints } from "../../../routes/endpoints";
+import axios from "axios";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
@@ -24,30 +25,34 @@ const SignUp = () => {
   const [signUpError, setSignUpError] = React.useState();
   const [loading, setLoading] = React.useState(false);
 
-  const nextForm = () => {
-    setFormStep((currentStep) => currentStep + 1);
-  };
+  // const nextForm = () => {
+  //   setFormStep((cur) => cur + 1);
+  // };
 
   const prevForm = () => {
-    setFormStep((currentStep) => currentStep - 1);
+    setFormStep((cur) => cur - 1);
   };
 
   const handlePwdVisibility = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
   };
 
-  const handleSignUp = (e, staffInfo) => {
+  const handleSignUp = async (e, fullname, email, password, country, role) => {
     e.preventDefault();
 
     try {
       setLoading(true);
-      const { data } = await publicRoute.post(authEndpoints.signup, staffInfo);
+      const { data } = await axios.post(
+        userEndpoints.createUser,
+        fullname,
+        email,
+        password,
+        country,
+        role
+      );
       console.log(data);
     } catch (error) {
       setLoading(false);
-      const { data } = error.message;
-      setSignUpError(data.message);
-      setSignUpSuccess("");
     }
   };
 
@@ -67,7 +72,8 @@ const SignUp = () => {
         </Fade>
       </AuthSteps>
       <AuthWrapper>
-        <form onSubmit={handleSignUp} className="signup-form">
+        <form className="signup-form">
+          <p>{signUpError}</p>
           {formStep === 0 && (
             <>
               <Fade direction="up" cascade triggerOnce>
@@ -85,7 +91,6 @@ const SignUp = () => {
                     placeholder="Tom Cruise"
                     value={fullname}
                     onChange={(e) => setFullname(e.target.value)}
-                    ref={register()}
                   />
                 </InputGroup>
                 <InputGroup>
@@ -125,7 +130,14 @@ const SignUp = () => {
             />
           )}
           {formStep === 2 && <Role staffRole={role} roleChange={setRole} />}
-          <SignUpButtons step={formStep} onClick={nextForm} />
+          {formStep === 3 && <h3>congrats ${fullname}</h3>}
+
+          <SignUpButtons
+            step={formStep}
+            onClick={() => setFormStep((cur) => cur + 1)}
+            submit={handleSignUp}
+            text={loading ? "Registering..." : `Register`}
+          />
         </form>
       </AuthWrapper>
     </React.Fragment>

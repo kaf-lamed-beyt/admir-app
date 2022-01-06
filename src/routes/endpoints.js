@@ -1,33 +1,35 @@
+const baseURL = `https://admir-service.herokuapp.com/api/v1`;
+
 export const authEndpoints = {
-  login: "/auth/login",
-  verfiy: "/auth/verify/:email/:token",
-  resendLink: "/auth/resend-link",
-  changePassword: "/auth/change-password",
+  login: `${baseURL}/auth/login`,
+  verfiy: `${baseURL}/auth/verify/:email/:token`,
+  resendLink: `${baseURL}/auth/resend-link`,
+  changePassword: `${baseURL}/auth/change-password`,
   //   maybe it's recover password. I don't know for now sha
-  recover: "/auth/recover",
+  recover: `${baseURL}/auth/recover`,
   // I also don't know if this one is forgot account or...
   // perharps it is for the admin
-  forgot: "/auth/forgot/:email/:token",
-  resetPassword: "/auth/reset-password",
-  grantUserAccess: "/auth/grant-access/:userId",
+  forgot: `${baseURL}/auth/forgot/:email/:token`,
+  resetPassword: `${baseURL}/auth/reset-password`,
+  grantUserAccess: `${baseURL}/auth/grant-access/:userId`,
 };
 
 export const userEndpoints = {
-  base: "/user",
-  getProfile: "/user/me",
-  getStaff: "/user/:id",
+  createUser: `${baseURL}/user`,
+  getProfile: `${baseURL}/user/me`,
+  getStaff: `${baseURL}/user/:id`,
 };
 
 export const dashboardDataEndpoints = {
-  base: "/work-post",
-  userWorks: "/work-post/user",
-  uniqueWork: "/work-post/:workPostId",
-  reports: "/report",
-  userReport: "/report/user",
-  uniqueStaffReport: "/report/user/:staffId",
-  uniqueWorkPost: "/report/work-post/:workPostId",
-  uniqueReport: "/report/:reportId",
-  uploadReport: "report/upload/:reportId",
-  entry: "/entry",
-  uniqueEntry: "/entry/:entryId",
+  base: `${baseURL}/work-post`,
+  userWorks: `${baseURL}/work-post/user`,
+  uniqueWork: `${baseURL}/work-post/:workPostId`,
+  reports: `${baseURL}/report`,
+  userReport: `${baseURL}/report/user`,
+  uniqueStaffReport: `${baseURL}/report/user/:staffId`,
+  uniqueWorkPost: `${baseURL}/report/work-post/:workPostId`,
+  uniqueReport: `${baseURL}/report/:reportId`,
+  uploadReport: `report/upload/:reportId`,
+  entry: `${baseURL}/entry`,
+  uniqueEntry: `${baseURL}/entry/:entryId`,
 };

@@ -54,7 +54,7 @@ Button.propTypes = {
   width: propTypes.string,
 };
 
-export const SignUpButtons = ({ step, ...props }) => {
+export const SignUpButtons = ({ step, submit, onClick, text, ...props }) => {
   if (step > 2) {
     return undefined;
   } else if (step === 2) {
@@ -65,9 +65,10 @@ export const SignUpButtons = ({ step, ...props }) => {
           className="staff-contact-btn"
           fill="var(--primary)"
           type="button"
+          onClick={submit}
           {...props}
         >
-          <Link href="/dashboard">Register</Link>
+          {text}
         </Button>
         <div className="flex-secure">
           <span>
@@ -83,8 +84,8 @@ export const SignUpButtons = ({ step, ...props }) => {
         <Button
           name="register-button"
           type="button"
+          onClick={onClick}
           fill="var(--primary)"
-          {...props}
         >
           Save & Continue
         </Button>
@@ -104,7 +105,7 @@ export const SignUpButtons = ({ step, ...props }) => {
           className="staff-contact-btn"
           fill="var(--primary)"
           type="button"
-          {...props}
+          onClick={onClick}
         >
           Save & Continue
         </Button>
