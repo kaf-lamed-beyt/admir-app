@@ -1,12 +1,13 @@
 import React from "react";
 import { InputGroup, AuthWrapper } from "../../style/user-auth.styled";
 import { Fade } from "react-awesome-reveal";
-import Select from "react-dropdown-select";
+import Input from "../../../../components/Inputs";
 import { CountryPhoneInput } from "../../../../components/Inputs";
 import "react-phone-number-input/style.css";
-import { countries } from "../../../../utils/countries";
+// import { countries } from "../../../../utils/countries";
+// import Select from "react-dropdown-select";
 
-const Contact = ({ phoneNumber, country, phoneChange, countryChange }) => {
+const Contact = ({ phoneNumber, workerId, phoneChange, handleWorkerId }) => {
   return (
     <React.Fragment>
       <Fade cascade triggerOnce>
@@ -22,7 +23,7 @@ const Contact = ({ phoneNumber, country, phoneChange, countryChange }) => {
             className="number"
           />
         </InputGroup>
-        <InputGroup>
+        {/* <InputGroup>
           <label htmlFor="fullname">Country</label>
           <Select
             value={country}
@@ -32,6 +33,17 @@ const Contact = ({ phoneNumber, country, phoneChange, countryChange }) => {
             dropdownPosition="top"
             className="staff-country"
             onChange={countryChange}
+          />
+        </InputGroup> */}
+        <InputGroup>
+          <label htmlFor="workerId">Your Worker ID*</label>
+          <Input
+            name="workerId"
+            id="workerId"
+            type="text"
+            placeholder="Your Identification Number"
+            value={workerId}
+            onChange={handleWorkerId}
           />
         </InputGroup>
       </Fade>

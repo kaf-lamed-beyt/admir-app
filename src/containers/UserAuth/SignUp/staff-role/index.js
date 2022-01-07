@@ -5,9 +5,8 @@ import Select from "react-dropdown-select";
 
 const Role = ({ staffRole, roleChange }) => {
   const options = [
-    { label: "Field Worker", value: "field worker" },
-    { label: "Manager", value: "manager" },
-    { label: "Assistant Manager", value: "assistant manager" },
+    { label: "Worker", value: "Worker" },
+    { label: "Manager", value: "Manager" },
   ];
 
   return (

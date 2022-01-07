@@ -14,15 +14,15 @@ import axios from "axios";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
-  const [fullname, setFullname] = React.useState("");
+  const [fullName, setFullname] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [country, setCountry] = React.useState("");
-  const [role, setRole] = React.useState("");
+  const [workerId, setWorkerId] = React.useState("");
+  const [role, setRole] = React.useState();
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
-  const [signUpSuccess, setSignUpSuccess] = React.useState();
-  const [signUpError, setSignUpError] = React.useState();
+  // const [signUpSuccess, setSignUpSuccess] = React.useState();
+  // const [signUpError, setSignUpError] = React.useState();
   const [loading, setLoading] = React.useState(false);
 
   // const nextForm = () => {
@@ -37,22 +37,30 @@ const SignUp = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
   };
 
-  const handleSignUp = async (e, fullname, email, password, country, role) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
-      const { data } = await axios.post(
-        userEndpoints.createUser,
-        fullname,
-        email,
-        password,
-        country,
-        role
-      );
-      console.log(data);
+
+      const response = await axios({
+        method: "POST",
+        url: userEndpoints.createUser,
+        data: {
+          fullName,
+          email,
+          password,
+          phoneNumber,
+          workerId,
+          role: role.toString(),
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
     } catch (error) {
-      setLoading(false);
+      console.log(error);
     }
   };
 
@@ -72,8 +80,7 @@ const SignUp = () => {
         </Fade>
       </AuthSteps>
       <AuthWrapper>
-        <form className="signup-form">
-          <p>{signUpError}</p>
+        <form className="signup-form" onSubmit={handleSignUp}>
           {formStep === 0 && (
             <>
               <Fade direction="up" cascade triggerOnce>
@@ -89,7 +96,7 @@ const SignUp = () => {
                     id="fullname"
                     type="text"
                     placeholder="Tom Cruise"
-                    value={fullname}
+                    value={fullName}
                     onChange={(e) => setFullname(e.target.value)}
                   />
                 </InputGroup>
@@ -124,12 +131,17 @@ const SignUp = () => {
           {formStep === 1 && (
             <Contact
               phoneNumber={phoneNumber}
-              country={country}
-              countryChange={(country) => setCountry(country)}
               phoneChange={setPhoneNumber}
+              workerId={workerId}
+              handleWorkerId={(e) => setWorkerId(e.target.value)}
             />
           )}
-          {formStep === 2 && <Role staffRole={role} roleChange={setRole} />}
+          {formStep === 2 && (
+            <Role
+              staffRole={role}
+              roleChange={(role) => setRole(role.map((role) => role.value))}
+            />
+          )}
           {formStep === 3 && <h3>congrats ${fullname}</h3>}
 
           <SignUpButtons
