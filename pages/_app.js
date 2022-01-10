@@ -1,6 +1,7 @@
 import "../styles/globals.scss";
 import "../styles/variables.css";
 import "antd/dist/antd.css";
+import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import React from "react";
 

@@ -11,6 +11,7 @@ import { AuthController, FormInfo } from "../../../components/FormInfo";
 // import { publicRoute } from "../../../utils/public-fetch";
 import { userEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
@@ -60,8 +61,18 @@ const SignUp = () => {
       });
       console.log(response.data);
     } catch (error) {
-      console.log(error);
+      console.log(error.msg);
     }
+
+    // toast(`Hello ${fullName}, we sent a confirmation email to you.`, {
+    //   position: "top-right",
+    //   autoClose: 9000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    // });
   };
 
   return (

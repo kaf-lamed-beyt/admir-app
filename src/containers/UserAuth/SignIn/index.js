@@ -7,6 +7,7 @@ import { Fade } from "react-awesome-reveal";
 import { authEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
 import { BarLoader } from "react-spinners";
+import { useRouter } from "next/router";
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
@@ -14,21 +15,34 @@ const SignIn = () => {
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
+  const router = useRouter();
+
   const handlePwdVisibility = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
   };
 
-  const handleSignIn = async (e, email, password) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
-      const { data } = await axios.post(authEndpoints.login, email, password);
-      console.log(data);
+
+      const response = await axios({
+        method: "POST",
+        url: authEndpoints.login,
+        data: {
+          emailWorkerId: email,
+          password,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } catch (error) {
-      setLoading(false);
-      console.log(error);
+      console.log(error.msg);
     }
+
+    router.push("/dashboard");
   };
 
   return (
@@ -77,7 +91,7 @@ const SignIn = () => {
               name="signin-button"
               className="signin-btn"
             >
-              {loading ? <BarLoader /> : "Log in"}
+              {loading ? "Logging in..." : "Log in"}
             </Button>
           </Fade>
         </form>
