@@ -14,11 +14,31 @@ const SignIn = () => {
   const [password, setPassword] = React.useState("");
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-
+  const [signInSuccess, setSignInSuccess] = React.useState();
+  const [signInError, setSignInError] = React.useState();
+  const [redirectOnSignIn, setRedirectOnSignIn] = React.useState(false);
   const router = useRouter();
 
   const handlePwdVisibility = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
+  };
+
+  const validateSignIn = () => {
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
+    let pwdErr = document.querySelector(".pwd-err");
+    let email_err = document.querySelector(".email-err");
+    let err_msg = document.querySelector("#err");
+
+    if (!email && !password) {
+      err_msg.innerHTML = "Email and Password cannot be empty.";
+    } else if (!email) {
+      email_err.innerHTML = "Email address cannot be empty";
+    } else if (password.length === 4) {
+      pwdErr.innerHTML = "Password should be greater than four characters";
+    } else if (!password) {
+      pwdErr.innerHTML = "Password cannot be empty";
+    }
   };
 
   const handleSignIn = async (e) => {
@@ -26,6 +46,7 @@ const SignIn = () => {
 
     try {
       setLoading(true);
+      validateSignIn();
 
       const response = await axios({
         method: "POST",
@@ -38,12 +59,24 @@ const SignIn = () => {
           "Content-Type": "application/json",
         },
       });
+      console.log(response.data);
+      setSignInSuccess(response.data.msg);
+      setSignInError("");
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 700);
     } catch (error) {
-      console.log(error.msg);
+      setSignInError(error.msg);
+      setSignInSuccess(null);
     }
-
-    router.push("/dashboard");
   };
+
+  React.useEffect(() => {
+    router.prefetch("/dashboard");
+  });
+
+  const signInSuccessMsg = <p className="auth-success-msg">{signInSuccess}</p>;
+  const signInErrMsg = <p className="auth-err-msg">{signInError}</p>;
 
   return (
     <React.Fragment>
@@ -58,32 +91,38 @@ const SignIn = () => {
         </Fade>
       </div>
       <AuthWrapper>
+        {signInSuccess ? signInSuccessMsg : ""}
+        {signInError ? signInErrMsg : ""}
         <form className="signin-form" onSubmit={handleSignIn}>
           <Fade direction="up" cascade triggerOnce>
             <h1>Log In</h1>
-            <p>Welcome!</p>
+            <p id="err"></p>
             <InputGroup>
               <label htmlFor="email">Email address*</label>
               <Input
                 name="email"
                 type="email"
+                id="email"
                 placeholder="Enter email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <p className="email-err"></p>
             </InputGroup>
             <InputGroup>
               <label htmlFor="password">Password*</label>
               <Input
                 name="password"
                 type={passwordVisibility ? "text" : "password"}
-                placeholder="Enter password"
+                id="password"
+                placeholder="password should contain uppercase letter"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <span class="show-pwd" onClick={handlePwdVisibility}>
                 show
               </span>
+              <p className="pwd-err"></p>
               <p className="forgot-pwd">Forgot password?</p>
             </InputGroup>
             <Button
@@ -91,7 +130,7 @@ const SignIn = () => {
               name="signin-button"
               className="signin-btn"
             >
-              {loading ? "Logging in..." : "Log in"}
+              {loading ? "Logging In..." : "Log In"}
             </Button>
           </Fade>
         </form>
