@@ -58,12 +58,11 @@ const SignIn = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data.msg);
       setSignInSuccess(response.data.msg);
       setSignInError("");
       setTimeout(() => {
         router.push("/dashboard");
-      }, 10000);
+      }, 400);
     } catch (error) {
       const { data } = error.response;
       setSignInError(data.msg);

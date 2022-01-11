@@ -4,6 +4,7 @@ export const AuthWrapper = styled.div`
   padding: 80px 250px 100px 150px;
   height: 80%;
   width: 100%;
+  margin-top: -30px;
 
   .flex-secure {
     display: flex;

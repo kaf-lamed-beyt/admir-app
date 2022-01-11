@@ -11,6 +11,7 @@ import { AuthController, FormInfo } from "../../../components/FormInfo";
 import { userEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
 import router from "next/router";
+import { AuthErrMsg, AuthSuccessMsg } from "../../../components/Modals";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
@@ -81,27 +82,22 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
       setSignUpSuccess(response.data.msg);
       setSignUpError("");
       setTimeout(() => {
         router.push("/login");
       }, 400);
     } catch (error) {
-      setSignUpError(error.msg);
+      const { data } = error.response;
+      setSignUpError(data.msg);
       setSignUpSuccess(null);
     }
   };
 
-  const signUpSuccessMsg = (
-    <div className="auth-success-msg">{signUpSuccess}</div>
-  );
-  const signUpErrMsg = <p className="auth-err-msg">{signUpError}</p>;
-
   return (
     <React.Fragment>
       <AuthSteps>
-        <Fade>
+        <Fade triggerOnce>
           <AuthController steps={formStep} prevForm={prevForm} />
           {formStep < MAX_FORM_STEPS && (
             <div className="info">
@@ -114,8 +110,8 @@ const SignUp = () => {
         </Fade>
       </AuthSteps>
       <AuthWrapper>
-        {signUpSuccess ? signUpSuccessMsg : ""}
-        {signUpError ? signUpErrMsg : ""}
+        {signUpSuccess ? <AuthSuccessMsg message={signUpSuccess} /> : ""}
+        {signUpError ? <AuthErrMsg message={signUpError} /> : ""}
         <form className="signup-form" onSubmit={handleSignUp}>
           {formStep === 0 && (
             <>

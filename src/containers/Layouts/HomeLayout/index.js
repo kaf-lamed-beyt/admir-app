@@ -10,7 +10,7 @@ const HomeLayoutWrapper = styled.section`
 
   .dashboard-content {
     width: 100%;
-    height: 100%;
+    height: 100vh;
   }
 `;
 
