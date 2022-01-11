@@ -8,10 +8,9 @@ import Role from "./staff-role";
 import { SignUpButtons } from "../../../components/Buttons";
 import { MAX_FORM_STEPS } from "../../../utils/common";
 import { AuthController, FormInfo } from "../../../components/FormInfo";
-// import { publicRoute } from "../../../utils/public-fetch";
 import { userEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
-import { toast } from "react-toastify";
+import router from "next/router";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
@@ -22,8 +21,8 @@ const SignUp = () => {
   const [workerId, setWorkerId] = React.useState("");
   const [role, setRole] = React.useState();
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
-  // const [signUpSuccess, setSignUpSuccess] = React.useState();
-  // const [signUpError, setSignUpError] = React.useState();
+  const [signUpSuccess, setSignUpSuccess] = React.useState();
+  const [signUpError, setSignUpError] = React.useState();
   const [loading, setLoading] = React.useState(false);
 
   // const nextForm = () => {
@@ -38,11 +37,34 @@ const SignUp = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
   };
 
+  const validateSignUp = () => {
+    const fullName = document.querySelector("#fullname").value;
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
+    let pwdErr = document.querySelector(".pwd-err");
+    let email_err = document.querySelector(".email-err");
+    let nameErr = document.querySelector(".name-err");
+    let err_msg = document.querySelector("#err");
+
+    if (!email && !password && !fullName) {
+      err_msg.innerHTML = "Your fullname, email and password cannot be empty.";
+    } else if (!fullName) {
+      nameErr.innerHTML = "Fullname cannot be empty.";
+    } else if (!email) {
+      email_err.innerHTML = "Email address cannot be empty";
+    } else if (password.length === 4) {
+      pwdErr.innerHTML = "Password should be greater than four characters";
+    } else if (!password) {
+      pwdErr.innerHTML = "Password cannot be empty";
+    }
+  };
+
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
+      // validateSignUp();
 
       const response = await axios({
         method: "POST",
@@ -60,20 +82,21 @@ const SignUp = () => {
         },
       });
       console.log(response.data);
+      setSignUpSuccess(response.data.msg);
+      setSignUpError("");
+      setTimeout(() => {
+        router.push("/login");
+      }, 400);
     } catch (error) {
-      console.log(error.msg);
+      setSignUpError(error.msg);
+      setSignUpSuccess(null);
     }
-
-    // toast(`Hello ${fullName}, we sent a confirmation email to you.`, {
-    //   position: "top-right",
-    //   autoClose: 9000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    // });
   };
+
+  const signUpSuccessMsg = (
+    <div className="auth-success-msg">{signUpSuccess}</div>
+  );
+  const signUpErrMsg = <p className="auth-err-msg">{signUpError}</p>;
 
   return (
     <React.Fragment>
@@ -91,6 +114,8 @@ const SignUp = () => {
         </Fade>
       </AuthSteps>
       <AuthWrapper>
+        {signUpSuccess ? signUpSuccessMsg : ""}
+        {signUpError ? signUpErrMsg : ""}
         <form className="signup-form" onSubmit={handleSignUp}>
           {formStep === 0 && (
             <>
@@ -100,6 +125,7 @@ const SignUp = () => {
                   For the purpose of industry regulation, your details are
                   required.
                 </p>
+                <p id="err"></p>
                 <InputGroup>
                   <label htmlFor="fullname">Your fullname*</label>
                   <Input
@@ -110,6 +136,7 @@ const SignUp = () => {
                     value={fullName}
                     onChange={(e) => setFullname(e.target.value)}
                   />
+                  <p className="name-err"></p>
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="email">Email address*</label>
@@ -121,6 +148,7 @@ const SignUp = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
+                  <p className="email-err"></p>
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="password">Create password*</label>
@@ -135,6 +163,7 @@ const SignUp = () => {
                   <span className="show-pwd" onClick={handlePwdVisibility}>
                     show
                   </span>
+                  <p className="pwd-err"></p>
                 </InputGroup>
               </Fade>
             </>

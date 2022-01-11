@@ -1,5 +1,5 @@
 import React from "react";
-import { InputGroup, AuthWrapper } from "../../style/user-auth.styled";
+import { InputGroup } from "../../style/user-auth.styled";
 import { Fade } from "react-awesome-reveal";
 import Input from "../../../../components/Inputs";
 import { CountryPhoneInput } from "../../../../components/Inputs";

@@ -6,8 +6,8 @@ import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
 import { authEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
-import { BarLoader } from "react-spinners";
 import { useRouter } from "next/router";
+import { AuthErrMsg, AuthSuccessMsg } from "../../../components/Modals";
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
@@ -16,7 +16,6 @@ const SignIn = () => {
   const [loading, setLoading] = React.useState(false);
   const [signInSuccess, setSignInSuccess] = React.useState();
   const [signInError, setSignInError] = React.useState();
-  const [redirectOnSignIn, setRedirectOnSignIn] = React.useState(false);
   const router = useRouter();
 
   const handlePwdVisibility = () => {
@@ -59,14 +58,15 @@ const SignIn = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
+      console.log(response.data.msg);
       setSignInSuccess(response.data.msg);
       setSignInError("");
       setTimeout(() => {
         router.push("/dashboard");
-      }, 700);
+      }, 400);
     } catch (error) {
-      setSignInError(error.msg);
+      const { data } = error.response;
+      setSignInError(data.msg);
       setSignInSuccess(null);
     }
   };
@@ -74,9 +74,6 @@ const SignIn = () => {
   React.useEffect(() => {
     router.prefetch("/dashboard");
   });
-
-  const signInSuccessMsg = <p className="auth-success-msg">{signInSuccess}</p>;
-  const signInErrMsg = <p className="auth-err-msg">{signInError}</p>;
 
   return (
     <React.Fragment>
@@ -91,12 +88,11 @@ const SignIn = () => {
         </Fade>
       </div>
       <AuthWrapper>
-        {signInSuccess ? signInSuccessMsg : ""}
-        {signInError ? signInErrMsg : ""}
+        {signInError ? <AuthErrMsg message={signInError} /> : ""}
+        {signInSuccess ? <AuthSuccessMsg message={signInSuccess} /> : ""}
         <form className="signin-form" onSubmit={handleSignIn}>
           <Fade direction="up" cascade triggerOnce>
             <h1>Log In</h1>
-            <p id="err"></p>
             <InputGroup>
               <label htmlFor="email">Email address*</label>
               <Input
@@ -129,6 +125,7 @@ const SignIn = () => {
               fill="var(--primary)"
               name="signin-button"
               className="signin-btn"
+              type="submit"
             >
               {loading ? "Logging In..." : "Log In"}
             </Button>
