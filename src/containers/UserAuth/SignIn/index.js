@@ -63,7 +63,7 @@ const SignIn = () => {
       setSignInError("");
       setTimeout(() => {
         router.push("/dashboard");
-      }, 400);
+      }, 10000);
     } catch (error) {
       const { data } = error.response;
       setSignInError(data.msg);

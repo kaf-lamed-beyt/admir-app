@@ -34,7 +34,7 @@ body {
   margin-top: 100px;
   margin-left: 100px;
   z-index: 10;
-  animation: scaleModal 0.8s ease-in forwards;
+  animation: scaleModal 2s ease-in forwards;
   padding: 13px 0;
   opacity: 0;
 
@@ -47,6 +47,16 @@ body {
     color: #fff;
     font-size: 50px;
     font-weight: 500;
+  }
+
+  @media only screen and (min-width: 0px) and (max-width: 375px) {
+    margin-left: 42px;
+    margin-top: 30px;
+  }
+
+  @media only screen and (min-width: 376px) and (max-width: 576px) {
+    margin-left: 70px;
+    margin-top: 30px;
   }
 }
 
@@ -77,6 +87,16 @@ body {
     color: #fff;
     font-size: 50px;
     font-weight: 500;
+  }
+
+  @media only screen and (min-width: 0px) and (max-width: 375px) {
+    margin-left: 42px;
+    margin-top: 30px;
+  }
+
+  @media only screen and (min-width: 376px) and (max-width: 576px) {
+    margin-left: 70px;
+    margin-top: 30px;
   }
 }
 
