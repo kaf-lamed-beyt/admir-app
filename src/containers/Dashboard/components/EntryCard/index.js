@@ -4,6 +4,8 @@ import Icon from "../../../../components/Icons";
 import Button from "../../../../components/Buttons";
 import { Fade } from "react-awesome-reveal";
 import propTypes from "prop-types";
+import Select from "react-dropdown-select";
+import { time } from "../../../../utils/common";
 
 const EntryCard = ({ title, open }) => {
   const [clockIn, setClockIn] = React.useState("");
@@ -24,28 +26,35 @@ const EntryCard = ({ title, open }) => {
           <p className="date">22 Dec, 2021</p>
         </div>
         <form onSubmit={handleSubmit}>
-          {/* <label htmlFor="time-in">
-          <Icon name="clock-in" />{" "}
-        </label> */}
-          <input
-            type="time"
-            name="time-in"
-            id="time-in"
-            onChange={(clockIn) => setClockIn(clockIn)}
-            placeholder="Clock In"
-            value={clockIn}
-          />
-          {/* <label htmlFor="time-out">
-          <Icon name="clock-in" />
-        </label> */}
-          <input
-            type="time"
-            name="time-out"
-            id="time-out"
-            onChange={(clockOut) => setClockOut(clockOut)}
-            placeholder="Clock Out"
-            value={clockOut}
-          />
+          <div className="input-group">
+            <Icon name="clock-in" />{" "}
+            <Select
+              name="time-in"
+              id="time-in"
+              options={time}
+              value={clockIn}
+              className="select"
+              dropdownPosition="bottom"
+              onChange={(clockIn) =>
+                setClockIn(clockIn.map((time) => console.log(time.value)))
+              }
+              placeholder="Clock In"
+            />
+          </div>
+          <div className="input-group">
+            <Icon name="clock-in" />
+            <Select
+              name="time-out"
+              id="time-out"
+              value={clockOut}
+              className="select"
+              options={time}
+              onChange={(clockOut) =>
+                setClockOut(clockOut.map((time) => console.log(time.value)))
+              }
+              placeholder="Clock Out"
+            />
+          </div>
           <Button fill="var(--secondary)" height="30px" text-color="#fff">
             Save
           </Button>

@@ -47,16 +47,13 @@ export const EntryWrapper = styled.div`
   }
 
   form {
-    margin-top: 45px;
-
-    input {
-      width: 100%;
-      height: 30px;
-      border: none;
-      background: #f5f5f5;
-      border-radius: 15px;
-      margin: 0 0 20px 0;
-      outline: none;
+    .input-group {
+      .select {
+        margin-top: -45px;
+        background: #f5f5f5;
+        border-radius: 15px;
+        height: 20px !important;
+      }
     }
 
     button {
@@ -64,21 +61,7 @@ export const EntryWrapper = styled.div`
       border: none;
       outline: none;
       color: #fff;
-      margin-top: 30px;
-    }
-  }
-
-  .input-group {
-    display: flex;
-    justify-content: space-between;
-
-    input {
-      margin-left: 7px;
-
-      ::placeholder {
-        padding: 0 0 0 15px;
-        font-size: 14px;
-      }
+      margin-top: 37px;
     }
   }
 
