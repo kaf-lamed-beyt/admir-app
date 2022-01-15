@@ -91,7 +91,7 @@ export const SignUpButtons = ({ step, submit, onClick, text, ...props }) => {
         </Button>
         <p className="have-account">
           Already have an account?{""}{" "}
-          <Link href="/">
+          <Link href="/" passHref>
             <span>Sign In</span>
           </Link>
         </p>
