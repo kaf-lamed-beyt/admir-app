@@ -65,18 +65,17 @@ const SignIn = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
+      console.log(response.data);
+      authContext.setAuthState(response.data);
       setSignInSuccess(response.data.msg);
       setSignInError("");
       setTimeout(() => {
         router.push("/dashboard");
       }, 200);
-      // authContext.setAuthState(response);
     } catch (error) {
       setLoading(false);
-      const { data } = error.response;
-      setSignInError(data.msg);
-      setSignInSuccess(null);
+      setSignInError(error.response.data.msg);
+      setSignInSuccess("");
     }
   };
 

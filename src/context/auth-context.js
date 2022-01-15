@@ -14,13 +14,6 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  //   const getCurrentUser = ({userData}) => {
-  //     setAuthState({
-  //         userData:
-  //     })
-
-  //   }
-
   return (
     <Provider
       value={{

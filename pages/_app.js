@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import React from "react";
+import { AuthProvider } from "../src/context/auth-context";
 
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {
@@ -20,7 +21,9 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="rgba(215, 87, 17, 1)" />
         <link rel="icon" type="image/ico" href="" />
       </Head>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </React.Fragment>
   );
 }

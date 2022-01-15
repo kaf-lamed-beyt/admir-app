@@ -11,6 +11,7 @@ import Input from "../src/components/Inputs";
 import Button from "../src/components/Buttons";
 import Layout from "../src/containers/Layouts/HomeLayout";
 import { AuthErrMsg, AuthSuccessMsg } from "../src/components/Modals";
+import Link from "next/link";
 
 const ForgotPasswordPage = () => {
   const router = useRouter();
@@ -114,6 +115,9 @@ export const DefaultResetPassword = () => {
           >
             {!loading ? "Send" : "Sending..."}
           </Button>
+          {/* <Link href="/signin">
+            <p className="forgot-pwd" style={{ textAlign: "center" }}></p>
+          </Link> */}
         </form>
       </AuthWrapper>
     </Layout>
