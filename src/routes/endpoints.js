@@ -11,13 +11,13 @@ export const authEndpoints = {
   // perharps it is for the admin
   forgot: `${baseURL}/auth/forgot/:email/:token`,
   resetPassword: `${baseURL}/auth/reset-password`,
-  grantUserAccess: `${baseURL}/auth/grant-access/:userId`,
 };
 
 export const userEndpoints = {
   createUser: `${baseURL}/user`,
   getProfile: `${baseURL}/user/me`,
   getStaff: `${baseURL}/user/:id`,
+  grantUserAccess: `${baseURL}/user/grant-access/:userId`,
 };
 
 export const dashboardDataEndpoints = {

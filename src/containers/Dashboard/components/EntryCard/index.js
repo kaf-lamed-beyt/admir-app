@@ -27,7 +27,7 @@ const EntryCard = ({ title, open }) => {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
-            <Icon name="clock-in" />{" "}
+            <Icon name="clock-in" />
             <Select
               name="time-in"
               id="time-in"
@@ -36,7 +36,7 @@ const EntryCard = ({ title, open }) => {
               className="select"
               dropdownPosition="bottom"
               onChange={(clockIn) =>
-                setClockIn(clockIn.map((time) => console.log(time.value)))
+                setClockIn(clockIn.map((time) => time.value))
               }
               placeholder="Clock In"
             />
@@ -48,9 +48,10 @@ const EntryCard = ({ title, open }) => {
               id="time-out"
               value={clockOut}
               className="select"
+              dropdownPosition="top"
               options={time}
               onChange={(clockOut) =>
-                setClockOut(clockOut.map((time) => console.log(time.value)))
+                setClockOut(clockOut.map((time) => time.value))
               }
               placeholder="Clock Out"
             />
@@ -90,23 +91,25 @@ export const ReportsEntry = ({ title, open }) => {
           <p className="date">22 Dec, 2021</p>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
+          <div className="reports-group">
             <Icon name="activities" />
             <input
               type="text"
               name="activities"
+              className="work-activity"
               id="activities"
               onChange={(activities) => setActivities(activities)}
               placeholder="Clock In"
               value={activities}
             />
           </div>
-          <div className="input-group">
+          <div className="reports-group">
             <Icon name="entry-card-marker" />
             <input
               type="text"
               name="location"
               id="location"
+              className="work-location"
               onChange={(location) => setLocation(location)}
               placeholder="Location"
               value={location}

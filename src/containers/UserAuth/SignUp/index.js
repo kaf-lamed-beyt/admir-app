@@ -12,6 +12,7 @@ import { userEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
 import router from "next/router";
 import { AuthErrMsg, AuthSuccessMsg } from "../../../components/Modals";
+import { AuthContext } from "../../../context/auth-context";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
@@ -25,6 +26,7 @@ const SignUp = () => {
   const [signUpSuccess, setSignUpSuccess] = React.useState();
   const [signUpError, setSignUpError] = React.useState();
   const [loading, setLoading] = React.useState(false);
+  const authContext = React.useContext(AuthContext);
 
   // const nextForm = () => {
   //   setFormStep((cur) => cur + 1);
@@ -82,6 +84,7 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
       });
+      authContext.setAuthState(data);
       setSignUpSuccess(response.data.msg);
       setSignUpError("");
       setTimeout(() => {

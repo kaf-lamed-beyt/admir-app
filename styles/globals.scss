@@ -267,3 +267,8 @@ textarea {
 .btn-outline a {
   color: var(--grey);
 }
+
+// reset password screen global styles
+.reset-password {
+  transform: translate(0, 50%);
+}

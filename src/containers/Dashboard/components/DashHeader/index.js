@@ -25,7 +25,7 @@ const DashHeader = ({ dashboardTitle, user, profile_img }) => {
         <div className="user-details">
           <p className="username">{user}</p>
           <div className="img-wrapper" onClick={() => setOpen(!open)}>
-            <img src={profile_img} alt="user profile image" />
+            <img src="/img/tom.png" alt="user profile image" />
           </div>
         </div>
         <UserMenu open={open} />

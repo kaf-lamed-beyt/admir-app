@@ -56,6 +56,27 @@ export const EntryWrapper = styled.div`
       }
     }
 
+    .reports-group {
+      display: flex;
+      margin-top: 30px;
+
+      svg {
+        margin-top: 8px;
+      }
+
+      .work-location,
+      .work-activity {
+        padding: 0 8px;
+        outline: none;
+        height: 36px;
+        width: 100%;
+        border-radius: 15px;
+        border: none;
+        background: #f5f5f5;
+        margin-left: 10px;
+      }
+    }
+
     button {
       border-radius: 15px;
       border: none;

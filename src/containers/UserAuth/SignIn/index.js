@@ -8,6 +8,7 @@ import { authEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { AuthErrMsg, AuthSuccessMsg } from "../../../components/Modals";
+import { AuthContext } from "../../../context/auth-context";
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
@@ -17,6 +18,7 @@ const SignIn = () => {
   const [signInSuccess, setSignInSuccess] = React.useState();
   const [signInError, setSignInError] = React.useState();
   const router = useRouter();
+  const authContext = React.useContext(AuthContext);
 
   const handlePwdVisibility = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
@@ -31,12 +33,17 @@ const SignIn = () => {
 
     if (!email && !password) {
       err_msg.innerHTML = "Email and Password cannot be empty.";
+      email.focus();
+      password.focus();
     } else if (!email) {
       email_err.innerHTML = "Email address cannot be empty";
+      email.focus();
     } else if (password.length === 4) {
       pwdErr.innerHTML = "Password should be greater than four characters";
+      password.focus();
     } else if (!password) {
       pwdErr.innerHTML = "Password cannot be empty";
+      password.focus();
     }
   };
 
@@ -58,11 +65,13 @@ const SignIn = () => {
           "Content-Type": "application/json",
         },
       });
+      console.log(response);
       setSignInSuccess(response.data.msg);
       setSignInError("");
       setTimeout(() => {
         router.push("/dashboard");
       }, 200);
+      // authContext.setAuthState(response);
     } catch (error) {
       setLoading(false);
       const { data } = error.response;
@@ -119,7 +128,9 @@ const SignIn = () => {
                 show
               </span>
               <p className="pwd-err"></p>
-              <p className="forgot-pwd">Forgot password?</p>
+              <Link href="/forgot-password">
+                <p className="forgot-pwd">Forgot password?</p>
+              </Link>
             </InputGroup>
             <Button
               fill="var(--primary)"

@@ -26,6 +26,8 @@ export const SettingsWrapper = styled.div`
     margin-top: 70px !important;
     margin-bottom: 20px;
     padding: 0;
+    width: 100%;
+    border: 1px solid green;
 
     .role-input {
       margin: 0 !important;
@@ -42,53 +44,52 @@ export const SettingsWrapper = styled.div`
   }
 `;
 
-export const InputGroup = styled.div`
-  display: block;
-  padding: 10px 0;
-`;
-
 export const SettingsForm = styled.form`
   width: 100%;
-  margin-top: 24px;
+  margin-top: 2px;
+  display: flex;
+  flex-flow: column;
+
+  .flex-fields {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    label {
+      display: block;
+    }
+
+    .fullname,
+    .email {
+      width: 292px;
+    }
+
+    .select,
+    .number {
+      padding: 6px 3px;
+      height: 45px;
+      width: 295px;
+      border-radius: 6px;
+    }
+  }
+
+  .pwd-field {
+    width: 50%;
+    margin-top: 30px;
+
+    input {
+      width: 76%;
+    }
+  }
 
   .show-pwd {
     position: absolute;
-    margin-left: 320px;
-    margin-top: -35px;
+    margin-left: -50px;
+    margin-top: 17px;
 
     :hover {
       cursor: pointer;
     }
-  }
-
-  .flex-fields {
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-
-    input[type="text"] {
-      width: 120%;
-    }
-
-    .number {
-      width: 143%;
-    }
-
-    input[type="password"] {
-      width: 113%;
-    }
-  }
-
-  .role-input {
-    height: 45px;
-    border-radius: 6px;
-    width: 179%;
-    margin-left: -76%;
-  }
-
-  .role-label {
-    margin-bottom: 20px !important;
-    margin-left: -75%;
   }
 
   .flex-buttons {
@@ -101,13 +102,16 @@ export const SettingsForm = styled.form`
     }
   }
 
-  @media only screen and (min-width: 0px) and (max-width: 992px) {
-    input {
-      width: 100%;
-    }
+  @media only screen and (min-width: 0px) and (max-width: 576px) {
+    border: 1px solid red;
 
     .flex-fields {
       flex-wrap: wrap;
+      border: 1px solid red;
+
+      input {
+        width: 400px;
+      }
     }
   }
 `;

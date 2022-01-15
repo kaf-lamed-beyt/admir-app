@@ -11,10 +11,10 @@ import Select from "react-dropdown-select";
 import { InputGroup } from "./style/settings.styled";
 
 const Settings = () => {
-  const [fullname, setFullname] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [fullname, setFullname] = React.useState("Caleb Olojo");
+  const [email, setEmail] = React.useState("sakamakhmood@gmail.com");
+  const [password, setPassword] = React.useState("uysgsgsyskAaa");
+  const [phoneNumber, setPhoneNumber] = React.useState("+45876110033");
   const [role, setRole] = React.useState("");
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
 
@@ -34,11 +34,7 @@ const Settings = () => {
 
   return (
     <React.Fragment>
-      <DashHeader
-        dashboardTitle="Settings"
-        user="Tom Cruise"
-        profile_img="/img/tom.png"
-      />
+      <DashHeader dashboardTitle="Settings" user="Tom Cruise" />
       <Fade>
         <SettingsWrapper>
           <div className="profile-wrapper">
@@ -46,69 +42,64 @@ const Settings = () => {
           </div>
           <SettingsForm onSubmit={handleSubmit}>
             <div className="flex-fields">
-              <InputGroup>
+              <div>
                 <label htmlFor="fullname">Your fullname</label>
-                <Input
+                <input
                   name="fullname"
                   type="text"
                   placeholder="Tom Cruise"
                   value={fullname}
+                  className="fullname form-control"
                   onChange={(e) => setFullname(e.target.value)}
                 />
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="email" className="email-label">
-                  Email address
-                </label>
-                <Input
+              </div>
+              <div>
+                <label htmlFor="email">Email address</label>
+                <input
                   name="email"
                   type="email"
                   placeholder="Enter email address"
                   value={email}
+                  className="email form-control"
                   onChange={(e) => setEmail(e.target.value)}
                 />
-              </InputGroup>
+              </div>
             </div>
             <div className="flex-fields">
-              <InputGroup>
-                <label htmlFor="phone number" className="number-label">
-                  Phone Number
-                </label>
+              <div>
+                <label htmlFor="phone number">Phone Number</label>
                 <CountryPhoneInput
                   value={phoneNumber}
                   onChange={setPhoneNumber}
                   className="number"
                 />
-              </InputGroup>
-              <InputGroup>
-                <label htmlFor="role" className="role-label">
-                  Role
-                </label>
+              </div>
+              <div>
+                <label htmlFor="role">Role</label>
                 <Select
                   value={role}
                   options={options}
                   placeholder="Please select your role"
                   dropdownPosition="top"
-                  className="role-input"
+                  className="select"
                   color="var(--primary)"
-                  onChange={(role) => setRole(role)}
+                  onChange={(role) => setRole(role.map((role) => role.value))}
                 />
-              </InputGroup>
+              </div>
             </div>
-            <div className="flex-fields">
-              <InputGroup>
-                <label htmlFor="password">Change password</label>
-                <Input
-                  name="password"
-                  type={passwordVisibility ? "text" : "password"}
-                  placeholder="Create password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <span className="show-pwd" onClick={handlePwdVisibility}>
-                  show
-                </span>
-              </InputGroup>
+            <div className="pwd-field">
+              <label htmlFor="password">Change password</label>
+              <input
+                name="password"
+                type={passwordVisibility ? "text" : "password"}
+                placeholder="Create password"
+                value={password}
+                className="form-control"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <span className="show-pwd" onClick={handlePwdVisibility}>
+                show
+              </span>
             </div>
             <div className="flex-buttons">
               <Button

@@ -9,37 +9,37 @@ import Icon from "../../../components/Icons";
 import { ReportsEntry } from "../components/EntryCard";
 import onClickOutside from "react-onclickoutside";
 
-export const getStaticPaths = async () => {
-  const response = await fetch("same-api-endpoint");
-  const data = await response.json();
+// export const getStaticPaths = async () => {
+//   const response = await fetch("same-api-endpoint");
+//   const data = await response.json();
 
-  // we need a way to get the params that contains the id
-  //  of each object in the data array. Using the map method of
-  // javascript enables us to accomplish that.
-  const staffReportPath = data.map((staffReport) => {
-    return {
-      params: { id: staffReport.id.toString() },
-    };
-  });
+//   // we need a way to get the params that contains the id
+//   //  of each object in the data array. Using the map method of
+//   // javascript enables us to accomplish that.
+//   const staffReportPath = data.map((staffReport) => {
+//     return {
+//       params: { id: staffReport.id.toString() },
+//     };
+//   });
 
-  return {
-    paths: staffReportPath,
-    fallback: false,
-  };
-};
+//   return {
+//     paths: staffReportPath,
+//     fallback: false,
+//   };
+// };
 
-export const getStaticProps = async (context) => {
-  const reportId = context.params.id;
+// export const getStaticProps = async (context) => {
+//   const reportId = context.params.id;
 
-  const response = await fetch(`same-api-endpoint/${reportId}`);
-  const data = await response.json();
+//   const response = await fetch(`same-api-endpoint/${reportId}`);
+//   const data = await response.json();
 
-  return {
-    props: {
-      user: data,
-    },
-  };
-};
+//   return {
+//     props: {
+//       user: data,
+//     },
+//   };
+// };
 
 const IndividualReport = () => {
   const [open, setOpen] = React.useState(false);
