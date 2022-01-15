@@ -5,12 +5,17 @@ const { Provider } = AuthContext;
 
 const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = React.useState({
-    data: null,
+    token: "",
+    userRole: "",
   });
 
   const setUserAuthInfo = ({ data }) => {
+    const token = localStorage.setItem("token", data.data);
+    const userRole = localStorage.setItem("userRole", data.meta);
+
     setAuthState({
-      data,
+      token,
+      userRole,
     });
   };
 

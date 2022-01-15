@@ -65,8 +65,7 @@ const SignIn = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
-      authContext.setAuthState(response.data);
+      authContext.setAuthState(response);
       setSignInSuccess(response.data.msg);
       setSignInError("");
       setTimeout(() => {
