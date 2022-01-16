@@ -48,7 +48,6 @@ export default function OverviewPage() {
       });
       const { data } = response.data;
       authContext.setCurrentLoggedInUser(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
