@@ -3,8 +3,9 @@ import React from "react";
 import DashLayout from "../../src/containers/Layouts/DashLayout";
 import Overview from "../../src/containers/Dashboard/overview";
 import { useRouter } from "next/router";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../src/context/auth-context";
+import axios from "axios";
+import { userEndpoints } from "../../src/routes/endpoints";
 
 var options = {
   enableHighAccuracy: true,
@@ -25,7 +26,33 @@ function errors(err) {
 }
 
 export default function OverviewPage() {
+  const [loading, setLoading] = React.useState(false);
+  const authContext = React.useContext(AuthContext);
   const router = useRouter();
+
+  const getCurrentUser = async () => {
+    try {
+      setLoading(!false);
+
+      const response = await axios({
+        method: "GET",
+        url: userEndpoints.getCurrentUser,
+        headers: {
+          "Content-Type": "application/json",
+          // once the user is logged in. This request block helps us
+          // get their details. But, for us to be able to get the details,
+          // we need to pass the token that we stored in localStorgare from
+          // the authContext, so that each login is unique to each user.
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+      const { data } = response.data;
+      authContext.setCurrentLoggedInUser(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   React.useEffect(() => {
     if (navigator.geolocation) {
@@ -37,8 +64,7 @@ export default function OverviewPage() {
           console.log(result.state);
         } else if (result.state === "denied") {
           router.push("/");
-          console.log("you need to enable geolocation");
-          alert("you need to enable your device's location");
+          alert("you need to turn on your device's location");
         }
         result.onchange = () => {
           console.log(result.state);
@@ -47,6 +73,8 @@ export default function OverviewPage() {
     } else {
       alert("navigator is not available");
     }
+
+    getCurrentUser();
   }, []);
 
   return (
@@ -54,9 +82,13 @@ export default function OverviewPage() {
       <Head>
         <title>Dashboard | Overview</title>
       </Head>
-      <DashLayout>
-        <Overview />
-      </DashLayout>
+      {!loading ? (
+        "Loading..."
+      ) : (
+        <DashLayout>
+          <Overview />
+        </DashLayout>
+      )}
     </React.Fragment>
   );
 }

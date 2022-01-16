@@ -4,13 +4,43 @@ import { DashHeadWrapper } from "./style/dash-header.styled";
 import Icon from "../../../../components/Icons";
 import UserMenu from "../UserMenu";
 import onClickOutside from "react-onclickoutside";
+import axios from "axios";
+import { userEndpoints } from "../../../../routes/endpoints";
 
 const DashHeader = ({ dashboardTitle, user, profile_img }) => {
   const [open, setOpen] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState({
+    fullName: "",
+  });
 
   DashHeader.handleClickOutside = () => {
     setOpen(open);
   };
+
+  const getCurrentUser = async () => {
+    try {
+      const response = await axios({
+        method: "GET",
+        url: userEndpoints.getCurrentUser,
+        headers: {
+          "Content-Type": "application/json",
+          // once the user is logged in. This request block helps us
+          // get their details. But, for us to be able to get the details,
+          // we need to pass the token that we stored in localStorgare from
+          // the authContext, so that each login is unique to each user.
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+      const { data } = response.data;
+      setCurrentUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   return (
     <DashHeadWrapper>
@@ -23,7 +53,9 @@ const DashHeader = ({ dashboardTitle, user, profile_img }) => {
           <Icon name="bell" />
         </div>
         <div className="user-details">
-          <p className="username">{user}</p>
+          <p className="username">
+            {currentUser.fullName ? currentUser.fullName : user}
+          </p>
           <div className="img-wrapper" onClick={() => setOpen(!open)}>
             <img src="/img/tom.png" alt="user profile image" />
           </div>

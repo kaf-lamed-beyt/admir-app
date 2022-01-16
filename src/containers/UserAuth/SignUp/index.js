@@ -91,6 +91,7 @@ const SignUp = () => {
         router.push("/login");
       }, 400);
     } catch (error) {
+      setLoading(false);
       const { data } = error.response;
       setSignUpError(data.msg);
       setSignUpSuccess(null);

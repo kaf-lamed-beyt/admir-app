@@ -39,7 +39,7 @@ const ForgotPasswordPage = () => {
       </Head>
       {router.pathname ===
       `http://localhost:3000/forgot-password/token/email` ? (
-        <ResetPassword />
+        <DefaultResetPassword />
       ) : (
         <DefaultResetPassword />
       )}

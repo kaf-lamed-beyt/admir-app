@@ -15,8 +15,8 @@ export const authEndpoints = {
 
 export const userEndpoints = {
   createUser: `${baseURL}/user`,
-  getProfile: `${baseURL}/user/me`,
-  getStaff: `${baseURL}/user/:id`,
+  getCurrentUser: `${baseURL}/user/me`,
+  getStaffByAdmin: `${baseURL}/user/:id`,
   grantUserAccess: `${baseURL}/user/grant-access/:userId`,
 };
 
