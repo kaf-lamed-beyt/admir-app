@@ -150,4 +150,13 @@ export const InputGroup = styled.div`
   label {
     line-height: 19px;
   }
+
+  span {
+    svg {
+      font-size: 22px;
+      margin-top: 1px;
+      margin-left: 10px;
+      color: var(--grey);
+    }
+  }
 `;
