@@ -10,9 +10,9 @@ const AuthProvider = ({ children }) => {
     token: "",
     userRole: "",
   });
-  const [currentLoggedInUser, setCurrentLoggedInUser] = React.useState({
-    fullName: "",
-  });
+  // const [currentLoggedInUser, setCurrentLoggedInUser] = React.useState({
+  //   fullName: "",
+  // });
 
   const setUserAuthInfo = ({ data }) => {
     const token = localStorage.setItem("token", data.data);
@@ -24,20 +24,20 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const getCurrentLoggedInUser = ({ fullName }) => {
-    setCurrentLoggedInUser({
-      fullName,
-    });
-  };
+  // const getCurrentLoggedInUser = ({ fullName }) => {
+  //   setCurrentLoggedInUser({
+  //     fullName,
+  //   });
+  // };
 
   return (
     <Provider
       value={{
         authState,
         setAuthState: (userAuthInfo) => setUserAuthInfo(userAuthInfo),
-        currentLoggedInUser,
-        setCurrentLoggedInUser: (loggedInUserInfo) =>
-          getCurrentLoggedInUser(loggedInUserInfo),
+        // currentLoggedInUser,
+        // setCurrentLoggedInUser: (loggedInUserInfo) =>
+        //   getCurrentLoggedInUser(loggedInUserInfo),
       }}
     >
       {children}

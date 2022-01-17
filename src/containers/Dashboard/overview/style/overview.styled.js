@@ -5,7 +5,7 @@ export const Stats = styled.div`
   justify-content: space-between;
   flex-wrap: nowwrap;
   overflow-x: auto;
-  width: 1109px;
+  width: 81vw;
   margin-top: 30px;
 
   // obtaining smooth scrolling on iOS

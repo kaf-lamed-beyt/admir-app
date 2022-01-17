@@ -3,14 +3,14 @@ import Head from "next/head";
 import {
   AuthWrapper,
   InputGroup,
-} from "../src/containers/UserAuth/style/user-auth.styled";
+} from "../../src/containers/UserAuth/style/user-auth.styled";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { authEndpoints } from "../src/routes/endpoints";
-import Input from "../src/components/Inputs";
-import Button from "../src/components/Buttons";
-import Layout from "../src/containers/Layouts/HomeLayout";
-import { AuthErrMsg, AuthSuccessMsg } from "../src/components/Modals";
+import { authEndpoints } from "../../src/routes/endpoints";
+import Input from "../../src/components/Inputs";
+import Button from "../../src/components/Buttons";
+import Layout from "../../src/containers/Layouts/HomeLayout";
+import { AuthErrMsg, AuthSuccessMsg } from "../../src/components/Modals";
 import Link from "next/link";
 
 const ForgotPasswordPage = () => {
@@ -37,8 +37,7 @@ const ForgotPasswordPage = () => {
       <Head>
         <title>Reset Password &mdash; Admir Technologies</title>
       </Head>
-      {router.pathname ===
-      `http://localhost:3000/forgot-password/token/email` ? (
+      {router.pathname === `/forgot-password/` ? (
         <DefaultResetPassword />
       ) : (
         <DefaultResetPassword />

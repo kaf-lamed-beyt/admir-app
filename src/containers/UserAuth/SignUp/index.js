@@ -13,7 +13,7 @@ import axios from "axios";
 import router from "next/router";
 import { AuthErrMsg, AuthSuccessMsg } from "../../../components/Modals";
 import { AuthContext } from "../../../context/auth-context";
-import { AiOutlineEye } from 'react-icons/ai';
+import { AiOutlineEye } from "react-icons/ai";
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
@@ -68,7 +68,7 @@ const SignUp = () => {
 
     try {
       setLoading(true);
-      // validateSignUp();
+      validateSignUp();
 
       const response = await axios({
         method: "POST",
@@ -162,7 +162,7 @@ const SignUp = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <span className="show-pwd" onClick={handlePwdVisibility}>
-                  <AiOutlineEye />
+                    <AiOutlineEye />
                   </span>
                   <p className="pwd-err"></p>
                 </InputGroup>

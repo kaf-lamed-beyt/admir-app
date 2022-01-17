@@ -12,6 +12,7 @@ var options = {
   timeout: 5000,
   maximumAge: 0,
 };
+
 function success(pos) {
   var crd = pos.coords;
 
@@ -62,8 +63,8 @@ export default function OverviewPage() {
           navigator.geolocation.getCurrentPosition(success, errors, options);
           console.log(result.state);
         } else if (result.state === "denied") {
-          router.push("/");
           alert("you need to turn on your device's location");
+          router.push("/");
         }
         result.onchange = () => {
           console.log(result.state);

@@ -21,6 +21,18 @@ export const SettingsWrapper = styled.div`
     }
   }
 
+  .first-card,
+  .second-card {
+    width: 375px;
+    height: 134px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 28px;
+    color: #fff;
+    margin: 0 21px 0 0;
+  }
+
   @media only screen and (min-width: 0px) and (max-width: 992px) {
     flex-wrap: wrap;
     margin-top: 70px !important;
