@@ -9,6 +9,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { AuthErrMsg, AuthSuccessMsg } from "../../../components/Modals";
 import { AuthContext } from "../../../context/auth-context";
+import { AiOutlineEye } from 'react-icons/ai';
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
@@ -118,12 +119,12 @@ const SignIn = () => {
                 name="password"
                 type={passwordVisibility ? "text" : "password"}
                 id="password"
-                placeholder="password should contain uppercase letter"
+                placeholder=" Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <span class="show-pwd" onClick={handlePwdVisibility}>
-                show
+              <AiOutlineEye />
               </span>
               <p className="pwd-err"></p>
               <Link href="/forgot-password">
