@@ -9,7 +9,7 @@ export const sideNavItems = [
   { name: "reports", path: "/dashboard/reports", icon: "report" },
   {
     name: "settings",
-    path: settingsRoute || generalSettingsRoute || changePasswordRoute,
+    path: `${settingsRoute || generalSettingsRoute || changePasswordRoute}`,
     icon: "settings",
     unique_class: "settings",
   },

@@ -9,7 +9,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { AuthErrMsg, AuthSuccessMsg } from "../../../components/Modals";
 import { AuthContext } from "../../../context/auth-context";
-import { AiOutlineEye } from 'react-icons/ai';
+import { AiOutlineEye } from "react-icons/ai";
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
@@ -26,23 +26,23 @@ const SignIn = () => {
   };
 
   const validateSignIn = () => {
-    const email = document.querySelector("#email").value;
-    const password = document.querySelector("#password").value;
+    const email = document.querySelector("#email");
+    const password = document.querySelector("#password");
     let pwdErr = document.querySelector(".pwd-err");
     let email_err = document.querySelector(".email-err");
     let err_msg = document.querySelector("#err");
 
-    if (!email && !password) {
+    if (!email.value && !password.value) {
       err_msg.innerHTML = "Email and Password cannot be empty.";
       email.focus();
       password.focus();
-    } else if (!email) {
+    } else if (!email.value) {
       email_err.innerHTML = "Email address cannot be empty";
       email.focus();
-    } else if (password.length === 4) {
+    } else if (password.value.length === 4) {
       pwdErr.innerHTML = "Password should be greater than four characters";
       password.focus();
-    } else if (!password) {
+    } else if (!password.value) {
       pwdErr.innerHTML = "Password cannot be empty";
       password.focus();
     }
@@ -124,7 +124,7 @@ const SignIn = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <span class="show-pwd" onClick={handlePwdVisibility}>
-              <AiOutlineEye />
+                <AiOutlineEye />
               </span>
               <p className="pwd-err"></p>
               <Link href="/forgot-password">

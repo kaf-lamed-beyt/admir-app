@@ -1,6 +1,6 @@
 import React from "react";
 import DashHeader from "../../components/DashHeader";
-import { SettingsWrapper, SettingsForm } from "../style/settings.styled";
+import { SettingsWrapper, GeneralSettingsForm } from "../style/settings.styled";
 import Button from "../../../../components/Buttons";
 import { Fade } from "react-awesome-reveal";
 import { CountryPhoneInput } from "../../../../components/Inputs";
@@ -31,7 +31,7 @@ const GeneralSettings = () => {
           <div className="profile-wrapper">
             <img src="/img/user.png" alt="user profile image" />
           </div>
-          <SettingsForm onSubmit={handleSubmit}>
+          <GeneralSettingsForm onSubmit={handleSubmit}>
             <div className="flex-fields">
               <div>
                 <label htmlFor="fullname">Your fullname</label>
@@ -40,7 +40,7 @@ const GeneralSettings = () => {
                   type="text"
                   placeholder="Tom Cruise"
                   value={fullname}
-                  className="fullname form-control"
+                  className="form-control"
                   onChange={(e) => setFullname(e.target.value)}
                 />
               </div>
@@ -51,30 +51,18 @@ const GeneralSettings = () => {
                   type="email"
                   placeholder="Enter email address"
                   value={email}
-                  className="email form-control"
+                  className="form-control"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
             <div className="flex-fields">
-              <div>
+              <div className="phoneNumber-container">
                 <label htmlFor="phone number">Phone Number</label>
                 <CountryPhoneInput
                   value={phoneNumber}
                   onChange={setPhoneNumber}
                   className="number"
-                />
-              </div>
-              <div>
-                <label htmlFor="role">Role</label>
-                <Select
-                  value={role}
-                  options={options}
-                  placeholder="Please select your role"
-                  dropdownPosition="top"
-                  className="select"
-                  color="var(--primary)"
-                  onChange={(role) => setRole(role.map((role) => role.value))}
                 />
               </div>
             </div>
@@ -97,7 +85,7 @@ const GeneralSettings = () => {
                 Save changes
               </Button>
             </div>
-          </SettingsForm>
+          </GeneralSettingsForm>
         </SettingsWrapper>
       </Fade>
     </React.Fragment>

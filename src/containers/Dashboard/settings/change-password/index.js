@@ -1,6 +1,6 @@
 import React from "react";
 import DashHeader from "../../components/DashHeader";
-import { SettingsWrapper, SettingsForm } from "../style/settings.styled";
+import { SettingsWrapper, ChangePasswordForm } from "../style/settings.styled";
 import Button from "../../../../components/Buttons";
 import { Fade } from "react-awesome-reveal";
 import axios from "axios";
@@ -21,21 +21,22 @@ const ChangePassword = () => {
   };
 
   const validateChangePassword = () => {
-    const oldPassword = document.querySelector("#old-password").value;
-    const newPassword = document.querySelector("#new-password").value;
+    const oldPassword = document.querySelector("#old-password");
+    const newPassword = document.querySelector("#new-password");
     let oldPwdErr = document.querySelector(".old-pwd-err");
     let newPwdErr = document.querySelector(".new-pwd-err");
     let errMsg = document.querySelector("#err");
 
-    if (!oldPassword && !newPassword) {
-      <AuthErrMsg message="Old and New password cannot be empty" />;
-    } else if (!oldPassword) {
+    if (!oldPassword.value && !newPassword.value) {
+      errMsg.innerHTML = "Old and New password cannot be empty";
+      oldPassword.focus();
+    } else if (!oldPassword.value) {
       oldPwdErr.innerHTML = "Old pasword cannot be empty";
       oldPassword.focus();
-    } else if (!newPassword) {
+    } else if (!newPassword.value) {
       newPwdErr.innerHTML = "New password cannot be empty";
       newPassword.focus();
-    } else if (newPasssword.length === 4) {
+    } else if (newPasssword.value.length === 4) {
       newPassword.innerHTML =
         "New password should be greater than four characters";
       newPassword.focus();
@@ -73,10 +74,11 @@ const ChangePassword = () => {
 
   return (
     <React.Fragment>
-      <DashHeader dashboardTitle="Change Password" />
+      <DashHeader dashboardTitle="Change Password" user="Tom Cruise" />
       <Fade>
         <SettingsWrapper>
-          <SettingsForm
+          <p id="err"></p>
+          <ChangePasswordForm
             className="change-password-form"
             onSubmit={handleChangePassword}
           >
@@ -121,9 +123,9 @@ const ChangePassword = () => {
               fill="var(--secondary)"
               text_color="#fff"
             >
-              Change Password
+              {loading ? "Changing password" : "Change Password"}
             </Button>
-          </SettingsForm>
+          </ChangePasswordForm>
         </SettingsWrapper>
       </Fade>
     </React.Fragment>

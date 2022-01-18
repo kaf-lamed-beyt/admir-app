@@ -29,10 +29,6 @@ const SignUp = () => {
   const [loading, setLoading] = React.useState(false);
   const authContext = React.useContext(AuthContext);
 
-  // const nextForm = () => {
-  //   setFormStep((cur) => cur + 1);
-  // };
-
   const prevForm = () => {
     setFormStep((cur) => cur - 1);
   };
@@ -42,25 +38,30 @@ const SignUp = () => {
   };
 
   const validateSignUp = () => {
-    const fullName = document.querySelector("#fullname").value;
-    const email = document.querySelector("#email").value;
-    const password = document.querySelector("#password").value;
+    const fullName = document.querySelector("#fullname");
+    const email = document.querySelector("#email");
+    const password = document.querySelector("#password");
     let pwdErr = document.querySelector(".pwd-err");
     let email_err = document.querySelector(".email-err");
     let nameErr = document.querySelector(".name-err");
     let err_msg = document.querySelector("#err");
 
-    if (!email && !password && !fullName) {
+    if (!email.value && !password.value && !fullName.value) {
       err_msg.innerHTML = "Your fullname, email and password cannot be empty.";
-    } else if (!fullName) {
+    } else if (!fullName.value) {
       nameErr.innerHTML = "Fullname cannot be empty.";
-    } else if (!email) {
+    } else if (!email.value) {
       email_err.innerHTML = "Email address cannot be empty";
-    } else if (password.length === 4) {
+    } else if (password.value.length === 4) {
       pwdErr.innerHTML = "Password should be greater than four characters";
-    } else if (!password) {
+    } else if (!password.value) {
       pwdErr.innerHTML = "Password cannot be empty";
     }
+  };
+
+  const nextForm = () => {
+    validateSignUp();
+    setFormStep((cur) => cur + 1);
   };
 
   const handleSignUp = async (e) => {
@@ -187,7 +188,7 @@ const SignUp = () => {
 
           <SignUpButtons
             step={formStep}
-            onClick={() => setFormStep((cur) => cur + 1)}
+            onClick={() => nextForm()}
             submit={handleSignUp}
             text={loading ? "Registering..." : `Register`}
           />

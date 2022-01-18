@@ -48,7 +48,7 @@ export const SettingsWrapper = styled.div`
       h3 {
         font-size: 22px;
         color: #fff;
-        font-weight: 500;
+        font-weight: 600;
         margin: auto 0;
       }
     }
@@ -62,31 +62,6 @@ export const SettingsWrapper = styled.div`
     }
   }
 
-  .change-password-form {
-    transform: translate(0, 11%);
-
-    input {
-      ::placeholder {
-        font-weight: 300;
-      }
-    }
-
-    input[id="old-password"] {
-      font-weight: 300;
-    }
-
-    span {
-      svg {
-        position: absolute;
-        top: 0;
-        margin-left: 330px;
-        margin-top: -50px;
-        font-size: 19px;
-        color: var(--grey);
-      }
-    }
-  }
-
   @media only screen and (min-width: 0px) and (max-width: 992px) {
     flex-wrap: wrap;
     margin-top: 70px !important;
@@ -94,101 +69,102 @@ export const SettingsWrapper = styled.div`
     padding: 0;
     width: 100%;
 
-    // .role-input {
-    //   margin: 0 !important;
-    //   width: 180% !important;
-    // }
+    .settings-card {
+      flex-flow: column;
+      justify-content: center !important;
+      width: 100%;
+      paddding: 0;
 
-    // .role-label {
-    //   margin: 0 !important;
-    // }
-
-    // input[type="email"] {
-    //   width: 120% !important;
-    // }
+      .first-card,
+      .second-card {
+        margin: 0 0 30px 0;
+        width: 100%;
+      }
+    }
   }
 `;
 
-export const SettingsForm = styled.form`
-  width: 100%;
-  margin-top: 2px;
-  display: flex;
-  flex-flow: column;
+export const GeneralSettingsForm = styled.form`
+  height: 100%;
+  margin-top: 35px;
 
   .flex-fields {
     display: flex;
-    margin-top: 30px;
     justify-content: space-between;
+    margin: 0 0 30px 0;
 
-    label {
-      display: block;
-    }
-
-    input {
-      width: 100%;
-      margin: 0 90px 0 0;
-    }
-
-    // .fullname,
-    // .email {
-    //   width: 292px;
-    // }
-
-    .select,
-    .number {
-      padding: 6px 3px;
+    .role-container {
+      width: 100% !important;
+      margin: 0 0 0 195px;
       height: 45px;
-      width: 295px;
-      border-radius: 6px;
+
+      select {
+        border: 1px solid red;
+      }
     }
-  }
 
-  .pwd-field {
-    width: 50%;
-    margin-top: 30px;
-
-    input {
-      width: 76%;
-    }
-  }
-
-  .show-pwd {
-    position: absolute;
-    margin-left: -50px;
-    margin-top: 17px;
-
-    :hover {
-      cursor: pointer;
+    .phoneNumber-container {
+      width: 100%;
     }
   }
 
   .flex-buttons {
-    display: flex;
     justify-content: flex-end;
-    margin-top: 75px;
-
-    button {
-      margin: 0 20px 0 10px;
-    }
+    display: flex;
+    margin-top: 30px;
 
     .btn-outline {
-      border: 1px solid var(--grey);
+      margin: 0 30px 0 0;
     }
-  }
-
-  button {
-    border: none;
-    margin-top: 50px;
-    font-weight: 600;
   }
 
   @media only screen and (min-width: 0px) and (max-width: 576px) {
     .flex-fields {
-      flex-wrap: wrap;
+      flex-flow: column;
 
-      input {
-        width: 100%;
+      .role-container {
+        width: 100% !important;
+        margin: 0;
+        height: 45px;
       }
+
+      div {
+        margin-bottom: 5px;
+      }
+    }
+
+    .two {
+      margin-top: -18px;
+    }
+  }
+`;
+
+export const ChangePasswordForm = styled.form`
+  margin-top: 30px;
+
+  .flex-fields {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      svg {
+        font-size: 18px;
+        color: var(--grey);
+        position: absolute;
+        margin-top: 17px;
+        margin-left: -25px;
+      }
+    }
+  }
+
+  button {
+    margin-top: 30px;
+    border: none;
+  }
+
+  @media only screen and (min-width: 0px) and (max-width: 576px) {
+    .flex-fields {
+      flex-flow: column;
     }
   }
 `;
