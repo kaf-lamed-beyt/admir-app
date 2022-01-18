@@ -48,10 +48,6 @@ const DashHeader = ({ dashboardTitle, user, profile_img }) => {
         <h1>{dashboardTitle}</h1>
       </div>
       <div className="profile-info">
-        {/* <div className="header-icons">
-          <Icon name="search" />
-          <Icon name="bell" />
-        </div> */}
         <div className="user-details">
           <p className="username">
             {currentUser.fullName ? currentUser.fullName : user}

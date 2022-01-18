@@ -5,29 +5,76 @@ import Button from "../../../../components/Buttons";
 import { Fade } from "react-awesome-reveal";
 import { CountryPhoneInput } from "../../../../components/Inputs";
 import "react-phone-number-input/style.css";
-import Select from "react-dropdown-select";
+import axios from "axios";
+import { userEndpoints } from "../../../../routes/endpoints";
+import { AuthErrMsg, AuthSuccessMsg } from "../../../../components/Modals";
 
 const GeneralSettings = () => {
-  const [fullname, setFullname] = React.useState("Caleb Olojo");
-  const [email, setEmail] = React.useState("sakamakhmood@gmail.com");
-  const [phoneNumber, setPhoneNumber] = React.useState("+45876110033");
-  const [role, setRole] = React.useState("");
+  const [fullname, setFullname] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [saveSuccess, setSaveSuccess] = React.useState();
+  const [saveError, setSaveError] = React.useState();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const getCurrentUserDetails = async () => {
+    try {
+      const response = await axios({
+        method: "GET",
+        url: userEndpoints.getCurrentUser,
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+
+      const { data } = response.data;
+
+      setFullname(data.fullName);
+      setEmail(data.email);
+      setPhoneNumber(data.phoneNumber);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const options = [
-    { label: "Field Worker", value: "field worker" },
-    { label: "Manager", value: "manager" },
-    { label: "Assistant Manager", value: "assistant manager" },
-  ];
+  // get user data on load
+  React.useEffect(() => {
+    getCurrentUserDetails();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      const response = await axios({
+        method: "PATCH",
+        url: userEndpoints.createUser,
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+
+      const { data } = response.data;
+      console.log(data);
+      setSaveSuccess(data.msg);
+      setSaveError("");
+    } catch (error) {
+      setLoading(false);
+      const { data } = error.response;
+      setSaveError(data.msg);
+      setSaveSuccess(null);
+    }
+  };
 
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="General Settings" user="Tom Cruise" />
       <Fade>
         <SettingsWrapper>
+          {saveSuccess ? <AuthSuccessMsg message={saveSuccess} /> : ""}
+          {saveError ? <AuthErrMsg message={saveError} /> : ""}
           <div className="profile-wrapper">
             <img src="/img/user.png" alt="user profile image" />
           </div>
@@ -82,7 +129,7 @@ const GeneralSettings = () => {
                 fill="var(--secondary)"
                 text_color="#fff"
               >
-                Save changes
+                {loading ? "Saving..." : "Save changes"}
               </Button>
             </div>
           </GeneralSettingsForm>

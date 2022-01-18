@@ -104,7 +104,7 @@ export const GeneralSettingsForm = styled.form`
     }
 
     .phoneNumber-container {
-      width: 100%;
+      width: 38%;
     }
   }
 
@@ -126,6 +126,10 @@ export const GeneralSettingsForm = styled.form`
         width: 100% !important;
         margin: 0;
         height: 45px;
+      }
+
+      .phoneNumber-container {
+        width: 100% !important;
       }
 
       div {
