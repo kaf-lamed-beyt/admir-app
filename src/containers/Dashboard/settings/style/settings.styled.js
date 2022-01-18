@@ -21,16 +21,70 @@ export const SettingsWrapper = styled.div`
     }
   }
 
-  .first-card,
-  .second-card {
-    width: 375px;
-    height: 134px;
-    border-radius: 8px;
+  .settings-card {
     display: flex;
-    justify-content: space-between;
-    padding: 18px 28px;
-    color: #fff;
-    margin: 0 21px 0 0;
+
+    .first-card,
+    .second-card {
+      width: 350px;
+      height: 134px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 28px;
+      color: #fff;
+      margin: 0 40px 0 0;
+
+      :hover {
+        cursor: pointer;
+      }
+
+      svg {
+        font-size: 70px;
+        font-weight: 500;
+        margin-top: 14px;
+      }
+
+      h3 {
+        font-size: 22px;
+        color: #fff;
+        font-weight: 500;
+        margin: auto 0;
+      }
+    }
+
+    .first-card {
+      background: var(--secondary);
+    }
+
+    .second-card {
+      background: var(--pink);
+    }
+  }
+
+  .change-password-form {
+    transform: translate(0, 11%);
+
+    input {
+      ::placeholder {
+        font-weight: 300;
+      }
+    }
+
+    input[id="old-password"] {
+      font-weight: 300;
+    }
+
+    span {
+      svg {
+        position: absolute;
+        top: 0;
+        margin-left: 330px;
+        margin-top: -50px;
+        font-size: 19px;
+        color: var(--grey);
+      }
+    }
   }
 
   @media only screen and (min-width: 0px) and (max-width: 992px) {
@@ -39,20 +93,19 @@ export const SettingsWrapper = styled.div`
     margin-bottom: 20px;
     padding: 0;
     width: 100%;
-    border: 1px solid green;
 
-    .role-input {
-      margin: 0 !important;
-      width: 180% !important;
-    }
+    // .role-input {
+    //   margin: 0 !important;
+    //   width: 180% !important;
+    // }
 
-    .role-label {
-      margin: 0 !important;
-    }
+    // .role-label {
+    //   margin: 0 !important;
+    // }
 
-    input[type="email"] {
-      width: 120% !important;
-    }
+    // input[type="email"] {
+    //   width: 120% !important;
+    // }
   }
 `;
 
@@ -64,17 +117,22 @@ export const SettingsForm = styled.form`
 
   .flex-fields {
     display: flex;
-    justify-content: space-between;
     margin-top: 30px;
+    justify-content: space-between;
 
     label {
       display: block;
     }
 
-    .fullname,
-    .email {
-      width: 292px;
+    input {
+      width: 100%;
+      margin: 0 90px 0 0;
     }
+
+    // .fullname,
+    // .email {
+    //   width: 292px;
+    // }
 
     .select,
     .number {
@@ -112,17 +170,24 @@ export const SettingsForm = styled.form`
     button {
       margin: 0 20px 0 10px;
     }
+
+    .btn-outline {
+      border: 1px solid var(--grey);
+    }
+  }
+
+  button {
+    border: none;
+    margin-top: 50px;
+    font-weight: 600;
   }
 
   @media only screen and (min-width: 0px) and (max-width: 576px) {
-    border: 1px solid red;
-
     .flex-fields {
       flex-wrap: wrap;
-      border: 1px solid red;
 
       input {
-        width: 400px;
+        width: 100%;
       }
     }
   }

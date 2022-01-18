@@ -15,7 +15,9 @@ body {
 // error messages
 #err,
 .email-err,
-.pwd-err {
+.pwd-err,
+.new-pwd-err,
+.old-pwd-err {
   color: red;
   font-size: 10px;
 }

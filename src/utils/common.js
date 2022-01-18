@@ -1,3 +1,7 @@
+const settingsRoute = "/dashboard/settings";
+const generalSettingsRoute = "/dashboard/settings/general";
+const changePasswordRoute = "/dashboard/settings/change-password";
+
 export const sideNavItems = [
   { name: "overview", path: "/dashboard", icon: "overview" },
   { name: "Time Tracker", path: "/dashboard/time-tracker", icon: "time" },
@@ -5,7 +9,7 @@ export const sideNavItems = [
   { name: "reports", path: "/dashboard/reports", icon: "report" },
   {
     name: "settings",
-    path: "/dashboard/settings",
+    path: settingsRoute || generalSettingsRoute || changePasswordRoute,
     icon: "settings",
     unique_class: "settings",
   },
