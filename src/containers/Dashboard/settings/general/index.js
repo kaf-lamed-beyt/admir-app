@@ -62,8 +62,7 @@ const GeneralSettings = () => {
       setSaveError("");
     } catch (error) {
       setLoading(false);
-      const { data } = error.response;
-      setSaveError(data.msg);
+      setSaveError(error.response.data.msg);
       setSaveSuccess(null);
     }
   };

@@ -28,7 +28,6 @@ function errors(err) {
 
 export default function OverviewPage() {
   const [loading, setLoading] = React.useState(false);
-  const authContext = React.useContext(AuthContext);
   const router = useRouter();
 
   const getCurrentUser = async () => {
@@ -48,7 +47,7 @@ export default function OverviewPage() {
         },
       });
       const { data } = response.data;
-      authContext.setCurrentLoggedInUser(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }

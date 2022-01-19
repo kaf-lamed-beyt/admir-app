@@ -1,6 +1,5 @@
+import { useRouter } from "next/router";
 import React from "react";
-import axios from "axios";
-import { userEndpoints } from "../routes/endpoints";
 
 const AuthContext = React.createContext();
 const { Provider } = AuthContext;
@@ -10,9 +9,7 @@ const AuthProvider = ({ children }) => {
     token: "",
     userRole: "",
   });
-  // const [currentLoggedInUser, setCurrentLoggedInUser] = React.useState({
-  //   fullName: "",
-  // });
+  const router = useRouter();
 
   const setUserAuthInfo = ({ data }) => {
     const token = localStorage.setItem("token", data.data);
@@ -24,20 +21,31 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  // const getCurrentLoggedInUser = ({ fullName }) => {
-  //   setCurrentLoggedInUser({
-  //     fullName,
-  //   });
-  // };
+  // checks if the user is authenticated or not
+  const isUserAuthenticated = () => {
+    if (!authState.token) {
+      return false;
+    }
+  };
+
+  // log the usser out of the app
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userRole");
+
+    // setAuthState({
+    //   token: null,
+    //   userRole: null,
+    // });
+  };
 
   return (
     <Provider
       value={{
         authState,
         setAuthState: (userAuthInfo) => setUserAuthInfo(userAuthInfo),
-        // currentLoggedInUser,
-        // setCurrentLoggedInUser: (loggedInUserInfo) =>
-        //   getCurrentLoggedInUser(loggedInUserInfo),
+        isUserAuthenticated,
+        logout,
       }}
     >
       {children}

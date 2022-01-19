@@ -2,6 +2,8 @@ import React from "react";
 import { MenuCard } from "./style/user-menu-styled";
 import Link from "next/link";
 import propTypes from "prop-types";
+import { AuthContext } from "../../../../context/auth-context";
+import { useRouter } from "next/router";
 
 const menu_items = [
   { name: "My Account", path: "/dashboard/settings" },
@@ -12,6 +14,14 @@ const menu_items = [
 ];
 
 const UserMenu = ({ open }) => {
+  const router = useRouter();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userRole");
+    router.push("/");
+  };
+
   return (
     <MenuCard open={open}>
       <ul>
@@ -23,10 +33,8 @@ const UserMenu = ({ open }) => {
           );
         })}
       </ul>
-      <div className="sign-out">
-        <Link href="/">
-          <p>Sign out</p>
-        </Link>
+      <div className="sign-out" onClick={logout}>
+        <p>Sign out</p>
       </div>
     </MenuCard>
   );

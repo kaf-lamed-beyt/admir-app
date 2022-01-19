@@ -37,6 +37,37 @@ export const overview_stats = [
 // steps remaining in form filling process
 export const MAX_FORM_STEPS = 3;
 
+// admin dashboard static data
+
+export const admin_stats = [
+  { title: "all staffs", value: 60, _id: 0 },
+  { title: "active staffs", value: 16, _id: 1 },
+  { title: "reports", value: 43, _id: 2 },
+  { title: "average hour", value: 16, _id: 3 },
+];
+
+// dashboard/settings
+export const settings_card = [
+  {
+    icon: "organization",
+    name: "organizations",
+    description: "Edit your company name, address, time zone and more e.t.c",
+    path: "/dashboard/settings/organizations",
+  },
+  {
+    icon: "map",
+    name: "Maps",
+    description: "Control location tracking",
+    path: "#",
+  },
+  {
+    icon: "time-tracker",
+    name: "Time off",
+    description: "Manage your companies time off and holiday policy",
+    path: "#",
+  },
+];
+
 // time tracker time stamps
 export const time = [
   {
