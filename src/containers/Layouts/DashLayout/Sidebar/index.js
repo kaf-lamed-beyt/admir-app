@@ -2,12 +2,14 @@ import React from "react";
 import Link from "next/link";
 import Icon from "../../../../components/Icons";
 import { useRouter } from "next/router";
-import { sideNavItems } from "../../../../utils/common";
+import { sideNavItems, adminNavItems } from "../../../../utils/common";
 import { HiMenuAlt1 } from "react-icons/hi";
 import style from "./scss/sidebar.module.scss";
+import { AuthContext } from "../../../../context/auth-context";
 
 const Sidebar = () => {
   const router = useRouter();
+  const authContext = React.useContext(AuthContext);
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -49,3 +51,45 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+// {authContext.isAdmin()
+//   ? sideNavItems.map((item, index) => {
+//       return (
+//         <ul
+//           className={`${
+//             router.pathname === item.path ? "active-navLink" : ""
+//           }`}
+//         >
+//           <Link href={item.path} key={index}>
+//             <div
+//               className={style.item_wrapper}
+//               id={item.unique_class}
+//               onClick={() => setOpen(open)}
+//             >
+//               <Icon name={item.icon} />
+//               <li>{item.name}</li>
+//             </div>
+//           </Link>
+//         </ul>
+//       );
+//     })
+//   : adminNavItems.map((item, index) => {
+//       return (
+//         <ul
+//           className={`${
+//             router.pathname === item.path ? "active-navLink" : ""
+//           }`}
+//         >
+//           <Link href={item.path} key={index}>
+//             <div
+//               className={style.item_wrapper}
+//               id={item.unique_class}
+//               onClick={() => setOpen(open)}
+//             >
+//               <Icon name={item.icon} />
+//               <li>{item.name}</li>
+//             </div>
+//           </Link>
+//         </ul>
+//       );
+//     })}

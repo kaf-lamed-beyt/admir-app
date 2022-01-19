@@ -28,15 +28,16 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  // log the usser out of the app
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userRole");
+    router.push("/");
+  };
 
-    // setAuthState({
-    //   token: null,
-    //   userRole: null,
-    // });
+  // checks if the user is an admin
+  // if yes, they're sent to the admin route
+  const isAdmin = () => {
+    return authState.userRole === "Manager";
   };
 
   return (
@@ -46,6 +47,7 @@ const AuthProvider = ({ children }) => {
         setAuthState: (userAuthInfo) => setUserAuthInfo(userAuthInfo),
         isUserAuthenticated,
         logout,
+        isAdmin,
       }}
     >
       {children}

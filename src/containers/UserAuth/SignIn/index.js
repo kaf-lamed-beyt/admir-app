@@ -70,7 +70,7 @@ const SignIn = () => {
       setSignInSuccess(response.data.msg);
       setSignInError("");
       setTimeout(() => {
-        router.push("/dashboard");
+        router.push("/admin");
       }, 200);
     } catch (error) {
       setLoading(false);

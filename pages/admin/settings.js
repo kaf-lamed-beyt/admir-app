@@ -1,16 +1,16 @@
 import React from "react";
-import Overview from "../../src/containers/admin/overview";
 import Head from "next/head";
 import DashLayout from "../../src/containers/Layouts/DashLayout";
+import Settings from "../../src/containers/admin/settings";
 
-export default function AdminPage() {
+export default function AdminTimeTrackerPage() {
   return (
     <React.Fragment>
       <Head>
-        <title>Admir Admin | Overview</title>
+        <title>Admin | Settings</title>
       </Head>
       <DashLayout>
-        <Overview />
+        <Settings />
       </DashLayout>
     </React.Fragment>
   );

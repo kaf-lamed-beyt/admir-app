@@ -15,6 +15,19 @@ export const sideNavItems = [
   },
 ];
 
+export const adminNavItems = [
+  { name: "overview", path: "/admin", icon: "overview" },
+  { name: "Time Tracker", path: "/admin/time-tracker", icon: "time" },
+  { name: "Location", path: "/admin/location", icon: "location" },
+  { name: "reports", path: "/admin/reports", icon: "report" },
+  {
+    name: "settings",
+    path: "/admin.settings",
+    icon: "settings",
+    unique_class: "settings",
+  },
+];
+
 // dashboard stats card
 export const overview_stats = [
   {
