@@ -9,9 +9,11 @@ export default function ReportsPage() {
   const authContext = React.useContext(AuthContext);
   const router = useRouter();
 
-  React.useEffect(() => {
-    authContext.isUserAuthenticated() ? true : router.push("/");
-  }, []);
+  // React.useEffect(() => {
+  //   authContext.isUserAuthenticated()
+  //     ? router.push("/dashboard/reports")
+  //     : router.push("/");
+  // }, []);
 
   return (
     <React.Fragment>

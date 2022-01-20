@@ -56,7 +56,11 @@ export default function OverviewPage() {
 
   React.useEffect(() => {
     // checks if the user is authenticated
-    authContext.isUserAuthenticated() ? true : router.push("/");
+    authContext.isUserAuthenticated()
+      ? router.push("/")
+      : router.push("/dashboard");
+
+    getCurrentUser();
 
     if (navigator.geolocation) {
       navigator.permissions.query({ name: "geolocation" }).then((result) => {
@@ -76,8 +80,6 @@ export default function OverviewPage() {
     } else {
       alert("navigator is not available");
     }
-
-    getCurrentUser();
   }, []);
 
   return (
