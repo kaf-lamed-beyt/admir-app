@@ -29,6 +29,7 @@ function errors(err) {
 export default function OverviewPage() {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
+  const authContext = React.useContext(AuthContext);
 
   const getCurrentUser = async () => {
     try {
@@ -54,6 +55,9 @@ export default function OverviewPage() {
   };
 
   React.useEffect(() => {
+    // checks if the user is authenticated
+    authContext.isUserAuthenticated() ? true : router.push("/");
+
     if (navigator.geolocation) {
       navigator.permissions.query({ name: "geolocation" }).then((result) => {
         if (result.state === "granted") {
