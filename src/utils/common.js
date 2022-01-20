@@ -20,6 +20,7 @@ export const adminNavItems = [
   { name: "Time Tracker", path: "/admin/time-tracker", icon: "time" },
   { name: "Location", path: "/admin/location", icon: "location" },
   { name: "reports", path: "/admin/reports", icon: "report" },
+  { name: "workers", path: "/admin/workers", icon: "report" },
   {
     name: "settings",
     path: "/admin.settings",

@@ -34,8 +34,13 @@ export const CardWrapper = styled.div`
     margin-top: -2px;
   }
 
-  @media only screen and (min-width: 0px) and (max-width: 768px) {
+  @media only screen and (min-width: 0px) and (max-width: 576px) {
     margin-bottom: 10px;
-    width: 49%;
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 577px) and (max-width: 768px) {
+    margin-bottom: 30px;
+    width: 48%;
   }
 `;

@@ -2,6 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 import { TableWrapper } from "./style/table.styled";
 import Link from "next/link";
+import Button from "../../../../components/Buttons";
 
 const Table = ({ employees }) => {
   return (
@@ -130,18 +131,3 @@ export const PersonalizedReport = ({ reports }) => {
     </TableWrapper>
   );
 };
-
-// using Next.js's data fetching methods to get
-// the unique report of the staff when the admin clicks
-// their report.
-
-// export const getStaticProps = async () => {
-//   const response = await fetch("url");
-//   const data = response.json();
-
-//   return {
-//     props: {
-//       reports: data,
-//     },
-//   };
-// };

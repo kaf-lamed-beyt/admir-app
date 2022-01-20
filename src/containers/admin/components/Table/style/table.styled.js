@@ -75,6 +75,10 @@ export const TableWrapper = styled.table`
     margin-left: 13px;
   }
 
+  button {
+    border: none;
+  }
+
   @media only screen and (min-width: 0px) and (max-width: 576px) {
     td,
     th {

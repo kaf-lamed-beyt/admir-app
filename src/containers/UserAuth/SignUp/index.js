@@ -37,30 +37,29 @@ const SignUp = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
   };
 
-  const validateSignUp = () => {
-    const fullName = document.querySelector("#fullname");
-    const email = document.querySelector("#email");
-    const password = document.querySelector("#password");
-    let pwdErr = document.querySelector(".pwd-err");
-    let email_err = document.querySelector(".email-err");
-    let nameErr = document.querySelector(".name-err");
-    let err_msg = document.querySelector("#err");
+  // const validateSignUp = () => {
 
-    if (!email.value && !password.value && !fullName.value) {
-      err_msg.innerHTML = "Your fullname, email and password cannot be empty.";
-    } else if (!fullName.value) {
-      nameErr.innerHTML = "Fullname cannot be empty.";
-    } else if (!email.value) {
-      email_err.innerHTML = "Email address cannot be empty";
-    } else if (password.value.length === 4) {
-      pwdErr.innerHTML = "Password should be greater than four characters";
-    } else if (!password.value) {
-      pwdErr.innerHTML = "Password cannot be empty";
-    }
-  };
+  //   const email = document.querySelector("#email");
+  //   const password = document.querySelector("#password");
+  //   let pwdErr = document.querySelector(".pwd-err");
+  //   let email_err = document.querySelector(".email-err");
+  //   let err_msg = document.querySelector("#err");
+
+  //   if (!email.value) {
+  //     err_msg.innerHTML = "Your fullname, email and password cannot be empty.";
+  //   } else if (!fullName.value) {
+  //     nameErr.innerHTML = "Fullname cannot be empty.";
+  //   } else if (!email.value) {
+  //     email_err.innerHTML = "Email address cannot be empty";
+  //   } else if (password.value.length === 4) {
+  //     pwdErr.innerHTML = "Password should be greater than four characters";
+  //   } else if (!password.value) {
+  //     pwdErr.innerHTML = "Password cannot be empty";
+  //   }
+  // };
 
   const nextForm = () => {
-    validateSignUp();
+    // validateSignUp()
     setFormStep((cur) => cur + 1);
   };
 
@@ -69,7 +68,6 @@ const SignUp = () => {
 
     try {
       setLoading(true);
-      validateSignUp();
 
       const response = await axios({
         method: "POST",
@@ -94,8 +92,7 @@ const SignUp = () => {
       }, 400);
     } catch (error) {
       setLoading(false);
-      const { data } = error.response;
-      setSignUpError(data.msg);
+      setSignUpError(error.response.data.msg);
       setSignUpSuccess(null);
     }
   };

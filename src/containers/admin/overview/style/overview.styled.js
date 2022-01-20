@@ -13,6 +13,6 @@ export const Stats = styled.div`
   @media only screen and (min-width: 0px) and (max-width: 992px) {
     flex-wrap: wrap;
     width: 100%;
-    margin-top: 48px;
+    margin-top: 60px;
   }
 `;

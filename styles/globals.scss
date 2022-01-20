@@ -8,6 +8,11 @@ body {
   margin: 0;
 }
 
+* {
+  box-sizing: border-box;
+  font-family: var(--sans-pro);
+}
+
 #settings {
   margin-top: 50px !important;
 }
@@ -106,11 +111,6 @@ body {
   color: inherit;
   text-decoration: none;
 } */
-
-* {
-  box-sizing: border-box;
-  font-family: var(--sans-pro);
-}
 
 /* global form styles starts here*/
 

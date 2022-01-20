@@ -366,3 +366,73 @@ export const time_tracker = [
     time_out: "6:00pm",
   },
 ];
+
+// workers list
+export const workers = [
+  {
+    key: 1,
+    name: "Tom Cruise",
+    createdAt: "Jan 16",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 2,
+    name: "Matt Damon",
+    createdAt: "Apr 4",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 3,
+    name: "Robert Downey",
+    createdAt: "Mar 31",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 4,
+    name: "Christian Grace",
+    createdAt: "Dec16",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 5,
+    name: "Henry cavil",
+    createdAt: "Apr 22",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 6,
+    name: "Chris Evans",
+    createdAt: "Jun 22",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 7,
+    name: "Sam Smith",
+    createdAt: "Jan 5",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 8,
+    name: "Steve Rogers",
+    createdAt: "Jan 14",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 9,
+    name: "Robert Downey",
+    createdAt: "Jan 12",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 10,
+    name: "Robert Downey",
+    createdAt: "Jan 1",
+    email: "dodo@gmail.com",
+  },
+  {
+    key: 11,
+    name: "Robert Downey",
+    createdAt: "Jan 5",
+    email: "dodo@gmail.com",
+  },
+];
