@@ -13,11 +13,7 @@ import Link from "next/link";
 const Overview = () => {
   return (
     <React.Fragment>
-      <DashHeader
-        dashboardTitle="Overview"
-        user="Tom Cruise"
-        profile_img="/img/tom.png"
-      />
+      <DashHeader dashboardTitle="Overview" profile_img="/img/tom.png" />
       <Stats>
         <CardWrapper style={{ background: "var(--secondary)" }}>
           <div className="icon-wrapper">

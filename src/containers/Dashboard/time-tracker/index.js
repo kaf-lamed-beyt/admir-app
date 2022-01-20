@@ -89,11 +89,7 @@ const TimeTracker = () => {
 
   return (
     <React.Fragment>
-      <DashHeader
-        dashboardTitle="Time Tracker"
-        user="Tom Cruise"
-        profile_img="/img/tom.png"
-      />
+      <DashHeader dashboardTitle="Time Tracker" profile_img="/img/tom.png" />
       <TrackerContainer>
         <div className="table-title">
           <p>All entries</p>

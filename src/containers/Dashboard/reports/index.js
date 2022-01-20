@@ -79,11 +79,7 @@ export const ReportContainer = styled.div`
 const Reports = () => {
   return (
     <React.Fragment>
-      <DashHeader
-        dashboardTitle="Reports"
-        user="Tom Cruise"
-        profile_img="/img/tom.png"
-      />
+      <DashHeader dashboardTitle="Reports" profile_img="/img/tom.png" />
       <IndividualReport />
     </React.Fragment>
   );

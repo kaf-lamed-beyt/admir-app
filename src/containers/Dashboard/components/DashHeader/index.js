@@ -1,7 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
 import { DashHeadWrapper } from "./style/dash-header.styled";
-import Icon from "../../../../components/Icons";
 import UserMenu from "../UserMenu";
 import onClickOutside from "react-onclickoutside";
 import axios from "axios";
@@ -50,7 +49,7 @@ const DashHeader = ({ dashboardTitle, user, profile_img }) => {
       <div className="profile-info">
         <div className="user-details">
           <p className="username">
-            {currentUser.fullName ? currentUser.fullName : user}
+            {currentUser.fullName ? currentUser.fullName : null}
           </p>
           <div className="img-wrapper" onClick={() => setOpen(!open)}>
             <img src="/img/tom.png" alt="user profile image" />
