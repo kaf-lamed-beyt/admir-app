@@ -12,29 +12,6 @@ import { userEndpoints } from "../../../../routes/endpoints";
 const Sidebar = () => {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState({
-    role: "",
-  });
-
-  const getCurrentUser = async () => {
-    try {
-      const response = await axios({
-        method: "GET",
-        url: userEndpoints.getCurrentUser,
-        headers: {
-          "x-auth-token": localStorage.getItem("token"),
-          "Content-Type": "application/json",
-        },
-      });
-      setCurrentUser(response.data.role);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  React.useEffect(() => {
-    getCurrentUser();
-  }, []);
 
   return (
     <>
@@ -42,10 +19,9 @@ const Sidebar = () => {
         <HiMenuAlt1 />
       </div>
       <aside className={!open ? style.sidebar : style.active_sidebar}>
-        <AiOutlineClose
-          className={style.close}
-          onClick={() => setOpen(!open)}
-        />
+        <div className={style.close} onClick={() => setOpen(!open)}>
+          <AiOutlineClose />
+        </div>
         <div className={style.brand}>
           <Link href="/dashboard">
             <img src="/img/admir-lght.png" alt="admir technologies logo" />

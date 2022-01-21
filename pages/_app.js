@@ -20,6 +20,26 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="theme-color" content="rgba(215, 87, 17, 1)" />
         <link rel="icon" type="image/ico" href="" />
+        <meta
+          name="description"
+          content="Geotechnical solutions in civil Engineering."
+        />
+        <meta property="og:title" content="KWASU50's Blog" key="ogtitle" />
+        <meta
+          property="og:description"
+          content="Geotechnical solutions in civil Engineering."
+          key="ogdesc"
+        />
+        <meta
+          property="og:image"
+          content={`https://admirapp.netlify.app/img/admir-og-img.png`}
+          key="ogimage"
+        />
+        <meta
+          property="og:site_name"
+          content="https://admirapp.netlify.app"
+          key="ogsitename"
+        />
       </Head>
       <AuthProvider>
         <Component {...pageProps} />
