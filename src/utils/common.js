@@ -23,7 +23,7 @@ export const adminNavItems = [
   { name: "workers", path: "/admin/workers", icon: "report" },
   {
     name: "settings",
-    path: "/admin.settings",
+    path: "/admin/settings",
     icon: "settings",
     unique_class: "settings",
   },

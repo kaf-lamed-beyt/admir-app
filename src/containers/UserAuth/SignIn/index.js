@@ -70,7 +70,9 @@ const SignIn = () => {
       setSignInSuccess(response.data.msg);
       setSignInError("");
       setTimeout(() => {
-        router.push("/admin");
+        response.data.role === "Worker"
+          ? router.push("/dashboard")
+          : router.push("/admin");
       }, 200);
     } catch (error) {
       setLoading(false);
@@ -80,7 +82,7 @@ const SignIn = () => {
   };
 
   React.useEffect(() => {
-    router.prefetch("/admin");
+    router.prefetch("/dashboard");
   });
 
   return (

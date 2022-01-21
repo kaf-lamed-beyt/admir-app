@@ -1,5 +1,5 @@
 import React from "react";
-import DashHeader from "../components/DashHeader";
+import DashHeader from "../../../containers/Dashboard/components/DashHeader";
 import { data } from "../../../utils/table-data";
 import Table from "../components/Table";
 import styled from "styled-components";

@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
-import DashLayout from "../../src/containers/Layouts/DashLayout";
 import Location from "../../src/containers/admin/location";
+import DashLayout from "../../src/containers/Layouts/DashLayout";
 
 export default function AdminTimeTrackerPage() {
   return (

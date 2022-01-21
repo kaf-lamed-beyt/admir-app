@@ -1,5 +1,5 @@
 import React from "react";
-import DashHeader from "../../Dashboard/components/DashHeader";
+import DashHeader from "../../../containers/Dashboard/components/DashHeader";
 import styled from "styled-components";
 import { workers } from "../../../utils/table-data";
 import { TableWrapper } from "../../Dashboard/components/Table/style/table.styled";
