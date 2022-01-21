@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
           name="description"
           content="Geotechnical solutions in civil Engineering."
         />
-        <meta property="og:title" content="KWASU50's Blog" key="ogtitle" />
+        <meta property="og:title" content="Admir Tracker App" key="ogtitle" />
         <meta
           property="og:description"
           content="Geotechnical solutions in civil Engineering."
