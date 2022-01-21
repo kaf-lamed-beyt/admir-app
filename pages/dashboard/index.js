@@ -89,7 +89,7 @@ export default function OverviewPage() {
     } else {
       alert("navigator is not available");
     }
-  }, []);
+  }, [router, authContext]);
 
   return (
     <React.Fragment>

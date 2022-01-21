@@ -17,7 +17,7 @@ export default function AdminPage() {
     }
 
     // authContext.isAdmin() ? router.push("/admin") : router.push("/dashboard");
-  }, []);
+  }, [router]);
 
   return (
     <React.Fragment>

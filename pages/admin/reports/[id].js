@@ -1,5 +1,5 @@
 import React from "react";
-import DashLayout from "../../../src/containers/Layouts/DashLayout";
+import DashLayout from "../../../src/containers/admin/DashLayout";
 import IndividualReport from "../../../src/containers/admin/reports/individual";
 
 export default function PersonalizedReportPage() {
