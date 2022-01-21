@@ -273,3 +273,22 @@ textarea {
 .reset-password {
   transform: translate(0, 50%);
 }
+
+// skeletons
+
+.pulse-placeholder {
+  margin-top: 8px;
+  width: 130px;
+  height: 15px;
+  background: var(--grey);
+  border-radius: 9px;
+  animation: pulse 0.4s ease-in forwards;
+  opacity: 0;
+}
+
+.loader {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  transform: translateY(800%);
+}

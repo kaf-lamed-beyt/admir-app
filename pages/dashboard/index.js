@@ -6,6 +6,14 @@ import { useRouter } from "next/router";
 import { AuthContext } from "../../src/context/auth-context";
 import axios from "axios";
 import { userEndpoints } from "../../src/routes/endpoints";
+import { PulseLoader } from "react-spinners";
+import { css } from "@emotion/react";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 var options = {
   enableHighAccuracy: true,
@@ -30,6 +38,7 @@ export default function OverviewPage() {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
   const authContext = React.useContext(AuthContext);
+  const [color, setColor] = React.useState("rgba(215, 87, 17, 1)");
 
   const getCurrentUser = async () => {
     try {
@@ -88,7 +97,9 @@ export default function OverviewPage() {
         <title>Dashboard | Overview</title>
       </Head>
       {!loading ? (
-        "Loading..."
+        <div className="loader">
+          <PulseLoader color={color} />
+        </div>
       ) : (
         <DashLayout>
           <Overview />
