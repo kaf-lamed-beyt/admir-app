@@ -8,7 +8,7 @@ export const MenuCard = styled.div`
   padding: 0;
   border: 1px solid #fff;
   position: absolute;
-  margin-left: -40px;
+  margin-left: -60px;
   margin-top: 62px;
   padding-top: 10px;
   z-index: 3;

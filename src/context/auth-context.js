@@ -34,11 +34,11 @@ const AuthProvider = ({ children }) => {
     router.push("/");
   };
 
-  // // checks if the user is an admin
-  // // if yes, they're sent to the admin route
-  // const isAdmin = () => {
-  //   return authState.userRole === "Manager";
-  // };
+  // checks if the user is an admin
+  // if yes, they're sent to the admin route
+  const isAdmin = () => {
+    return authState.userRole === "Manager";
+  };
 
   return (
     <Provider
@@ -47,6 +47,7 @@ const AuthProvider = ({ children }) => {
         setAuthState: (userAuthInfo) => setUserAuthInfo(userAuthInfo),
         isUserAuthenticated,
         logout,
+        isAdmin,
       }}
     >
       {children}
