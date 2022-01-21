@@ -8,7 +8,6 @@ import { userEndpoints } from "../../../../routes/endpoints";
 
 const DashHeader = ({ dashboardTitle, user, profile_img }) => {
   const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({
     fullName: "",
   });
@@ -19,8 +18,6 @@ const DashHeader = ({ dashboardTitle, user, profile_img }) => {
 
   const getCurrentUser = async () => {
     try {
-      setLoading(true);
-
       const response = await axios({
         method: "GET",
         url: userEndpoints.getCurrentUser,
@@ -52,13 +49,9 @@ const DashHeader = ({ dashboardTitle, user, profile_img }) => {
       </div>
       <div className="profile-info">
         <div className="user-details">
-          {loading ? (
-            <p className="username">
-              {currentUser.fullName ? currentUser.fullName : null}
-            </p>
-          ) : (
-            <div className="pulse-placeholder"></div>
-          )}
+          <p className="username">
+            {currentUser.fullName ? currentUser.fullName : null}
+          </p>
           <div className="img-wrapper" onClick={() => setOpen(!open)}>
             <img src="/img/tom.png" alt="user profile image" />
           </div>
