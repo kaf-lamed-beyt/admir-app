@@ -38,7 +38,7 @@ export default function OverviewPage() {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
   const authContext = React.useContext(AuthContext);
-  const [color, setColor] = React.useState("rgba(215, 87, 17, 1)");
+  const [data, setData] = React.useState();
 
   const getCurrentUser = async () => {
     try {
@@ -57,8 +57,9 @@ export default function OverviewPage() {
         },
       });
       const { data } = response.data;
-      console.log(data);
+      setData(data);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -96,14 +97,14 @@ export default function OverviewPage() {
       <Head>
         <title>Dashboard | Overview</title>
       </Head>
-      {!loading ? (
-        <div className="loader">
-          <PulseLoader color={color} />
-        </div>
-      ) : (
+      {data ? (
         <DashLayout>
           <Overview />
         </DashLayout>
+      ) : (
+        <div className="loader">
+          <PulseLoader color="var(--primary)" loading={loading} />
+        </div>
       )}
     </React.Fragment>
   );

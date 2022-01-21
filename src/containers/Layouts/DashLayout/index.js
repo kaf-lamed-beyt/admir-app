@@ -2,6 +2,9 @@ import React from "react";
 import propTypes from "prop-types";
 import Sidebar from "../DashLayout/Sidebar";
 import styled from "styled-components";
+import axios from "axios";
+import { userEndpoints } from "../../../routes/endpoints";
+import { PulseLoader } from "react-spinners";
 
 const LayoutWrapper = styled.section`
   display: flex;
@@ -22,10 +25,44 @@ const LayoutWrapper = styled.section`
 `;
 
 const Layout = ({ children }) => {
+  const [data, setData] = React.useState();
+  const [loading, setLoading] = React.useState(false);
+
+  const getUserData = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios({
+        method: "GET",
+        url: userEndpoints.getCurrentUser,
+        headers: {
+          "x-auth-token": localStorage.getItem("token"),
+          "Content-Type": "application/json",
+        },
+      });
+      const { data } = response.data;
+      setData(data);
+    } catch (error) {
+      setLoading(false);
+      const { data } = error.response;
+      console.log(data);
+    }
+  };
+
+  React.useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <LayoutWrapper>
       <Sidebar />
-      <main className="dashboard-content">{children}</main>
+      {data ? (
+        <main className="dashboard-content">{children}</main>
+      ) : (
+        <div className="loader">
+          <PulseLoader loading={loading} color="var(--primary)" />
+        </div>
+      )}
     </LayoutWrapper>
   );
 };

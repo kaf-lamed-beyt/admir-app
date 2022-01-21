@@ -5,13 +5,7 @@ import propTypes from "prop-types";
 import { AuthContext } from "../../../../context/auth-context";
 import { useRouter } from "next/router";
 
-const menu_items = [
-  { name: "My Account", path: "/dashboard/settings" },
-  // { name: "Logout", path: "/" },
-  // { name: "Company Account", path: "/profile/company-account" },
-  // { name: "User Settings", path: "" },
-  // { name: "Developer API", path: "" },
-];
+const menu_items = [{ name: "My Account", path: "/dashboard/settings" }];
 
 const UserMenu = ({ open }) => {
   const router = useRouter();

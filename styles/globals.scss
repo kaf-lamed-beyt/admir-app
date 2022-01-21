@@ -287,8 +287,9 @@ textarea {
 }
 
 .loader {
+  height: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  transform: translateY(800%);
+  transform: translateY(900%);
 }
