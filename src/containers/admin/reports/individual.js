@@ -2,7 +2,7 @@ import React from "react";
 import { PersonalizedReport } from "../../Dashboard/components/Table";
 import { user, individual_reports } from "../../../utils/table-data";
 import { ReportContainer } from "../reports";
-import DashHeader from "../components/DashHeader";
+import DashHeader from "../../Dashboard/components/DashHeader";
 import Head from "next/head";
 
 export const getStaticPaths = async () => {
