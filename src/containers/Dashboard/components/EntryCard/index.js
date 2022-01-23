@@ -7,6 +7,7 @@ import propTypes from "prop-types";
 import Select from "react-dropdown-select";
 import { time } from "../../../../utils/common";
 import axios from "axios";
+import Geocode from "react-geocode";
 
 export const ClockInEntryCard = ({ title, open }) => {
   const [clockIn, setClockIn] = React.useState("");
@@ -114,7 +115,36 @@ export const ClockOutEntryCard = ({ open, title }) => {
 export const ReportsEntry = ({ title, open }) => {
   const [reportTitle, setReportTile] = React.useState("");
   const [activities, setActivities] = React.useState("");
-  const [location, setLocation] = React.useState("");
+  const [location, setLocation] = React.useState({
+    latitude: "",
+    longitude: "",
+  });
+
+  React.useEffect(() => {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    const success = (position) => {
+      const crd = position.coords;
+
+      console.log(`longitude: ${crd.longitude}`);
+      console.log(`latitude: ${crd.latitude}`);
+
+      setLocation({
+        longitude: crd.longitude,
+        latitude: crd.latitude,
+      });
+    };
+
+    const error = (err) => {
+      console.warn(`error(${err.code}): ${err.message}`);
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -164,7 +194,7 @@ export const ReportsEntry = ({ title, open }) => {
               className="work-location"
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
-              value={location}
+              value={`${location.latitude} ${location.longitude}`}
             />
           </div>
           <Button fill="var(--secondary)" height="30px" text-color="#fff">
