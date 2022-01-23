@@ -6,6 +6,7 @@ import { TimeTrackerTable } from "../components/Table";
 import Button from "../../../components/Buttons";
 import Icon from "../../../components/Icons";
 import { ClockInEntryCard, ClockOutEntryCard } from "../components/EntryCard";
+import onClickOuside from "react-onclickoutside";
 
 const TrackerContainer = styled.div`
   height: 585px !important;
@@ -91,10 +92,10 @@ const TrackerContainer = styled.div`
 const TimeTracker = () => {
   const [clockIn, setClockIn] = React.useState(false);
   const [clockOut, setClockOut] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
 
   TimeTracker.handleClickOutside = () => {
-    setOpen(open);
+    setClockIn(clockIn);
+    setClockOut(clockOut);
   };
 
   return (
@@ -144,4 +145,8 @@ const TimeTracker = () => {
   );
 };
 
-export default TimeTracker;
+const clickOutsideConfig = {
+  handleClickOutside: () => TimeTracker.handleClickOutside,
+};
+
+export default onClickOuside(TimeTracker, clickOutsideConfig);
