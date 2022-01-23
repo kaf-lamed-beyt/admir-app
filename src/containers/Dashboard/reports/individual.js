@@ -18,7 +18,7 @@ const IndividualReport = () => {
   });
 
   IndividualReport.handleClickOutside = () => {
-    setOpen(!open);
+    setOpen(open);
   };
 
   const getCurrentUser = async () => {

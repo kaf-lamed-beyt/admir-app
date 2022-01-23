@@ -119,6 +119,7 @@ export const ReportsEntry = ({ title, open }) => {
     latitude: "",
     longitude: "",
   });
+  const [userAddress, setUserAddress] = React.useState("");
 
   React.useEffect(() => {
     const options = {
@@ -136,6 +137,13 @@ export const ReportsEntry = ({ title, open }) => {
       setLocation({
         longitude: crd.longitude,
         latitude: crd.latitude,
+      });
+
+      Geocode.setApiKey("AIzaSyAMGgifA5cwnmJ0cwauMcF-s1yJR34X2Jg");
+
+      Geocode.fromLatLng(crd.longitude, crd.latitude).then((response) => {
+        const address = response.results[0].formatted_address;
+        setUserAddress(address);
       });
     };
 
@@ -194,7 +202,7 @@ export const ReportsEntry = ({ title, open }) => {
               className="work-location"
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
-              value={`${location.latitude} ${location.longitude}`}
+              value={userAddress}
             />
           </div>
           <Button fill="var(--secondary)" height="30px" text-color="#fff">

@@ -33,47 +33,73 @@ const WorkersTable = () => {
     }
   };
 
+  const grantWorkerAccess = async () => {
+    try {
+      setLoading(true);
+
+      const response = await {
+        method: "PATCH",
+        url: userEndpoints.grantUserAccess,
+      };
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
   React.useEffect(() => {
     getAllWorkers();
   }, []);
 
   return (
     <React.Fragment>
-      {data ? (
-        <TableWrapper>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone Number</th>
-              <th>Created At</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((staff) => {
-              return (
-                <tr key={staff.key}>
-                  <td className="fullname">{staff.fullName}</td>
-                  <td className="email">{staff.email}</td>
-                  <td className="phone">{staff.phoneNumber}</td>
-                  <td className="created-at">
-                    {dayjs(staff.createdAt).format("MMMM D, YYYY")}
-                  </td>
-                  <td className="status">
-                    <Button name="actvate user" fill="var(--secondary)">
-                      Activate
-                    </Button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </TableWrapper>
-      ) : (
-        <div className="table-loader">
-          <PuffLoader color="var(--primary)" loading={loading} />
-        </div>
-      )}
+      <TableWrapper>
+        {data ? (
+          <>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((staff) => {
+                return (
+                  <tr key={staff.key}>
+                    <td className="fullname">{staff.fullName}</td>
+                    <td className="email">{staff.email}</td>
+                    <td className="phone">{staff.phoneNumber}</td>
+                    <td className="created-at">
+                      {dayjs(staff.createdAt).format("MMMM D, YYYY")}
+                    </td>
+                    <td className="status">
+                      <Button
+                        name="actvate user"
+                        fill={
+                          staff.isGranted === true
+                            ? "var(--success)"
+                            : "var(--secondary)"
+                        }
+                        onClick={
+                          staff.isGranted === true ? null : grantWorkerAccess
+                        }
+                      >
+                        {staff.isGranted === true ? "Activated" : "Activate"}
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </>
+        ) : (
+          <div className="table-loader">
+            <PuffLoader color="var(--primary)" loading={loading} />
+          </div>
+        )}
+      </TableWrapper>
     </React.Fragment>
   );
 };
