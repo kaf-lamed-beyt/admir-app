@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const EntryWrapper = styled.div`
   width: 383px;
-  height: 346px;
+  height: 280px;
   background: #fff;
   padding: 10px 15px;
-  box-shadow: 0px 0px 25px 3px rgba(17, 145, 215, 0.05);
+  box-shadow: 0px 0px 25px 3px rgba(17, 145, 215, 0.1);
   position: absolute;
   margin-left: 700px;
   margin-top: 10px;

@@ -7,9 +7,8 @@ import propTypes from "prop-types";
 import Select from "react-dropdown-select";
 import { time } from "../../../../utils/common";
 
-const EntryCard = ({ title, open }) => {
+export const ClockInEntryCard = ({ title, open }) => {
   const [clockIn, setClockIn] = React.useState("");
-  const [clockOut, setClockOut] = React.useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +40,38 @@ const EntryCard = ({ title, open }) => {
               placeholder="Clock In"
             />
           </div>
+          <Button fill="var(--secondary)" height="30px" text-color="#fff">
+            Save
+          </Button>
+        </form>
+      </Fade>{" "}
+    </EntryWrapper>
+  );
+};
+
+ClockInEntryCard.propTypes = {
+  open: propTypes.bool.isRequired,
+  title: propTypes.string.isRequired,
+};
+
+export const ClockOutEntryCard = ({ open, title }) => {
+  const [clockOut, setClockOut] = React.useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  return (
+    <EntryWrapper open={open}>
+      <Fade direction="up" triggerOnce>
+        <p className="entry-title">{title}</p>
+        <div className="date-carousel">
+          <Icon name="calendar" />
+          <p>Today</p>
+          <p>Yesterday</p>
+          <p className="date">22 Dec, 2021</p>
+        </div>
+        <form onSubmit={handleSubmit}>
           <div className="input-group">
             <Icon name="clock-in" />
             <Select
@@ -63,13 +94,6 @@ const EntryCard = ({ title, open }) => {
       </Fade>{" "}
     </EntryWrapper>
   );
-};
-
-export default EntryCard;
-
-EntryCard.propTypes = {
-  open: propTypes.bool.isRequired,
-  title: propTypes.string.isRequired,
 };
 
 export const ReportsEntry = ({ title, open }) => {
@@ -98,8 +122,8 @@ export const ReportsEntry = ({ title, open }) => {
               name="activities"
               className="work-activity"
               id="activities"
-              onChange={(activities) => setActivities(activities)}
-              placeholder="Clock In"
+              onChange={(e) => setActivities(e.target.value)}
+              placeholder="What did you do today?"
               value={activities}
             />
           </div>
@@ -110,7 +134,7 @@ export const ReportsEntry = ({ title, open }) => {
               name="location"
               id="location"
               className="work-location"
-              onChange={(location) => setLocation(location)}
+              onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
               value={location}
             />

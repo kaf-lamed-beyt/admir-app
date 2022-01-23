@@ -44,8 +44,7 @@ const Layout = ({ children }) => {
       setData(data);
     } catch (error) {
       setLoading(false);
-      const { data } = error.response;
-      console.log(data);
+      console.log(error.response.data);
     }
   };
 

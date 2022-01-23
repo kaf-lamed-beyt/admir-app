@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { TimeTrackerTable } from "../components/Table";
 import Button from "../../../components/Buttons";
 import Icon from "../../../components/Icons";
-import EntryCard from "../components/EntryCard";
+import { ClockInEntryCard, ClockOutEntryCard } from "../components/EntryCard";
 
 const TrackerContainer = styled.div`
   height: 585px !important;
@@ -24,22 +24,30 @@ const TrackerContainer = styled.div`
     padding-left: 15px;
     padding-right: 15px;
 
-    button {
-      font-weight: 700;
-      line-height: 19px;
-      border: none;
+    .entry-controllers {
+      display: flex;
 
-      p {
-        display: flex;
-        font-size: 16px;
-        text-align: center;
-        margin: 10px 20px;
-        justify-content: space-between;
+      button {
+        font-weight: 700;
+        line-height: 19px;
+        border: none;
 
-        svg {
-          font-size: 12px;
-          font-weight: 700 !important;
+        p {
+          display: flex;
+          font-size: 16px;
+          text-align: center;
+          margin: 10px 20px;
+          justify-content: space-between;
+
+          svg {
+            font-size: 12px;
+            font-weight: 700 !important;
+          }
         }
+      }
+
+      .clock-out {
+        margin: 0 0 0 19px;
       }
     }
 
@@ -81,6 +89,8 @@ const TrackerContainer = styled.div`
 `;
 
 const TimeTracker = () => {
+  const [clockIn, setClockIn] = React.useState(false);
+  const [clockOut, setClockOut] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
   TimeTracker.handleClickOutside = () => {
@@ -93,20 +103,36 @@ const TimeTracker = () => {
       <TrackerContainer>
         <div className="table-title">
           <p>All entries</p>
-          <Button
-            height="44px"
-            width="150px"
-            fill="var(--secondary)"
-            text_color="#fff"
-            onClick={() => setOpen(!open)}
-          >
-            <p>
-              {" "}
-              <Icon name="plus" /> New Entry
-            </p>
-          </Button>
+          <div className="entry-controllers">
+            <Button
+              height="44px"
+              width="150px"
+              fill="var(--secondary)"
+              text_color="#fff"
+              onClick={() => setClockIn(!clockIn)}
+            >
+              <p>
+                {" "}
+                <Icon name="plus" /> Clock In
+              </p>
+            </Button>
+            <Button
+              height="44px"
+              width="150px"
+              fill="var(--secondary)"
+              text_color="#fff"
+              className="clock-out"
+              onClick={() => setClockOut(!clockOut)}
+            >
+              <p>
+                {" "}
+                <Icon name="plus" /> Clock Out
+              </p>
+            </Button>
+          </div>
         </div>
-        <EntryCard title="New Entry" open={open} />
+        <ClockInEntryCard title="Clock In" open={clockIn} />
+        <ClockOutEntryCard title="Clock Out" open={clockOut} />
         <TimeTrackerTable
           firstHeader="Date/Days"
           secondHeader="Clock-in Time"

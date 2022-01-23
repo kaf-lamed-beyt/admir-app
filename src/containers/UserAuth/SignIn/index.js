@@ -88,7 +88,7 @@ const SignIn = () => {
   return (
     <React.Fragment>
       <div className="signup-text">
-        <Fade>
+        <Fade triggerOnce>
           <p>
             Don’t have an account? {""}{" "}
             <Link href="/signup">
