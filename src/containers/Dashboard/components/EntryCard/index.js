@@ -6,6 +6,7 @@ import { Fade } from "react-awesome-reveal";
 import propTypes from "prop-types";
 import Select from "react-dropdown-select";
 import { time } from "../../../../utils/common";
+import axios from "axios";
 
 export const ClockInEntryCard = ({ title, open }) => {
   const [clockIn, setClockIn] = React.useState("");
@@ -56,6 +57,20 @@ ClockInEntryCard.propTypes = {
 
 export const ClockOutEntryCard = ({ open, title }) => {
   const [clockOut, setClockOut] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+
+  // const clockOutWorker = async () => {
+  //   try {
+  //     setLoading(true)
+
+  //     const response = await axios({
+  //       method: "POST",
+  //       url:
+  //     })
+  //   } catch {
+
+  //   }
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -97,6 +112,7 @@ export const ClockOutEntryCard = ({ open, title }) => {
 };
 
 export const ReportsEntry = ({ title, open }) => {
+  const [reportTitle, setReportTile] = React.useState("");
   const [activities, setActivities] = React.useState("");
   const [location, setLocation] = React.useState("");
 
@@ -105,7 +121,7 @@ export const ReportsEntry = ({ title, open }) => {
   };
 
   return (
-    <EntryWrapper open={open}>
+    <EntryWrapper open={open} className="reports-entry">
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
         <div className="date-carousel">
@@ -119,8 +135,20 @@ export const ReportsEntry = ({ title, open }) => {
             <Icon name="activities" />
             <input
               type="text"
-              name="activities"
+              name="report-title"
               className="work-activity"
+              id="title"
+              onChange={(e) => setReportTile(e.target.value)}
+              placeholder="Title of your report"
+              value={reportTitle}
+            />
+          </div>
+          <div className="reports-group">
+            <Icon name="activities" />
+            <textarea
+              type="text"
+              name="activities"
+              className="text-area"
               id="activities"
               onChange={(e) => setActivities(e.target.value)}
               placeholder="What did you do today?"

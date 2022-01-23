@@ -75,6 +75,16 @@ export const EntryWrapper = styled.div`
         background: #f5f5f5;
         margin-left: 10px;
       }
+
+      .text-area {
+        margin: 0 0 0 9px;
+        border: none;
+        padding: 0 8px;
+        padding-top: 4px;
+        width: 100%;
+        background: #f5f5f5;
+        border-radius: 8px;
+      }
     }
 
     button {

@@ -17,8 +17,8 @@ const IndividualReport = () => {
     role: "",
   });
 
-  IndividualReport.handleClicOutside = () => {
-    setOpen(open);
+  IndividualReport.handleClickOutside = () => {
+    setOpen(!open);
   };
 
   const getCurrentUser = async () => {
@@ -65,7 +65,6 @@ const IndividualReport = () => {
               <p className="position">{currentUser.role}</p>
             </div>
           </div>
-
           <Button
             height="44px"
             width="150px"
@@ -75,11 +74,11 @@ const IndividualReport = () => {
           >
             <p>
               {" "}
-              <Icon name="plus" /> New Entry
+              <Icon name="plus" /> New Report
             </p>
           </Button>
         </div>
-        <ReportsEntry title="New Entry" open={open} />
+        <ReportsEntry title="Report" open={open} />
         <PersonalizedReport reports={individual_reports} />
       </ReportContainer>
     </React.Fragment>
@@ -87,7 +86,7 @@ const IndividualReport = () => {
 };
 
 const clickOutsideConfig = {
-  handleClicOutside: () => IndividualReport.handleClicOutside,
+  handleClickOutside: () => IndividualReport.handleClickOutside,
 };
 
 export default onClickOutside(IndividualReport, clickOutsideConfig);
