@@ -141,7 +141,7 @@ export const ReportsEntry = ({ title, open }) => {
 
       Geocode.setApiKey("AIzaSyAMGgifA5cwnmJ0cwauMcF-s1yJR34X2Jg");
 
-      Geocode.fromLatLng(crd.longitude, crd.latitude).then((response) => {
+      Geocode.fromLatLng(crd.latitude, crd.longitude).then((response) => {
         const address = response.results[0].formatted_address;
         setUserAddress(address);
       });
