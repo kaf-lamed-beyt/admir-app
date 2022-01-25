@@ -1,6 +1,20 @@
-const settingsRoute = "/dashboard/settings";
-const generalSettingsRoute = "/dashboard/settings/general";
-const changePasswordRoute = "/dashboard/settings/change-password";
+const userDashboard = "/dashboard";
+const adminDashboard = "/admin";
+
+export const dashRoutes = {
+  adminDashboard,
+  userDashboard,
+  userReports: `${userDashboard}/reports`,
+  userSettings: `${userDashboard}/settings`,
+  userTimeTracker: `${userDashboard}/time-tracker`,
+  generalSettingsRoute: `${userDashboard}/settings/general`,
+  changePasswordRoute: `${userDashboard}/settings/change-password`,
+  adminSettings: `${adminDashboard}/settings`,
+  locationRoute: `${adminDashboard}/location`,
+  workers: `${adminDashboard}/workers`,
+  adminTimeTracker: `${adminDashboard}/time-tracker`,
+  adminReports: `${adminDashboard}/reports`,
+};
 
 export const sideNavItems = [
   { name: "overview", path: "/dashboard", icon: "overview" },
@@ -9,7 +23,11 @@ export const sideNavItems = [
   { name: "reports", path: "/dashboard/reports", icon: "report" },
   {
     name: "settings",
-    path: `${settingsRoute || generalSettingsRoute || changePasswordRoute}`,
+    path: `${
+      dashRoutes.userSettings ||
+      dashRoutes.generalSettingsRoute ||
+      dashRoutes.changePasswordRoute
+    }`,
     icon: "settings",
     unique_class: "settings",
   },

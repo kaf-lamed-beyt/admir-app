@@ -8,6 +8,8 @@ import Select from "react-dropdown-select";
 import { time } from "../../../../utils/common";
 import axios from "axios";
 import Geocode from "react-geocode";
+import { dashboardDataEndpoints } from "../../../../routes/endpoints";
+import { SuccessModal, ErrModal } from "../../../../components/Modals";
 
 export const ClockInEntryCard = ({ title, open }) => {
   const [clockIn, setClockIn] = React.useState("");
@@ -60,19 +62,6 @@ export const ClockOutEntryCard = ({ open, title }) => {
   const [clockOut, setClockOut] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
-  // const clockOutWorker = async () => {
-  //   try {
-  //     setLoading(true)
-
-  //     const response = await axios({
-  //       method: "POST",
-  //       url:
-  //     })
-  //   } catch {
-
-  //   }
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -114,12 +103,51 @@ export const ClockOutEntryCard = ({ open, title }) => {
 
 export const ReportsEntry = ({ title, open }) => {
   const [reportTitle, setReportTile] = React.useState("");
-  const [activities, setActivities] = React.useState("");
+  const [description, setDescription] = React.useState("");
   const [location, setLocation] = React.useState({
     latitude: "",
     longitude: "",
   });
   const [userAddress, setUserAddress] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [reportSuccess, setReportSuccess] = React.useState();
+  const [reportErorr, setReportError] = React.useState();
+
+  const submitReport = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      const response = await axios({
+        method: "POST",
+        url: dashboardDataEndpoints.reports,
+        data: {
+          title: reportTitle,
+          description,
+          location: {
+            address: userAddress,
+            lat: location.latitude,
+            long: location.longitude,
+          },
+        },
+        headers: {
+          "Content-type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+
+      console.log(response);
+      const { data } = response.data;
+      setReportSuccess(data.msg);
+      setReportError("");
+    } catch (error) {
+      const { data } = error.response;
+      setLoading(false);
+      setReportError(data.msg);
+      setReportSuccess(null);
+    }
+  };
 
   React.useEffect(() => {
     const options = {
@@ -131,12 +159,9 @@ export const ReportsEntry = ({ title, open }) => {
     const success = (position) => {
       const crd = position.coords;
 
-      console.log(`longitude: ${crd.longitude}`);
-      console.log(`latitude: ${crd.latitude}`);
-
       setLocation({
-        longitude: crd.longitude,
         latitude: crd.latitude,
+        longitude: crd.longitude,
       });
 
       Geocode.setApiKey("AIzaSyAMGgifA5cwnmJ0cwauMcF-s1yJR34X2Jg");
@@ -154,21 +179,19 @@ export const ReportsEntry = ({ title, open }) => {
     navigator.geolocation.getCurrentPosition(success, error, options);
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <EntryWrapper open={open} className="reports-entry">
+      {reportSuccess ? <SuccessModal message={reportSuccess} /> : ""}
+      {reportErorr ? <ErrModal message={reportErorr} /> : ""}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
-        <div className="date-carousel">
+        {/* <div className="date-carousel">
           <Icon name="calendar" />
           <p>Today</p>
           <p>Yesterday</p>
           <p className="date">22 Dec, 2021</p>
-        </div>
-        <form onSubmit={handleSubmit}>
+        </div> */}
+        <form onSubmit={submitReport}>
           <div className="reports-group">
             <Icon name="activities" />
             <input
@@ -185,12 +208,12 @@ export const ReportsEntry = ({ title, open }) => {
             <Icon name="activities" />
             <textarea
               type="text"
-              name="activities"
+              name="description"
               className="text-area"
               id="activities"
-              onChange={(e) => setActivities(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
               placeholder="What did you do today?"
-              value={activities}
+              value={description}
             />
           </div>
           <div className="reports-group">
@@ -205,8 +228,13 @@ export const ReportsEntry = ({ title, open }) => {
               value={userAddress}
             />
           </div>
-          <Button fill="var(--secondary)" height="30px" text-color="#fff">
-            Save
+          <Button
+            fill="var(--secondary)"
+            height="30px"
+            disabled={loading}
+            text-color="#fff"
+          >
+            {loading ? "Submitting..." : "Submit Report"}
           </Button>
         </form>
       </Fade>{" "}

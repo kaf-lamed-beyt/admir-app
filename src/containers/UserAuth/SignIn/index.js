@@ -7,7 +7,7 @@ import { Fade } from "react-awesome-reveal";
 import { authEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { AuthErrMsg, AuthSuccessMsg } from "../../../components/Modals";
+import { ErrModal, SuccessModal } from "../../../components/Modals";
 import { AuthContext } from "../../../context/auth-context";
 import { AiOutlineEye } from "react-icons/ai";
 
@@ -98,8 +98,8 @@ const SignIn = () => {
         </Fade>
       </div>
       <AuthWrapper>
-        {signInError ? <AuthErrMsg message={signInError} /> : ""}
-        {signInSuccess ? <AuthSuccessMsg message={signInSuccess} /> : ""}
+        {signInError ? <ErrModal message={signInError} /> : ""}
+        {signInSuccess ? <SuccessModal message={signInSuccess} /> : ""}
         <form className="signin-form" onSubmit={handleSignIn}>
           <Fade direction="up" cascade triggerOnce>
             <h1>Log In</h1>

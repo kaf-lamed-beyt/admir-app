@@ -11,7 +11,7 @@ import { AuthController, FormInfo } from "../../../components/FormInfo";
 import { userEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
 import router from "next/router";
-import { AuthErrMsg, AuthSuccessMsg } from "../../../components/Modals";
+import { ErrModal, SuccessModal } from "../../../components/Modals";
 import { AuthContext } from "../../../context/auth-context";
 import { AiOutlineEye } from "react-icons/ai";
 
@@ -113,8 +113,8 @@ const SignUp = () => {
         </Fade>
       </AuthSteps>
       <AuthWrapper>
-        {signUpSuccess ? <AuthSuccessMsg message={signUpSuccess} /> : ""}
-        {signUpError ? <AuthErrMsg message={signUpError} /> : ""}
+        {signUpSuccess ? <SuccessModal message={signUpSuccess} /> : ""}
+        {signUpError ? <ErrModal message={signUpError} /> : ""}
         <form className="signup-form" onSubmit={handleSignUp}>
           {formStep === 0 && (
             <>
