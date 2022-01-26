@@ -8,8 +8,14 @@ import Select from "react-dropdown-select";
 import { time } from "../../../../utils/common";
 import axios from "axios";
 import Geocode from "react-geocode";
-import { dashboardDataEndpoints } from "../../../../routes/endpoints";
-import { SuccessModal, ErrModal } from "../../../../components/Modals";
+import {
+  dashboardDataEndpoints,
+  userEndpoints,
+} from "../../../../routes/endpoints";
+import {
+  DashboardSuccessModal,
+  DashboardErrorModal,
+} from "../../../../components/Modals";
 
 export const ClockInEntryCard = ({ title, open }) => {
   const [clockIn, setClockIn] = React.useState("");
@@ -112,6 +118,25 @@ export const ReportsEntry = ({ title, open }) => {
   const [loading, setLoading] = React.useState(false);
   const [reportSuccess, setReportSuccess] = React.useState();
   const [reportErorr, setReportError] = React.useState();
+  const [staffId, setStaffId] = React.useState("");
+
+  React.useEffect(async () => {
+    // get the staff id from the user endpoint
+    try {
+      const staffId = await axios({
+        method: "GET",
+        url: userEndpoints.getCurrentUser,
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+      const { data } = staffId.data;
+      setStaffId(data._id);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const submitReport = async (e) => {
     e.preventDefault();
@@ -123,21 +148,19 @@ export const ReportsEntry = ({ title, open }) => {
         method: "POST",
         url: dashboardDataEndpoints.reports,
         data: {
+          workPost: staffId,
           title: reportTitle,
+          report: reportTitle,
           description,
-          location: {
-            address: userAddress,
-            lat: location.latitude,
-            long: location.longitude,
-          },
+          address: userAddress,
+          // lat: location.latitude,
+          // long: location.longitude,
         },
         headers: {
           "Content-type": "application/json",
           "x-auth-token": localStorage.getItem("token"),
         },
       });
-
-      console.log(response);
       const { data } = response.data;
       setReportSuccess(data.msg);
       setReportError("");
@@ -181,16 +204,10 @@ export const ReportsEntry = ({ title, open }) => {
 
   return (
     <EntryWrapper open={open} className="reports-entry">
-      {reportSuccess ? <SuccessModal message={reportSuccess} /> : ""}
-      {reportErorr ? <ErrModal message={reportErorr} /> : ""}
+      {reportSuccess ? <DashboardSuccessModal message={reportSuccess} /> : ""}
+      {reportErorr ? <DashboardErrorModal message={reportErorr} /> : ""}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
-        {/* <div className="date-carousel">
-          <Icon name="calendar" />
-          <p>Today</p>
-          <p>Yesterday</p>
-          <p className="date">22 Dec, 2021</p>
-        </div> */}
         <form onSubmit={submitReport}>
           <div className="reports-group">
             <Icon name="activities" />
@@ -228,12 +245,7 @@ export const ReportsEntry = ({ title, open }) => {
               value={userAddress}
             />
           </div>
-          <Button
-            fill="var(--secondary)"
-            height="30px"
-            disabled={loading}
-            text-color="#fff"
-          >
+          <Button fill="var(--secondary)" height="30px" text-color="#fff">
             {loading ? "Submitting..." : "Submit Report"}
           </Button>
         </form>

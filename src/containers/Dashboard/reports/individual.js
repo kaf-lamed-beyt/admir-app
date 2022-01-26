@@ -9,6 +9,7 @@ import { ReportsEntry } from "../components/EntryCard";
 import axios from "axios";
 import { userEndpoints } from "../../../routes/endpoints";
 import onClickOutside from "react-onclickoutside";
+import { PuffLoader } from "react-spinners";
 
 const IndividualReport = () => {
   const [open, setOpen] = React.useState(false);
@@ -16,12 +17,15 @@ const IndividualReport = () => {
     fullName: "",
     role: "",
   });
+  const [loading, setLoading] = React.useState(false);
 
   IndividualReport.handleClickOutside = () => {
     setOpen(open);
   };
 
   const getCurrentUser = async () => {
+    setLoading(true);
+
     try {
       const response = await axios({
         method: "GET",
@@ -39,6 +43,7 @@ const IndividualReport = () => {
       setCurrentUser(data);
       console.log(data);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -53,33 +58,41 @@ const IndividualReport = () => {
         <title>{`${currentUser.fullName}'s Report` || "Reports"}</title>
       </Head>
       <ReportContainer>
-        <div className="table-title">
-          <div className="table-elem-flex">
-            <img
-              src="/img/tom.png"
-              className="staff-image"
-              alt="staff picture"
-            />
-            <div className="staff-name">
-              <p className="fullname">{currentUser.fullName}</p>
-              <p className="position">{currentUser.role}</p>
-            </div>
+        {!currentUser ? (
+          <div className="table-loader">
+            <PuffLoader color="var(--secondary)" loading={loading} />
           </div>
-          <Button
-            height="44px"
-            width="150px"
-            fill="var(--secondary)"
-            text_color="#fff"
-            onClick={() => setOpen(!open)}
-          >
-            <p>
-              {" "}
-              <Icon name="plus" /> New Report
-            </p>
-          </Button>
-        </div>
-        <ReportsEntry title="Report" open={open} />
-        <PersonalizedReport reports={individual_reports} />
+        ) : (
+          <>
+            <div className="table-title">
+              <div className="table-elem-flex">
+                <img
+                  src="/img/tom.png"
+                  className="staff-image"
+                  alt="staff picture"
+                />
+                <div className="staff-name">
+                  <p className="fullname">{currentUser.fullName}</p>
+                  <p className="position">{currentUser.role}</p>
+                </div>
+              </div>
+              <Button
+                height="44px"
+                width="150px"
+                fill="var(--secondary)"
+                text_color="#fff"
+                onClick={() => setOpen(!open)}
+              >
+                <p>
+                  {" "}
+                  <Icon name="plus" /> New Report
+                </p>
+              </Button>
+            </div>
+            <ReportsEntry title="Report" open={open} />
+            <PersonalizedReport reports={individual_reports} />
+          </>
+        )}
       </ReportContainer>
     </React.Fragment>
   );
