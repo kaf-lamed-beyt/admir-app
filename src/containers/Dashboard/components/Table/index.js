@@ -2,6 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 import { TableWrapper } from "./style/table.styled";
 import Link from "next/link";
+import dayjs from "dayjs";
 
 const Table = ({ employees }) => {
   return (
@@ -107,26 +108,31 @@ export const PersonalizedReport = ({ reports }) => {
         </tr>
       </thead>
       <tbody>
-        {reports.map((staff) => {
-          return (
-            <tr key={staff.key}>
-              <td>
-                <div className="day-date">
-                  <p className="weekday">{staff.day}</p>
-                  <p className="date">{staff.date}</p>
-                </div>
-              </td>
-              <td>
-                <div className="task">
-                  <p className="activities">{staff.task.activity}</p>
-                </div>
-              </td>
-              <td className="status">
-                <p className="location">{staff.task.location}</p>
-              </td>
-            </tr>
-          );
-        })}
+        {reports &&
+          reports.map((staff) => {
+            return (
+              <tr key={staff.key}>
+                <td>
+                  <div className="day-date">
+                    <p className="weekday">
+                      {dayjs(staff.createdAt).format("dddd")}
+                    </p>
+                    <p className="date">
+                      {dayjs(staff.createdAt).format("DD/MM/YY")}
+                    </p>
+                  </div>
+                </td>
+                <td>
+                  <div className="task">
+                    <p className="activities">{staff.description}</p>
+                  </div>
+                </td>
+                <td className="status">
+                  <p className="location">{staff.address}</p>
+                </td>
+              </tr>
+            );
+          })}
       </tbody>
     </TableWrapper>
   );

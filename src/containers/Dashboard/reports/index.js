@@ -1,8 +1,6 @@
 import React from "react";
 import DashHeader from "../components/DashHeader";
 import styled from "styled-components";
-// import { ReportTable } from "../components/Table";
-// import { employee_reports } from "../../../utils/table-data";
 import IndividualReport from "./individual";
 
 export const ReportContainer = styled.div`
