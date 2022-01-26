@@ -50,14 +50,15 @@ export const adminNavItems = [
 // dashboard stats card
 export const overview_stats = [
   {
-    title: "Check out your tasks",
+    // title: "Check out your tasks",
+    title: "Available tasks this week",
     value: 20,
     _id: 0,
     icon: "tasks",
     fill: "var(--primary-60)",
   },
   {
-    title: "Daily and weeekly reports",
+    title: "Reports for this week",
     value: 7,
     _id: 1,
     icon: "feedbacks",

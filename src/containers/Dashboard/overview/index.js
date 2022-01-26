@@ -7,10 +7,41 @@ import { CardWrapper } from "../components/Cards/style/cards.styled";
 import Icon from "../../../components/Icons";
 import Button from "../../../components/Buttons";
 import { PersonalizedReport, TimeTrackerTable } from "../components/Table";
-import { individual_reports, time_tracker } from "../../../utils/table-data";
+import { time_tracker } from "../../../utils/table-data";
 import Link from "next/link";
+import axios from "axios";
+import { dashboardDataEndpoints } from "../../../routes/endpoints";
+import { PuffLoader } from "react-spinners";
 
 const Overview = () => {
+  const [reports, setReports] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+
+  const getUserReports = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios({
+        method: "GET",
+        url: dashboardDataEndpoints.reports,
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+      const { data } = response.data;
+      setReports(data);
+      console.log(data.length);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getUserReports();
+  }, []);
+
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Overview" profile_img="/img/tom.png" />
@@ -48,7 +79,13 @@ const Overview = () => {
         </div>
         <div className="reports">
           <p className="table-title">Reports</p>
-          <PersonalizedReport reports={individual_reports} />
+          {!reports ? (
+            <div className="table-loader">
+              <PuffLoader color="var(--primary)" />
+            </div>
+          ) : (
+            <PersonalizedReport reports={reports} />
+          )}
         </div>
       </Tables>
     </React.Fragment>

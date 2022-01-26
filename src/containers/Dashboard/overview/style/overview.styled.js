@@ -92,6 +92,19 @@ export const Tables = styled.div`
     overflow-y: auto;
     box-shadow: 0px 0px 25px 3px rgba(17, 145, 215, 0.05);
 
+    table {
+      white-space: normal;
+
+      td:nth-child(3) {
+        text-align: left;
+      }
+
+      th:nth-child(2),
+      td:nth-child(2) {
+        padding: 0 14px 0 14px;
+      }
+    }
+
     ::-webkit-scrollbar {
       display: none;
     }

@@ -2,7 +2,10 @@ import React from "react";
 import { PersonalizedReport } from "../../Dashboard/components/Table";
 import Head from "next/head";
 import axios from "axios";
-import { dashboardDataEndpoints } from "../../../routes/endpoints";
+import {
+  dashboardDataEndpoints,
+  userEndpoints,
+} from "../../../routes/endpoints";
 import onClickOutside from "react-onclickoutside";
 import { Fade } from "react-awesome-reveal";
 import { PuffLoader } from "react-spinners";
@@ -10,6 +13,8 @@ import { ReportContainer } from "../reports";
 import Button from "../../../components/Buttons";
 import Icon from "../../../components/Icons";
 import { ReportsEntry } from "../components/EntryCard";
+import dayjs from "dayjs";
+import calendar from "dayjs/plugin/calendar";
 
 const IndividualReport = () => {
   const [open, setOpen] = React.useState(false);
@@ -63,7 +68,9 @@ const IndividualReport = () => {
       });
       const { data } = response.data;
       setReports(data);
+      console.log(data);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -73,12 +80,16 @@ const IndividualReport = () => {
     getUserReports();
   }, []);
 
+  dayjs.extend(calendar);
+
+  const sortedReports = reports.sort((a, b) => a.createdAt - b.createdAt);
+
   return (
     <React.Fragment>
       <Head>
         <title>{`${currentUser.fullName}'s Report` || "Reports"}</title>
       </Head>
-      {reports ? (
+      {sortedReports ? (
         <Fade triggerOnce>
           <ReportContainer>
             <div className="table-title">
@@ -107,7 +118,7 @@ const IndividualReport = () => {
               </Button>
             </div>
             <ReportsEntry title="Report" open={open} />
-            <PersonalizedReport reports={reports} />
+            <PersonalizedReport reports={sortedReports} />
           </ReportContainer>
         </Fade>
       ) : (

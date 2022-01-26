@@ -143,7 +143,6 @@ export const ReportsEntry = ({ title, open }) => {
 
     try {
       setLoading(true);
-
       const response = await axios({
         method: "POST",
         url: dashboardDataEndpoints.reports,
@@ -165,8 +164,8 @@ export const ReportsEntry = ({ title, open }) => {
       setReportSuccess(data.msg);
       setReportError("");
     } catch (error) {
-      const { data } = error.response;
       setLoading(false);
+      const { data } = error.response;
       setReportError(data.msg);
       setReportSuccess(null);
     }
