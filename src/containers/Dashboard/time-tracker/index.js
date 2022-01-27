@@ -5,7 +5,8 @@ import styled from "styled-components";
 import { TimeTrackerTable } from "../components/Table";
 import Button from "../../../components/Buttons";
 import Icon from "../../../components/Icons";
-import { ClockInEntryCard, ClockOutEntryCard } from "../components/EntryCard";
+import { ClockInEntryCard } from "../components/EntryCard/clock-in";
+import { ClockOutEntryCard } from "../components/EntryCard/clock-out";
 import onClickOutside from "react-onclickoutside";
 
 const TrackerContainer = styled.div`
@@ -92,16 +93,16 @@ const TrackerContainer = styled.div`
 const TimeTracker = () => {
   const [clockIn, setClockIn] = React.useState(false);
   const [clockOut, setClockOut] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
   TimeTracker.handleClickOutside = () => {
-    setClockIn(clockIn);
-    setClockOut(clockOut);
+    setOpen(false);
   };
 
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Time Tracker" profile_img="/img/tom.png" />
-      <TrackerContainer>
+      <TrackerContainer onClick={(open) => setOpen(!open)}>
         <div className="table-title">
           <p>All entries</p>
           <div className="entry-controllers">

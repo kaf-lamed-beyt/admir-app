@@ -32,4 +32,9 @@ export const dashboardDataEndpoints = {
   uploadReport: `report/upload/:reportId`,
   entry: `${baseURL}/entry`,
   uniqueEntry: `${baseURL}/entry/:entryId`,
+  userRecord: `${baseURL}/record/user`,
+  uniqueRecord: `${baseURL}/record/:recordId`,
+  records: `${baseURL}/record`,
+  clockIn: `${baseURL}/record/clock-in`,
+  clockOut: `${baseURL}/record/clock-out/:recordId`,
 };

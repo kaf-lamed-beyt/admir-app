@@ -12,9 +12,8 @@ import { PuffLoader } from "react-spinners";
 import { ReportContainer } from "../reports";
 import Button from "../../../components/Buttons";
 import Icon from "../../../components/Icons";
-import { ReportsEntry } from "../components/EntryCard";
+import { ReportsEntry } from "../components/EntryCard/reports";
 import dayjs from "dayjs";
-import calendar from "dayjs/plugin/calendar";
 
 const IndividualReport = () => {
   const [open, setOpen] = React.useState(false);
@@ -68,7 +67,6 @@ const IndividualReport = () => {
       });
       const { data } = response.data;
       setReports(data);
-      console.log(data);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -80,9 +78,9 @@ const IndividualReport = () => {
     getUserReports();
   }, []);
 
-  dayjs.extend(calendar);
-
-  const sortedReports = reports.sort((a, b) => a.createdAt - b.createdAt);
+  const sortedReports = reports.sort((a, b) => {
+    dayjs(b.createdAt).format("h") - dayjs(a.createdAt).format("h");
+  });
 
   return (
     <React.Fragment>

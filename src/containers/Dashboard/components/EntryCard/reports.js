@@ -1,111 +1,19 @@
 import React from "react";
-import { EntryWrapper } from "./style/entry.styled";
-import Icon from "../../../../components/Icons";
-import Button from "../../../../components/Buttons";
-import { Fade } from "react-awesome-reveal";
-import propTypes from "prop-types";
-import Select from "react-dropdown-select";
-import { time } from "../../../../utils/common";
-import axios from "axios";
 import Geocode from "react-geocode";
 import {
-  dashboardDataEndpoints,
   userEndpoints,
+  dashboardDataEndpoints,
 } from "../../../../routes/endpoints";
 import {
-  DashboardSuccessModal,
   DashboardErrorModal,
+  DashboardSuccessModal,
 } from "../../../../components/Modals";
-
-export const ClockInEntryCard = ({ title, open }) => {
-  const [clockIn, setClockIn] = React.useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  return (
-    <EntryWrapper open={open}>
-      <Fade direction="up" triggerOnce>
-        <p className="entry-title">{title}</p>
-        <div className="date-carousel">
-          <Icon name="calendar" />
-          <p>Today</p>
-          <p>Yesterday</p>
-          <p className="date">22 Dec, 2021</p>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <Icon name="clock-in" />
-            <Select
-              name="time-in"
-              id="time-in"
-              options={time}
-              value={clockIn}
-              className="select"
-              dropdownPosition="bottom"
-              onChange={(clockIn) =>
-                setClockIn(clockIn.map((time) => time.value))
-              }
-              placeholder="Clock In"
-            />
-          </div>
-          <Button fill="var(--secondary)" height="30px" text-color="#fff">
-            Save
-          </Button>
-        </form>
-      </Fade>{" "}
-    </EntryWrapper>
-  );
-};
-
-ClockInEntryCard.propTypes = {
-  open: propTypes.bool.isRequired,
-  title: propTypes.string.isRequired,
-};
-
-export const ClockOutEntryCard = ({ open, title }) => {
-  const [clockOut, setClockOut] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  return (
-    <EntryWrapper open={open}>
-      <Fade direction="up" triggerOnce>
-        <p className="entry-title">{title}</p>
-        <div className="date-carousel">
-          <Icon name="calendar" />
-          <p>Today</p>
-          <p>Yesterday</p>
-          <p className="date">22 Dec, 2021</p>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <Icon name="clock-in" />
-            <Select
-              name="time-out"
-              id="time-out"
-              value={clockOut}
-              className="select"
-              dropdownPosition="top"
-              options={time}
-              onChange={(clockOut) =>
-                setClockOut(clockOut.map((time) => time.value))
-              }
-              placeholder="Clock Out"
-            />
-          </div>
-          <Button fill="var(--secondary)" height="30px" text-color="#fff">
-            Save
-          </Button>
-        </form>
-      </Fade>{" "}
-    </EntryWrapper>
-  );
-};
+import { EntryWrapper } from "./style/entry.styled";
+import Icon from "../../../../components/Icons";
+import axios from "axios";
+import { Fade } from "react-awesome-reveal";
+import propTypes from "prop-types";
+import Button from "../../../../components/Buttons";
 
 export const ReportsEntry = ({ title, open }) => {
   const [reportTitle, setReportTile] = React.useState("");
@@ -143,13 +51,13 @@ export const ReportsEntry = ({ title, open }) => {
 
     try {
       setLoading(true);
+
       const response = await axios({
         method: "POST",
         url: dashboardDataEndpoints.reports,
         data: {
           workPost: staffId,
           title: reportTitle,
-          report: reportTitle,
           description,
           address: userAddress,
           // lat: location.latitude,
@@ -162,7 +70,7 @@ export const ReportsEntry = ({ title, open }) => {
       });
       const { data } = response.data;
       setReportSuccess(data.msg);
-      setReportError("");
+      setReportError(null);
     } catch (error) {
       setLoading(false);
       const { data } = error.response;
@@ -203,8 +111,8 @@ export const ReportsEntry = ({ title, open }) => {
 
   return (
     <EntryWrapper open={open} className="reports-entry">
-      {reportSuccess ? <DashboardSuccessModal message={reportSuccess} /> : ""}
       {reportErorr ? <DashboardErrorModal message={reportErorr} /> : ""}
+      {reportSuccess ? <DashboardSuccessModal message={reportSuccess} /> : ""}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
         <form onSubmit={submitReport}>

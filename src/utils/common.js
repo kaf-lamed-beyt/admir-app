@@ -47,6 +47,16 @@ export const adminNavItems = [
   },
 ];
 
+// dates
+export const today = new Date();
+export const yesterday = new Date(today);
+
+yesterday.setDate(yesterday.getDate() - 1);
+
+export const threeDaysAgo = new Date(yesterday);
+
+threeDaysAgo.setDate(threeDaysAgo.getDate() - 1);
+
 // dashboard stats card
 export const overview_stats = [
   {
