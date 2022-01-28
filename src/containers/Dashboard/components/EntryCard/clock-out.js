@@ -31,7 +31,7 @@ export const ClockOutEntryCard = ({ open, title }) => {
         method: "PATCH",
         url: dashboardDataEndpoints.clockOut,
         data: {
-          clockOut,
+          clockOut: clockOut.toString(),
         },
         headers: {
           "Content-Type": "application/json",

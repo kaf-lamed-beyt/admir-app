@@ -13,6 +13,7 @@ import Icon from "../../../../components/Icons";
 import Button from "../../../../components/Buttons";
 import Select from "react-dropdown-select";
 import { today, yesterday, threeDaysAgo } from "../../../../utils/common";
+import { dashboardDataEndpoints } from "../../../../routes/endpoints";
 
 export const ClockInEntryCard = ({ title, open }) => {
   const [clockIn, setClockIn] = React.useState("");
@@ -30,7 +31,7 @@ export const ClockInEntryCard = ({ title, open }) => {
         method: "POST",
         url: dashboardDataEndpoints.clockIn,
         data: {
-          clockIn,
+          clockIn: clockIn.toString(),
         },
         headers: {
           "Content-Type": "application/json",
@@ -42,8 +43,7 @@ export const ClockInEntryCard = ({ title, open }) => {
       setClockInError(null);
     } catch (error) {
       setLoading(false);
-      const { data } = error.response;
-      setClockInError(data.msg);
+      setClockInError(error.response.data.msg);
       setClockInSuccess(null);
     }
   };
