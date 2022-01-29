@@ -1,6 +1,5 @@
 import React from "react";
 import DashHeader from "../components/DashHeader";
-import { time_tracker } from "../../../utils/table-data";
 import styled from "styled-components";
 import { TimeTrackerTable } from "../components/Table";
 import Button from "../../../components/Buttons";
@@ -8,6 +7,9 @@ import Icon from "../../../components/Icons";
 import { ClockInEntryCard } from "../components/EntryCard/clock-in";
 import { ClockOutEntryCard } from "../components/EntryCard/clock-out";
 import onClickOutside from "react-onclickoutside";
+import { dashboardDataEndpoints } from "../../../routes/endpoints";
+import { PuffLoader } from "react-spinners";
+import axios from "axios";
 
 const TrackerContainer = styled.div`
   height: 585px !important;
@@ -94,6 +96,32 @@ const TimeTracker = () => {
   const [clockIn, setClockIn] = React.useState(false);
   const [clockOut, setClockOut] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+
+  const getUserTimeRecords = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios({
+        method: "GET",
+        url: dashboardDataEndpoints.records,
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+      const { data } = response.data;
+      setData(data);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getUserTimeRecords();
+  }, []);
 
   TimeTracker.handleClickOutside = () => {
     setOpen(false);
@@ -102,46 +130,52 @@ const TimeTracker = () => {
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Time Tracker" profile_img="/img/tom.png" />
-      <TrackerContainer onClick={(open) => setOpen(!open)}>
-        <div className="table-title">
-          <p>All entries</p>
-          <div className="entry-controllers">
-            <Button
-              height="44px"
-              width="150px"
-              fill="var(--secondary)"
-              text_color="#fff"
-              onClick={() => setClockIn(!clockIn)}
-            >
-              <p>
-                {" "}
-                <Icon name="plus" /> Clock In
-              </p>
-            </Button>
-            <Button
-              height="44px"
-              width="150px"
-              fill="var(--secondary)"
-              text_color="#fff"
-              className="clock-out"
-              onClick={() => setClockOut(!clockOut)}
-            >
-              <p>
-                {" "}
-                <Icon name="plus" /> Clock Out
-              </p>
-            </Button>
+      {data ? (
+        <TrackerContainer onClick={(open) => setOpen(!open)}>
+          <div className="table-title">
+            <p>All entries</p>
+            <div className="entry-controllers">
+              <Button
+                height="44px"
+                width="150px"
+                fill="var(--secondary)"
+                text_color="#fff"
+                onClick={() => setClockIn(!clockIn)}
+              >
+                <p>
+                  {" "}
+                  <Icon name="plus" /> Clock In
+                </p>
+              </Button>
+              <Button
+                height="44px"
+                width="150px"
+                fill="var(--secondary)"
+                text_color="#fff"
+                className="clock-out"
+                onClick={() => setClockOut(!clockOut)}
+              >
+                <p>
+                  {" "}
+                  <Icon name="plus" /> Clock Out
+                </p>
+              </Button>
+            </div>
           </div>
+          <ClockInEntryCard title="Clock In" open={clockIn} />
+          <ClockOutEntryCard title="Clock Out" open={clockOut} />
+          <TimeTrackerTable
+            firstHeader="Date/Days"
+            secondHeader="Clock-in Time"
+            thirdHeader="Clock-out Time"
+            reports={data}
+          />
+        </TrackerContainer>
+      ) : (
+        <div className="table-loader">
+          <PuffLoader loading={loading} color="var(--primary)" />
         </div>
-        <ClockInEntryCard title="Clock In" open={clockIn} />
-        <ClockOutEntryCard title="Clock Out" open={clockOut} />
-        <TimeTrackerTable
-          firstHeader="Date/Days"
-          secondHeader="Clock-in Time"
-          thirdHeader="Clock-out Time"
-          reports={time_tracker}
-        />
-      </TrackerContainer>
+      )}
     </React.Fragment>
   );
 };

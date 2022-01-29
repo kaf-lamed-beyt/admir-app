@@ -28,7 +28,7 @@ export const ClockOutEntryCard = ({ open, title }) => {
       setLoading(true);
 
       const response = await axios({
-        method: "PATCH",
+        method: "POST",
         url: dashboardDataEndpoints.clockOut,
         data: {
           clockOut: clockOut.toString(),
@@ -38,8 +38,8 @@ export const ClockOutEntryCard = ({ open, title }) => {
           "x-auth-token": localStorage.getItem("token"),
         },
       });
-      const { data } = response.data;
-      setClockOutSuccess(data.msg);
+      setClockOutSuccess(response.data.msg);
+      setLoading(false);
       setClockOutError(null);
     } catch (error) {
       setLoading(false);

@@ -7,7 +7,6 @@ import { CardWrapper } from "../components/Cards/style/cards.styled";
 import Icon from "../../../components/Icons";
 import Button from "../../../components/Buttons";
 import { PersonalizedReport, TimeTrackerTable } from "../components/Table";
-import { time_tracker } from "../../../utils/table-data";
 import Link from "next/link";
 import axios from "axios";
 import { dashboardDataEndpoints } from "../../../routes/endpoints";
@@ -15,7 +14,28 @@ import { PuffLoader } from "react-spinners";
 
 const Overview = () => {
   const [reports, setReports] = React.useState([]);
+  const [timeRecords, setTimeRecords] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+
+  const getUserTimeRecords = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios({
+        method: "GET",
+        url: dashboardDataEndpoints.records,
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+      const { data } = response.data;
+      setTimeRecords(data);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
 
   const getUserReports = async () => {
     try {
@@ -40,6 +60,7 @@ const Overview = () => {
 
   React.useEffect(() => {
     getUserReports();
+    getUserTimeRecords();
   }, []);
 
   return (
@@ -74,7 +95,7 @@ const Overview = () => {
             firstHeader="Date/Days"
             secondHeader="Clock-in Time"
             thirdHeader="Clock-out Time"
-            reports={time_tracker}
+            reports={timeRecords}
           />
         </div>
         <div className="reports">

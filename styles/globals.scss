@@ -137,6 +137,16 @@ body {
     font-size: 20px;
     font-weight: 500;
   }
+
+  @media only screen and (min-width: 0px) and (max-width: 576px) {
+    margin-left: -12px;
+    margin-top: -180px;
+  }
+
+  @media only screen and (min-width: 577px) and (max-width: 992px) {
+    margin-left: -176px;
+    margin-top: -120px;
+  }
 }
 
 .dash-error-msg {
@@ -173,6 +183,11 @@ body {
   @media only screen and (min-width: 0px) and (max-width: 576px) {
     margin-left: -12px;
     margin-top: -180px;
+  }
+
+  @media only screen and (min-width: 577px) and (max-width: 992px) {
+    margin-left: -176px;
+    margin-top: -120px;
   }
 }
 

@@ -68,8 +68,8 @@ export const ReportsEntry = ({ title, open }) => {
           "x-auth-token": localStorage.getItem("token"),
         },
       });
-      const { data } = response.data;
-      setReportSuccess(data.msg);
+      setReportSuccess(response.data.msg);
+      setLoading(false);
       setReportError(null);
     } catch (error) {
       setLoading(false);

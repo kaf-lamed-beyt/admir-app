@@ -36,5 +36,5 @@ export const dashboardDataEndpoints = {
   uniqueRecord: `${baseURL}/record/:recordId`,
   records: `${baseURL}/record`,
   clockIn: `${baseURL}/record/clock-in`,
-  clockOut: `${baseURL}/record/clock-out/:recordId`,
+  clockOut: `${baseURL}/record/clock-out/`,
 };

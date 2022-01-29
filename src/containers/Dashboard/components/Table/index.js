@@ -159,12 +159,16 @@ export const TimeTrackerTable = ({
             <tr key={staff.key}>
               <td>
                 <div className="day-date">
-                  <p className="weekday">{staff.day}</p>
-                  <p className="date">{staff.date}</p>
+                  <p className="weekday">
+                    {dayjs(staff.createdAt).format("dddd")}
+                  </p>
+                  <p className="date">
+                    {dayjs(staff.createdAt).format("DD/MM/YY")}
+                  </p>
                 </div>
               </td>
-              <td className="activities">{staff.time_in}</td>
-              <td className="status">{staff.time_out}</td>
+              <td className="activities">{staff.clockIn}</td>
+              <td className="status">{staff.clockOut}</td>
             </tr>
           );
         })}

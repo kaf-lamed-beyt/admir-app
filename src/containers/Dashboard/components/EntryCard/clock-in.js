@@ -38,8 +38,8 @@ export const ClockInEntryCard = ({ title, open }) => {
           "x-auth-token": localStorage.getItem("token"),
         },
       });
-      const { data } = response.data;
-      setClockInSuccess(data.msg);
+      setClockInSuccess(response.data.msg);
+      setLoading(false);
       setClockInError(null);
     } catch (error) {
       setLoading(false);
