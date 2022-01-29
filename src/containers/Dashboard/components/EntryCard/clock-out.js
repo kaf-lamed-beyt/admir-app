@@ -28,7 +28,7 @@ export const ClockOutEntryCard = ({ open, title }) => {
       setLoading(true);
 
       const response = await axios({
-        method: "POST",
+        method: "PATCH",
         url: dashboardDataEndpoints.clockOut,
         data: {
           clockOut: clockOut.toString(),

@@ -87,43 +87,47 @@ const IndividualReport = () => {
       <Head>
         <title>{`${currentUser.fullName}'s Report` || "Reports"}</title>
       </Head>
-      {sortedReports ? (
-        <Fade triggerOnce>
-          <ReportContainer>
-            <div className="table-title">
-              <div className="table-elem-flex">
-                <img
-                  src="/img/tom.png"
-                  className="staff-image"
-                  alt="staff picture"
-                />
-                <div className="staff-name">
-                  <p className="fullname">{currentUser.fullName}</p>
-                  <p className="position">{currentUser.role}</p>
-                </div>
+      <Fade triggerOnce>
+        <ReportContainer>
+          <div className="table-title">
+            <div className="table-elem-flex">
+              <img
+                src="/img/tom.png"
+                className="staff-image"
+                alt="staff picture"
+              />
+              <div className="staff-name">
+                <p className="fullname">{currentUser.fullName}</p>
+                <p className="position">{currentUser.role}</p>
               </div>
-              <Button
-                height="44px"
-                width="150px"
-                fill="var(--secondary)"
-                text_color="#fff"
-                onClick={() => setOpen(!open)}
-              >
-                <p>
-                  {" "}
-                  <Icon name="plus" /> New Report
-                </p>
-              </Button>
             </div>
-            <ReportsEntry title="Report" open={open} />
-            <PersonalizedReport reports={sortedReports} />
-          </ReportContainer>
-        </Fade>
-      ) : (
-        <div className="table-loader">
-          <PuffLoader color="var(--secondary)" loading={loading} />
-        </div>
-      )}
+            <Button
+              height="44px"
+              width="150px"
+              fill="var(--secondary)"
+              text_color="#fff"
+              onClick={() => setOpen(!open)}
+            >
+              <p>
+                {" "}
+                <Icon name="plus" /> New Report
+              </p>
+            </Button>
+          </div>
+          <ReportsEntry title="Report" open={open} />
+          <PersonalizedReport
+            reports={
+              sortedReports ? (
+                sortedReports
+              ) : (
+                <div className="table-loader">
+                  <PuffLoader color="var(--secondary)" loading={loading} />
+                </div>
+              )
+            }
+          />
+        </ReportContainer>
+      </Fade>
     </React.Fragment>
   );
 };

@@ -1,55 +1,35 @@
 import React from "react";
-import styled from "styled-components";
 import { ReportTable } from "../components/Table";
-import { employee_reports } from "../../../utils/table-data";
+import { employee_reports, user } from "../../../utils/table-data";
 import DashHeader from "../../../containers/Dashboard/components/DashHeader";
+import { ReportContainer } from "./style/report.styled";
+import axios from "axios";
+import {
+  dashboardDataEndpoints,
+  userEndpoints,
+} from "../../../routes/endpoints";
 
-export const ReportContainer = styled.div`
-  height: 530px;
-  padding-left: 0px;
-  padding-right: -10px;
-  margin-top: 9px;
-  border-radius: 10px;
-  border: 1px solid var(--position-staff);
-  overflow: auto;
+export const getStaticProps = async () => {
+  const allUsers = await axios({
+    method: "GET",
+    url: dashboardDataEndpoints.userReport,
+    headers: {
+      "Content-Type": "application/json",
+      "x-auth-token": localStorage.getItem("token"),
+    },
+  });
 
-  .table-title {
-    margin-top: 27px;
+  const usersData = await allUsers.json();
+  console.log(usersData);
 
-    p {
-      padding-left: 15px;
-      font-weight: 600;
-      font-size: 21px;
-    }
-  }
+  return {
+    props: {
+      users: usersData,
+    },
+  };
+};
 
-  ::-webkit-scrollbar {
-    width: 7px;
-    border-radius: 8px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    height: 4px;
-    background: var(--primary);
-    border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    border: 1px solid var(--primary);
-    border-radius: 10px;
-  }
-
-  @media only screen and (min-width: 0px) and (max-width: 992px) {
-    height: 100% !important;
-    margin-top: 48px;
-
-    ::-webkit-scrollbar {
-      display: none !important;
-    }
-  }
-`;
-
-const Reports = () => {
+const Reports = ({ users }) => {
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Daily Employee Reports" />

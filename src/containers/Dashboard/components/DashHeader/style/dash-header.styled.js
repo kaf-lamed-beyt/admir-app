@@ -107,7 +107,14 @@ export const DashHeadWrapper = styled.div`
     z-index: 1;
     left: 0;
     height: 60px;
-    background: var(--primary);
+
+    .profile-info {
+      .user-details {
+        .img-wrapper {
+          border: 2px solid var(--primary);
+        }
+      }
+    }
 
     .dashboard-title {
       width: 100%;
@@ -117,7 +124,7 @@ export const DashHeadWrapper = styled.div`
       white-space: nowrap;
 
       h1 {
-        color: #fff;
+        color: #000;
       }
     }
 

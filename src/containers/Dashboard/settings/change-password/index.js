@@ -6,7 +6,10 @@ import { Fade } from "react-awesome-reveal";
 import axios from "axios";
 import { authEndpoints } from "../../../../routes/endpoints";
 import { AiOutlineEye } from "react-icons/ai";
-import { AuthErrMsg } from "../../../../components/Modals";
+import {
+  DashboardErrorModal,
+  DashboardSuccessModal,
+} from "../../../../components/Modals";
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = React.useState("");
@@ -21,25 +24,30 @@ const ChangePassword = () => {
   };
 
   const validateChangePassword = () => {
-    const oldPassword = document.querySelector("#old-password");
-    const newPassword = document.querySelector("#new-password");
+    const oldPwdFocus = document.querySelector("#old-password");
+    const newPwdFocus = document.querySelector("#new-password");
+    const oldPassword = document.querySelector("#old-password").value;
+    const newPassword = document.querySelector("#new-password").value;
     let oldPwdErr = document.querySelector(".old-pwd-err");
     let newPwdErr = document.querySelector(".new-pwd-err");
     let errMsg = document.querySelector("#err");
 
-    if (!oldPassword.value && !newPassword.value) {
+    if (!oldPassword && !newPassword) {
       errMsg.innerHTML = "Old and New password cannot be empty";
-      oldPassword.focus();
-    } else if (!oldPassword.value) {
+      oldPwdFocus.focus();
+    } else if (oldPassword === newPassword) {
+      errMsg.innerHTML = "New password cannot be the same as old password";
+      newPwdFocus.focus();
+    } else if (!oldPassword) {
       oldPwdErr.innerHTML = "Old pasword cannot be empty";
-      oldPassword.focus();
-    } else if (!newPassword.value) {
+      oldPwdFocus.focus();
+    } else if (!newPassword) {
       newPwdErr.innerHTML = "New password cannot be empty";
-      newPassword.focus();
-    } else if (newPasssword.value.length === 4) {
+      newPwdFocus.focus();
+    } else if (newPassword.length === 4) {
       newPassword.innerHTML =
         "New password should be greater than four characters";
-      newPassword.focus();
+      newPwdFocus.focus();
     }
   };
 
@@ -59,13 +67,14 @@ const ChangePassword = () => {
         },
         headers: {
           "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
         },
       });
       console.log(response);
       setPasswordChangeSuccess(response.data.msg);
       setPasswordChangeError("");
     } catch (error) {
-      const { data } = errror.resposne;
+      const { data } = error.response;
       console.log(data);
       setPasswordChangeError(data.msg);
       setPasswordChangeSuccess(null);
@@ -75,6 +84,16 @@ const ChangePassword = () => {
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Change Password" user="Tom Cruise" />
+      {passwordChangeSuccess ? (
+        <DashboardSuccessModal message={passwordChangeSucess} />
+      ) : (
+        ""
+      )}
+      {passwordChangeError ? (
+        <DashboardErrorModal message={passwordChangeError} />
+      ) : (
+        ""
+      )}
       <Fade>
         <SettingsWrapper>
           <p id="err"></p>

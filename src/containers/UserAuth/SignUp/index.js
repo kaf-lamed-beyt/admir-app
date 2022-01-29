@@ -37,29 +37,41 @@ const SignUp = () => {
     setPasswordVisibility(passwordVisibility ? false : true);
   };
 
-  // const validateSignUp = () => {
+  const validateSignUp = () => {
+    // // DOM elements
+    // const fullname = document.querySelector("#fullname");
+    // const email = document.querySelector("#email");
+    // const password = document.querySelector("#password");
 
-  //   const email = document.querySelector("#email");
-  //   const password = document.querySelector("#password");
-  //   let pwdErr = document.querySelector(".pwd-err");
-  //   let email_err = document.querySelector(".email-err");
-  //   let err_msg = document.querySelector("#err");
+    // input values
+    const nameValue = document.querySelector("#fullname").value;
+    const emailValue = document.querySelector("#email").value;
+    const passwordValue = document.querySelector("#password").value;
 
-  //   if (!email.value) {
-  //     err_msg.innerHTML = "Your fullname, email and password cannot be empty.";
-  //   } else if (!fullName.value) {
-  //     nameErr.innerHTML = "Fullname cannot be empty.";
-  //   } else if (!email.value) {
-  //     email_err.innerHTML = "Email address cannot be empty";
-  //   } else if (password.value.length === 4) {
-  //     pwdErr.innerHTML = "Password should be greater than four characters";
-  //   } else if (!password.value) {
-  //     pwdErr.innerHTML = "Password cannot be empty";
-  //   }
-  // };
+    let pwdErr = document.querySelector(".pwd-err");
+    let email_err = document.querySelector(".email-err");
+    let err_msg = document.querySelector("#err");
+
+    if (!nameValue && !emailValue && !passwordValue) {
+      err_msg.innerHTML = "Your fullname, email and password cannot be empty.";
+      nameValue.focus();
+    } else if (!nameValue) {
+      nameErr.innerHTML = "Fullname cannot be empty.";
+      nameValue.focus();
+    } else if (!emailValue) {
+      email_err.innerHTML = "Email address cannot be empty";
+      emailValue.focus();
+    } else if (passwordValue.length === 4) {
+      pwdErr.innerHTML = "Password should be greater than four characters";
+      passwordValue.focus();
+    } else if (!passwordValue) {
+      pwdErr.innerHTML = "Password cannot be empty";
+      passwordValue.focus();
+    }
+  };
 
   const nextForm = () => {
-    // validateSignUp()
+    // validateSignUp();
     setFormStep((cur) => cur + 1);
   };
 

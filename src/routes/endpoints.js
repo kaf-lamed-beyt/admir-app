@@ -14,6 +14,7 @@ export const authEndpoints = {
 };
 
 export const userEndpoints = {
+  avatar: `${baseURL}/user/profile-image/`,
   createUser: `${baseURL}/user`,
   getCurrentUser: `${baseURL}/user/me`,
   getStaffByAdmin: `${baseURL}/user/:id`,
@@ -36,5 +37,5 @@ export const dashboardDataEndpoints = {
   uniqueRecord: `${baseURL}/record/:recordId`,
   records: `${baseURL}/record`,
   clockIn: `${baseURL}/record/clock-in`,
-  clockOut: `${baseURL}/record/clock-out/`,
+  clockOut: `${baseURL}/record/clock-out/:recordId`,
 };

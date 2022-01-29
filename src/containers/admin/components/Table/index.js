@@ -54,8 +54,8 @@ export const ReportTable = ({ reports }) => {
       <thead>
         <tr>
           <th>Staff details</th>
-          <th>Activities and Location</th>
-          <th className="status-head">Status</th>
+          <th>Activities</th>
+          <th className="status-head">Location</th>
         </tr>
       </thead>
       <tbody>
@@ -79,10 +79,9 @@ export const ReportTable = ({ reports }) => {
                 <td>
                   <div className="task">
                     <p className="activities">{staff.task.activity}</p>
-                    <p className="location">{staff.task.location}</p>
                   </div>
                 </td>
-                <td className="status">{staff.status}</td>
+                <td className="status">{staff.task.location}</td>
               </tr>
             </Link>
           );
@@ -103,8 +102,8 @@ export const PersonalizedReport = ({ reports }) => {
       <thead>
         <tr>
           <th>Day/Date</th>
-          <th>Activities and Location</th>
-          <th className="status-head">Status</th>
+          <th>Activities</th>
+          <th className="status-head">Location</th>
         </tr>
       </thead>
       <tbody>
@@ -120,10 +119,9 @@ export const PersonalizedReport = ({ reports }) => {
               <td>
                 <div className="task">
                   <p className="activities">{staff.task.activity}</p>
-                  <p className="location">{staff.task.location}</p>
                 </div>
               </td>
-              <td className="status">{staff.status}</td>
+              <p className="location">{staff.task.location}</p>
             </tr>
           );
         })}

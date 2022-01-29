@@ -71,6 +71,7 @@ const WorkersTable = () => {
                     <td className="fullname">{staff.fullName}</td>
                     <td className="email">{staff.email}</td>
                     <td className="phone">{staff.phoneNumber}</td>
+                    <td className="role">{staff.role}</td>
                     <td className="created-at">
                       {dayjs(staff.createdAt).format("MMMM D, YYYY")}
                     </td>
@@ -82,9 +83,7 @@ const WorkersTable = () => {
                             ? "var(--success)"
                             : "var(--secondary)"
                         }
-                        onClick={
-                          staff.isGranted === true ? null : grantWorkerAccess
-                        }
+                        onClick={grantWorkerAccess}
                       >
                         {staff.isGranted === true ? "Activated" : "Activate"}
                       </Button>
@@ -126,6 +125,10 @@ export const WorkersContainer = styled.div`
       padding: 18px 0 0 15px;
       text-transform: capitalize;
     }
+  }
+
+  @media only screen and (min-width: 0px) and (max-width: 992px) {
+    margin-top: 60px;
   }
 `;
 
