@@ -54,34 +54,30 @@ export const ReportTable = ({ reports }) => {
       <thead>
         <tr>
           <th>Staff details</th>
-          <th>Activities</th>
-          <th className="status-head">Location</th>
+          <th>Number of Reports</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
         {reports.map((staff) => {
           return (
-            <Link href={`reports/${staff.key}`} key={staff.key}>
+            <Link href={`reports/${staff._id}`} key={staff._id}>
               <tr>
                 <td>
                   <div className="table-elem-flex">
                     <img
-                      src={staff.profile_img}
+                      src={staff.img || "/img/tom.png"}
                       className="staff-image"
                       alt="staff picture"
                     />
                     <div className="staff-name">
-                      <p className="fullname">{staff.name}</p>
-                      <p className="position">{staff.position}</p>
+                      <p className="fullname">{staff.fullName}</p>
+                      <p className="position">{staff.role}</p>
                     </div>
                   </div>
                 </td>
-                <td>
-                  <div className="task">
-                    <p className="activities">{staff.task.activity}</p>
-                  </div>
-                </td>
-                <td className="status">{staff.task.location}</td>
+                <td className="number-of-reports">{staff.numberOfReports}</td>
+                <td className="status">{staff.status}</td>
               </tr>
             </Link>
           );

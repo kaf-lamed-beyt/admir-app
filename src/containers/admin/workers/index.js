@@ -26,7 +26,6 @@ const WorkersTable = () => {
       });
       const { data } = response.data;
       setData(data);
-      console.log(data);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -39,7 +38,7 @@ const WorkersTable = () => {
 
       const response = await {
         method: "PATCH",
-        url: userEndpoints.grantUserAccess,
+        url: `${userEndpoints.grantUserAccess}`,
       };
     } catch (error) {
       setLoading(false);

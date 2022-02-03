@@ -37,38 +37,23 @@ export const TableWrapper = styled.table`
         cursor: pointer;
         transition: all ease 0.3s;
 
-        .position,
-        .location {
+        .position {
           color: #000;
         }
       }
-    }
-  }
 
-  .task {
-    .activities,
-    .status {
-      font-weight: 600;
-      font-size: 14px;
+      // td {
+      //   text-align: center;
+      // }
     }
-
-    .location {
-      font-weight: 400;
-      font-size: 12px;
-      text-transform: capitalize;
-      color: var(--position-staff);
-      margin-top: -13px;
-    }
-  }
-
-  .status-head {
-    text-align: center;
   }
 
   .status {
-    text-align: center;
-    font-weight: 600;
     text-transform: capitalize;
+  }
+
+  .number-of-reports {
+    padding: 0 60px;
   }
 
   .day-date {

@@ -18,7 +18,7 @@ export const userEndpoints = {
   createUser: `${baseURL}/user`,
   getCurrentUser: `${baseURL}/user/me`,
   getStaffByAdmin: `${baseURL}/user/:id`,
-  grantUserAccess: `${baseURL}/user/grant-access/:userId`,
+  grantUserAccess: `${baseURL}/user/grant-access/`,
 };
 
 export const dashboardDataEndpoints = {
@@ -27,7 +27,7 @@ export const dashboardDataEndpoints = {
   uniqueWork: `${baseURL}/work-post/:workPostId`,
   reports: `${baseURL}/report`,
   userReport: `${baseURL}/report/user`,
-  uniqueStaffReport: `${baseURL}/report/user/:staffId`,
+  uniqueStaffReport: `${baseURL}/report/user/`,
   uniqueWorkPost: `${baseURL}/report/work-post/:workPostId`,
   uniqueReport: `${baseURL}/report/:reportId`,
   uploadReport: `report/upload/:reportId`,
