@@ -1,12 +1,11 @@
 import React from "react";
-import Overview from "../../src/containers/admin/overview";
+import Location from "../../src/containers/admin/location";
 import Head from "next/head";
 import DashLayout from "../../src/containers/admin/DashLayout";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { userEndpoints } from "../../src/routes/endpoints";
 import { PulseLoader } from "react-spinners";
-import { AuthContext } from "../../src/context/auth-context";
 
 export default function AdminPage() {
   const [data, setData] = React.useState();
@@ -53,7 +52,7 @@ export default function AdminPage() {
       </Head>
       {data ? (
         <DashLayout>
-          <Overview />
+          <Location />
         </DashLayout>
       ) : (
         <div className="loader">

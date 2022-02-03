@@ -34,9 +34,9 @@ export const sideNavItems = [
 ];
 
 export const adminNavItems = [
-  { name: "overview", path: "/admin", icon: "overview" },
-  { name: "Time Tracker", path: "/admin/time-tracker", icon: "time" },
-  { name: "Location", path: "/admin/location", icon: "location" },
+  { name: "location", path: "/admin", icon: "location" },
+  // { name: "Time Tracker", path: "/admin/time-tracker", icon: "time" },
+  // { name: "Location", path: "/admin/location", icon: "location" },
   { name: "reports", path: "/admin/reports", icon: "report" },
   { name: "workers", path: "/admin/workers", icon: "report" },
   {

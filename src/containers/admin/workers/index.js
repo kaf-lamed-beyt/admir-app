@@ -61,6 +61,7 @@ const WorkersTable = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+                <th>Role</th>
                 <th>Created At</th>
               </tr>
             </thead>
