@@ -7,6 +7,7 @@ import axios from "axios";
 import { userEndpoints } from "../../../routes/endpoints";
 import dayjs from "dayjs";
 import { PuffLoader } from "react-spinners";
+import Link from "next/link";
 
 const WorkersTable = () => {
   const [data, setData] = React.useState([]);
@@ -26,20 +27,7 @@ const WorkersTable = () => {
       });
       const { data } = response.data;
       setData(data);
-    } catch (error) {
       setLoading(false);
-      console.log(error);
-    }
-  };
-
-  const grantWorkerAccess = async () => {
-    try {
-      setLoading(true);
-
-      const response = await {
-        method: "PATCH",
-        url: `${userEndpoints.grantUserAccess}`,
-      };
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -53,7 +41,11 @@ const WorkersTable = () => {
   return (
     <React.Fragment>
       <TableWrapper>
-        {data ? (
+        {loading ? (
+          <div className="table-loader">
+            <PuffLoader color="var(--primary)" loading={loading} />
+          </div>
+        ) : (
           <>
             <thead>
               <tr>
@@ -67,36 +59,21 @@ const WorkersTable = () => {
             <tbody>
               {data.map((staff) => {
                 return (
-                  <tr key={staff.key}>
-                    <td className="fullname">{staff.fullName}</td>
-                    <td className="email">{staff.email}</td>
-                    <td className="phone">{staff.phoneNumber}</td>
-                    <td className="role">{staff.role}</td>
-                    <td className="created-at">
-                      {dayjs(staff.createdAt).format("MMMM D, YYYY")}
-                    </td>
-                    <td className="status">
-                      <Button
-                        name="actvate user"
-                        fill={
-                          staff.isGranted === true
-                            ? "var(--success)"
-                            : "var(--secondary)"
-                        }
-                        onClick={grantWorkerAccess}
-                      >
-                        {staff.isGranted === true ? "Activated" : "Activate"}
-                      </Button>
-                    </td>
-                  </tr>
+                  <Link href={`workers/${staff._id}`}>
+                    <tr key={staff.key}>
+                      <td className="fullname">{staff.fullName}</td>
+                      <td className="email">{staff.email}</td>
+                      <td className="phone">{staff.phoneNumber}</td>
+                      <td className="role">{staff.role}</td>
+                      <td className="created-at">
+                        {dayjs(staff.createdAt).format("MMMM D, YYYY")}
+                      </td>
+                    </tr>
+                  </Link>
                 );
               })}
             </tbody>
           </>
-        ) : (
-          <div className="table-loader">
-            <PuffLoader color="var(--primary)" loading={loading} />
-          </div>
         )}
       </TableWrapper>
     </React.Fragment>
@@ -115,6 +92,14 @@ export const WorkersContainer = styled.div`
   table {
     .fullname {
       padding-left: 12px;
+    }
+
+    tbody {
+      tr {
+        td {
+          height: 60px;
+        }
+      }
     }
   }
 

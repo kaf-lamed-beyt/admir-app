@@ -17,7 +17,7 @@ export const userEndpoints = {
   avatar: `${baseURL}/user/profile-image/`,
   createUser: `${baseURL}/user`,
   getCurrentUser: `${baseURL}/user/me`,
-  getStaffByAdmin: `${baseURL}/user/:id`,
+  getStaffByAdmin: `${baseURL}/user/`,
   grantUserAccess: `${baseURL}/user/grant-access/`,
 };
 

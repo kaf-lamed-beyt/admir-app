@@ -57,6 +57,13 @@ export const threeDaysAgo = new Date(yesterday);
 
 threeDaysAgo.setDate(threeDaysAgo.getDate() - 1);
 
+// get token from LS
+export const getToken = (key) => {
+  if (typeof window !== "undefined") {
+    window.localStorage.getItem(key);
+  }
+};
+
 // dashboard stats card
 export const overview_stats = [
   {

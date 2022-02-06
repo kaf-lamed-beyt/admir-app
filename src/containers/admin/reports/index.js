@@ -1,6 +1,6 @@
 import React from "react";
 import { ReportTable } from "../components/Table";
-import { employee_reports } from "../../../utils/table-data";
+import { employee_reports, user } from "../../../utils/table-data";
 import DashHeader from "../../../containers/Dashboard/components/DashHeader";
 import { ReportContainer } from "./style/report.styled";
 import axios from "axios";
@@ -8,6 +8,7 @@ import {
   dashboardDataEndpoints,
   userEndpoints,
 } from "../../../routes/endpoints";
+import { PuffLoader } from "react-spinners";
 
 export const getStaticProps = async () => {
   const usersData = await allUsers.json();
@@ -26,6 +27,8 @@ const Reports = () => {
 
   const getAllWorkers = async () => {
     try {
+      setLoading(true);
+
       const response = await axios({
         method: "GET",
         url: userEndpoints.createUser,
@@ -36,6 +39,7 @@ const Reports = () => {
       });
       const { data } = response.data;
       setData(data);
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -44,17 +48,6 @@ const Reports = () => {
 
   React.useEffect(async () => {
     getAllWorkers();
-
-    const response = await axios({
-      method: "GET",
-      url: `${dashboardDataEndpoints.uniqueStaffReport}61dc97b190545d02895c7721`,
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
-      },
-    });
-
-    console.log(response);
   }, []);
 
   return (
@@ -64,7 +57,13 @@ const Reports = () => {
         <div className="table-title">
           <p>All staffs</p>
         </div>
-        <ReportTable reports={data} />
+        {loading ? (
+          <div className="table-loader">
+            <PuffLoader color="var(--primary)" />
+          </div>
+        ) : (
+          <ReportTable reports={data} />
+        )}
       </ReportContainer>
     </React.Fragment>
   );

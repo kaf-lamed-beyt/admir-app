@@ -378,12 +378,20 @@ textarea {
   transform: translateY(900%);
 }
 
+.table-loader-unique {
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  transform: translateY(400%);
+}
+
 .table-loader {
   height: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  transform: translateY(20%);
+  transform: translateY(30%);
 }
 
 // entry cards global styles
@@ -394,4 +402,13 @@ textarea {
   button {
     font-weight: 500;
   }
+}
+
+// no report data
+.no-data {
+  text-align: center;
+  margin-top: 70px;
+  font-size: 22px;
+  font-weight: bold;
+  color: red;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 import { TableWrapper } from "./style/table.styled";
 import Link from "next/link";
-import Button from "../../../../components/Buttons";
+import dayjs from "dayjs";
 
 const Table = ({ employees }) => {
   return (
@@ -103,21 +103,25 @@ export const PersonalizedReport = ({ reports }) => {
         </tr>
       </thead>
       <tbody>
-        {reports.map((staff) => {
+        {reports.map((report) => {
           return (
-            <tr key={staff.key}>
+            <tr key={report._id}>
               <td>
                 <div className="day-date">
-                  <p className="weekday">{staff.day}</p>
-                  <p className="date">{staff.date}</p>
+                  <p className="weekday">
+                    {dayjs(report.createdAt).format("dddd")}
+                  </p>
+                  <p className="date">
+                    {dayjs(report.createdAt).format("DD/MM/YY")}
+                  </p>
                 </div>
               </td>
               <td>
                 <div className="task">
-                  <p className="activities">{staff.task.activity}</p>
+                  <p className="activities">{report.description}</p>
                 </div>
               </td>
-              <p className="location">{staff.task.location}</p>
+              <p className="location">{report.address}</p>
             </tr>
           );
         })}
