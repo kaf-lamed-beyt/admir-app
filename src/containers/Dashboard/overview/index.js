@@ -51,7 +51,7 @@ const Overview = () => {
       });
       const { data } = response.data;
       setReports(data);
-      console.log(data.length);
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -91,19 +91,31 @@ const Overview = () => {
       <Tables>
         <div className="time-tracker">
           <p className="table-title">Tracker</p>
-          <TimeTrackerTable
-            firstHeader="Date/Days"
-            secondHeader="Clock-in Time"
-            thirdHeader="Clock-out Time"
-            reports={timeRecords}
-          />
+          {loading ? (
+            <div className="table-loader-unique">
+              <PuffLoader color="var(--primary)" />
+            </div>
+          ) : timeRecords.length === 0 ? (
+            <p className="no-data">You time records will here</p>
+          ) : (
+            <TimeTrackerTable
+              firstHeader="Date/Days"
+              secondHeader="Clock-in Time"
+              thirdHeader="Clock-out Time"
+              reports={timeRecords}
+            />
+          )}
         </div>
         <div className="reports">
           <p className="table-title">Reports</p>
-          {!reports ? (
-            <div className="table-loader">
+          {loading ? (
+            <div className="table-loader-unique">
               <PuffLoader color="var(--primary)" />
             </div>
+          ) : reports.length === 0 ? (
+            <p className="no-data">
+              When you submit reports, they'll appear here.
+            </p>
           ) : (
             <PersonalizedReport reports={reports} />
           )}
