@@ -132,46 +132,56 @@ const TimeTracker = () => {
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Time Tracker" profile_img="/img/tom.png" />
-      <TrackerContainer onClick={(open) => setOpen(!open)}>
-        <div className="table-title">
-          <p>All entries</p>
-          <div className="entry-controllers">
-            <Button
-              height="44px"
-              width="150px"
-              fill="var(--secondary)"
-              text_color="#fff"
-              onClick={() => setClockIn(!clockIn)}
-            >
-              <p>
-                {" "}
-                <Icon name="plus" /> Clock In
-              </p>
-            </Button>
-            <Button
-              height="44px"
-              width="150px"
-              fill="var(--secondary)"
-              text_color="#fff"
-              className="clock-out"
-              onClick={() => setClockOut(!clockOut)}
-            >
-              <p>
-                {" "}
-                <Icon name="plus" /> Clock Out
-              </p>
-            </Button>
-          </div>
+      {loading ? (
+        <div className="table-loader-unique">
+          <PuffLoader color="var(--primary)" />
         </div>
-        <ClockInEntryCard title="Clock In" open={clockIn} />
-        <ClockOutEntryCard title="Clock Out" open={clockOut} />
-        <TimeTrackerTable
-          firstHeader="Date/Days"
-          secondHeader="Clock-in Time"
-          thirdHeader="Clock-out Time"
-          reports={data ? data : "No time records, yet."}
-        />
-      </TrackerContainer>
+      ) : (
+        <TrackerContainer onClick={(open) => setOpen(!open)}>
+          <div className="table-title">
+            <p>All entries</p>
+            <div className="entry-controllers">
+              <Button
+                height="44px"
+                width="150px"
+                fill="var(--secondary)"
+                text_color="#fff"
+                onClick={() => setClockIn(!clockIn)}
+              >
+                <p>
+                  {" "}
+                  <Icon name="plus" /> Clock In
+                </p>
+              </Button>
+              <Button
+                height="44px"
+                width="150px"
+                fill="var(--secondary)"
+                text_color="#fff"
+                className="clock-out"
+                onClick={() => setClockOut(!clockOut)}
+              >
+                <p>
+                  {" "}
+                  <Icon name="plus" /> Clock Out
+                </p>
+              </Button>
+            </div>
+          </div>
+          <ClockInEntryCard title="Clock In" open={clockIn} />
+          <ClockOutEntryCard title="Clock Out" open={clockOut} />
+          {data.length === 0 ? (
+            <p className="no-data">No time records yet</p>
+          ) : (
+            <TimeTrackerTable
+              firstHeader="Date/Days"
+              secondHeader="Clock-in Time"
+              thirdHeader="Clock-out Time"
+              reports={data}
+            />
+          )}
+        </TrackerContainer>
+      )}
     </React.Fragment>
   );
 };

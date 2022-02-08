@@ -6,6 +6,16 @@ import { userEndpoints } from "../../../routes/endpoints";
 import { useRouter } from "next/router";
 import { PuffLoader } from "react-spinners";
 import { WorkerProfile } from "./style/worker.styled";
+import Button from "../../../components/Buttons";
+import { BiPhoneCall } from "react-icons/bi";
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import { SiStatuspal } from "react-icons/si";
+import { FaTasks } from "react-icons/fa";
+import {
+  DashboardSuccessModal,
+  DashboardErrorModal,
+} from "../../../components/Modals";
+import { bool } from "yup";
 
 const Worker = () => {
   const [user, setUser] = React.useState({
@@ -14,10 +24,16 @@ const Worker = () => {
     role: "",
     phoneNumber: "",
     numberOfReports: "",
+    status: "",
+    isGranted: bool,
   });
   const [loading, setLoading] = React.useState(false);
+  const [workerAccessError, setWorkerAccessError] = React.useState();
+  const [workerAccessSuccess, setWorkerAccessSuccess] = React.useState();
   const { query } = useRouter();
 
+  // obtaining the user's unique ID with Next.js'
+  // router utility method/function
   const currentUserId = query.id;
 
   const getUniqueUser = async () => {
@@ -34,6 +50,8 @@ const Worker = () => {
       });
       const { data } = response.data;
       setUser(data);
+      setLoading(false);
+      console.log(data);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -46,11 +64,17 @@ const Worker = () => {
 
       const response = await {
         method: "PATCH",
-        url: `${userEndpoints.grantUserAccess}`,
+        url: `${userEndpoints.grantUserAccess}${currentUserId}`,
       };
+      const { data } = response.data;
+      setLoading(false);
+      setWorkerAccessSuccess(data.msg);
+      setWorkerAccessError("");
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      // const { data } = error.response.msg;
+      // setWorkerAccessError(error.response.msg);
+      // setWorkerAccessSuccess(null);
     }
   };
 
@@ -67,6 +91,16 @@ const Worker = () => {
         </title>
       </Head>
       <DashHeader dashboardTitle={`Employee Profile`} />
+      {workerAccessError ? (
+        <DashboardErrorModal message={workerAccessError} />
+      ) : (
+        ""
+      )}
+      {workerAccessSuccess ? (
+        <DashboardErrorModal message={workerAccessSuccess} />
+      ) : (
+        ""
+      )}
       {loading ? (
         <div className="table-loader-unique">
           <PuffLoader color="var(--primary)" />
@@ -83,6 +117,37 @@ const Worker = () => {
             <div className="user-details">
               <p className="fullname">{user.fullName}</p>
               <p className="role">{user.role}</p>
+            </div>
+          </div>
+          <div className="user-details-cards__actions">
+            <div className="user-cards">
+              <div className="card reports">
+                <FaTasks />
+                <p className="report">{user.numberOfReports}</p>
+              </div>
+              <div className="card phone-number">
+                <BiPhoneCall />
+                <p className="phone">{user.phoneNumber}</p>
+              </div>
+              <div className="card email">
+                <MdOutlineAlternateEmail />
+                <p className="at-sign">{user.email}</p>
+              </div>
+              <div className="card status">
+                <SiStatuspal />
+                <p className="mast">{user.status}</p>
+              </div>
+            </div>
+            <div className="user-actions__controllers">
+              <Button className="terminate">
+                {user.status === "terminated" ? "Terminated" : "Terminate"}
+              </Button>
+              <Button
+                className="activate"
+                onClick={user.isGranted ? null : () => grantWorkerAccess()}
+              >
+                {user.isGranted === true ? "Activated" : "Activate"}
+              </Button>
             </div>
           </div>
         </WorkerProfile>
