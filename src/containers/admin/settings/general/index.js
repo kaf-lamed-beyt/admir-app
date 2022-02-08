@@ -1,5 +1,5 @@
 import React from "react";
-import DashHeader from "../../components/DashHeader";
+import DashHeader from "../../../Dashboard/components/DashHeader";
 import { SettingsWrapper, GeneralSettingsForm } from "../style/settings.styled";
 import Button from "../../../../components/Buttons";
 import { Fade } from "react-awesome-reveal";
