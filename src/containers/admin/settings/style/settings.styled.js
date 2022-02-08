@@ -7,6 +7,12 @@ export const SettingsWrapper = styled.div`
   margin-top: 45px;
   padding: 0 230px 0 100px;
 
+  .settings-success,
+  .settings-error {
+    margin-top: 50px !important;
+    border: 1px solid red;
+  }
+
   .profile-wrapper {
     height: 70px;
     width: 70px;

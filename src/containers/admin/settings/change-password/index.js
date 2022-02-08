@@ -70,12 +70,12 @@ const ChangePassword = () => {
           "x-auth-token": localStorage.getItem("token"),
         },
       });
-      console.log(response);
+      setLoading(false);
       setPasswordChangeSuccess(response.data.msg);
       setPasswordChangeError("");
     } catch (error) {
+      setLoading(false);
       const { data } = error.response;
-      console.log(data);
       setPasswordChangeError(data.msg);
       setPasswordChangeSuccess(null);
     }

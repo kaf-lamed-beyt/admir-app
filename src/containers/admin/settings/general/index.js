@@ -7,7 +7,10 @@ import { CountryPhoneInput } from "../../../../components/Inputs";
 import "react-phone-number-input/style.css";
 import axios from "axios";
 import { userEndpoints } from "../../../../routes/endpoints";
-import { AuthErrMsg, AuthSuccessMsg } from "../../../../components/Modals";
+import {
+  DashboardSuccessModal,
+  DashboardErrorModal,
+} from "../../../../components/Modals";
 
 const GeneralSettings = () => {
   const [fullname, setFullname] = React.useState("");
@@ -55,14 +58,12 @@ const GeneralSettings = () => {
           "x-auth-token": localStorage.getItem("token"),
         },
       });
-
-      const { data } = response.data;
-      console.log(data);
-      setSaveSuccess(data.msg);
+      setLoading(false);
+      setSaveSuccess(response.data.msg);
       setSaveError("");
     } catch (error) {
       setLoading(false);
-      setSaveError(error.response.data.msg);
+      setSaveError(null);
       setSaveSuccess(null);
     }
   };
@@ -72,8 +73,22 @@ const GeneralSettings = () => {
       <DashHeader dashboardTitle="General Settings" user="Tom Cruise" />
       <Fade>
         <SettingsWrapper>
-          {saveSuccess ? <AuthSuccessMsg message={saveSuccess} /> : ""}
-          {saveError ? <AuthErrMsg message={saveError} /> : ""}
+          {saveSuccess ? (
+            <DashboardSuccessModal
+              message={saveSuccess}
+              className="settings-success"
+            />
+          ) : (
+            ""
+          )}
+          {saveError ? (
+            <DashboardErrorModal
+              message={saveError}
+              className="settings-error"
+            />
+          ) : (
+            ""
+          )}
           <div className="profile-wrapper">
             <img src="/img/user.png" alt="user profile image" />
           </div>

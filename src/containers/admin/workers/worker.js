@@ -94,22 +94,22 @@ const Worker = () => {
         </title>
       </Head>
       <DashHeader dashboardTitle={`Employee Profile`} />
-      {workerAccessError ? (
-        <DashboardErrorModal message={workerAccessError} />
-      ) : (
-        ""
-      )}
-      {workerAccessSuccess ? (
-        <DashboardErrorModal message={workerAccessSuccess} />
-      ) : (
-        ""
-      )}
       {loading ? (
         <div className="table-loader-unique">
           <PuffLoader color="var(--primary)" />
         </div>
       ) : (
         <WorkerProfile>
+          {workerAccessError ? (
+            <DashboardErrorModal message={workerAccessError} />
+          ) : (
+            ""
+          )}
+          {workerAccessSuccess ? (
+            <DashboardErrorModal message={workerAccessSuccess} />
+          ) : (
+            ""
+          )}
           <div className="user-info">
             <div className="user-img-container">
               <img
@@ -145,16 +145,18 @@ const Worker = () => {
               <Button className="terminate">
                 {user.status === "terminated" ? "Terminated" : "Terminate"}
               </Button>
-              <Button
-                className="activate"
-                onClick={user.isGranted ? null : () => grantWorkerAccess()}
-              >
-                {user.isGranted === true
-                  ? "Activated"
-                  : loading
-                  ? "Activating..."
-                  : "Activate"}
-              </Button>
+              {user.status === "terminated" ? null : (
+                <Button
+                  className="activate"
+                  onClick={user.isGranted ? null : () => grantWorkerAccess()}
+                >
+                  {user.isGranted === true
+                    ? "Activated"
+                    : loading
+                    ? "Activating..."
+                    : "Activate"}
+                </Button>
+              )}
             </div>
           </div>
         </WorkerProfile>
