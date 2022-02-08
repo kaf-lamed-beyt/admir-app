@@ -62,19 +62,22 @@ const Worker = () => {
     try {
       setLoading(true);
 
-      const response = await {
+      const response = await axios({
         method: "PATCH",
         url: `${userEndpoints.grantUserAccess}${currentUserId}`,
-      };
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
       const { data } = response.data;
       setLoading(false);
       setWorkerAccessSuccess(data.msg);
       setWorkerAccessError("");
     } catch (error) {
       setLoading(false);
-      // const { data } = error.response.msg;
-      // setWorkerAccessError(error.response.msg);
-      // setWorkerAccessSuccess(null);
+      setWorkerAccessError(error.response.msg);
+      setWorkerAccessSuccess(null);
     }
   };
 
@@ -146,7 +149,11 @@ const Worker = () => {
                 className="activate"
                 onClick={user.isGranted ? null : () => grantWorkerAccess()}
               >
-                {user.isGranted === true ? "Activated" : "Activate"}
+                {user.isGranted === true
+                  ? "Activated"
+                  : loading
+                  ? "Activating..."
+                  : "Activate"}
               </Button>
             </div>
           </div>
