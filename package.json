@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.7.0",
     "antd": "^4.17.2",
     "axios": "^0.24.0",
     "cookie": "^0.4.2",
