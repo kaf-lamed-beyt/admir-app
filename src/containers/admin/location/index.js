@@ -33,7 +33,7 @@ const Location = () => {
     <React.Fragment>
       <DashHeader dashboardTitle="Location" />
       {!isLoaded ? (
-        <div className="unique-table-loader">
+        <div className="table-loader-unique">
           <PuffLoader color="var(--primary)" />
         </div>
       ) : (
@@ -46,7 +46,7 @@ const Location = () => {
           >
             <Marker position={center} />
           </GoogleMap>
-          <Marker position={center} label={`This user is currently at ...`} />
+          <Marker position={center} label={"This user is currently at ..."} />
         </LocationWrapper>
       )}
     </React.Fragment>

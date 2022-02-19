@@ -11,6 +11,7 @@ import {
   DashboardSuccessModal,
   DashboardErrorModal,
 } from "../../../../components/Modals";
+import { AiOutlineCamera } from "react-icons";
 
 const GeneralSettings = () => {
   const [fullname, setFullname] = React.useState("");
@@ -19,6 +20,7 @@ const GeneralSettings = () => {
   const [loading, setLoading] = React.useState(false);
   const [saveSuccess, setSaveSuccess] = React.useState();
   const [saveError, setSaveError] = React.useState();
+  const [image, setImage] = React.useState(null);
 
   const getCurrentUserDetails = async () => {
     try {
@@ -68,6 +70,32 @@ const GeneralSettings = () => {
     }
   };
 
+  // records the file input change
+  const handleFile = (e) => {
+    setImage(e.target.files[0]);
+    console.log(e.target.files[0]);
+  };
+
+  // handles the file uplaod from the filesystem
+  const handleFileUpload = () => {
+    try {
+      setLoading(true);
+
+      const response = axios({
+        method: "PATCH",
+        url: userEndpoints.avatar,
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+      setLoading(false);
+      const { data } = response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="General Settings" user="Tom Cruise" />
@@ -90,7 +118,14 @@ const GeneralSettings = () => {
             ""
           )}
           <div className="profile-wrapper">
-            <img src="/img/user.png" alt="user profile image" />
+            {/* i want to hide the input element */}
+            <input
+              type="file"
+              onChange={handleFile}
+              ref={(fileInput) => (fileInput = fileInput)}
+            />
+            <img src={image} alt="user profile image" />
+            <button onClick={() => fileInput.click()}>add your avatar</button>
           </div>
           <GeneralSettingsForm onSubmit={handleSubmit}>
             <div className="flex-fields">
