@@ -70,7 +70,6 @@ const ChangePassword = () => {
           "x-auth-token": localStorage.getItem("token"),
         },
       });
-      console.log(response);
       setPasswordChangeSuccess(response.data.msg);
       setPasswordChangeError("");
     } catch (error) {

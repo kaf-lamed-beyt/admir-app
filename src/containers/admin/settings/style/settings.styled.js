@@ -25,6 +25,19 @@ export const SettingsWrapper = styled.div`
       height: 100%;
       border-radius: 50%;
     }
+
+    .uploader {
+      position: absolute;
+      margin-top: -50px;
+      z-index: 1;
+      margin-left: 8px;
+
+      svg {
+        font-size: 40px;
+        opacity: 0.8;
+        color: #fff;
+      }
+    }
   }
 
   .settings-card {

@@ -11,7 +11,7 @@ import {
   DashboardSuccessModal,
   DashboardErrorModal,
 } from "../../../../components/Modals";
-import { AiOutlineCamera } from "react-icons";
+import { AiOutlineCamera } from "react-icons/ai";
 
 const GeneralSettings = () => {
   const [fullname, setFullname] = React.useState("");
@@ -21,6 +21,7 @@ const GeneralSettings = () => {
   const [saveSuccess, setSaveSuccess] = React.useState();
   const [saveError, setSaveError] = React.useState();
   const [image, setImage] = React.useState(null);
+  const hiddenFileInput = React.useRef(null);
 
   const getCurrentUserDetails = async () => {
     try {
@@ -72,8 +73,15 @@ const GeneralSettings = () => {
 
   // records the file input change
   const handleFile = (e) => {
-    setImage(e.target.files[0]);
-    console.log(e.target.files[0]);
+    setImage(URL.createObjectURL(e.target.files[0]));
+
+    handleFileUpload();
+  };
+
+  // handles the click event of the custom
+  // button fro the file input
+  const handleFileClick = () => {
+    hiddenFileInput.current.click();
   };
 
   // handles the file uplaod from the filesystem
@@ -88,9 +96,11 @@ const GeneralSettings = () => {
           "Content-Type": "application/json",
           "x-auth-token": localStorage.getItem("token"),
         },
+        data: {
+          image,
+        },
       });
       setLoading(false);
-      const { data } = response.data;
     } catch (error) {
       console.log(error);
     }
@@ -121,11 +131,15 @@ const GeneralSettings = () => {
             {/* i want to hide the input element */}
             <input
               type="file"
+              accept="image/*"
               onChange={handleFile}
-              ref={(fileInput) => (fileInput = fileInput)}
+              ref={hiddenFileInput}
+              style={{ display: "none" }}
             />
             <img src={image} alt="user profile image" />
-            <button onClick={() => fileInput.click()}>add your avatar</button>
+            <div onClick={handleFileClick} className="uploader">
+              <AiOutlineCamera />
+            </div>
           </div>
           <GeneralSettingsForm onSubmit={handleSubmit}>
             <div className="flex-fields">
