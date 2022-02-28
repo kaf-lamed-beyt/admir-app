@@ -151,7 +151,7 @@ export const ResetPassword = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <span className="show-pwd" onClick={handlePwdVisibility}>
+            <span classNameName="show-pwd" onClick={handlePwdVisibility}>
               show
             </span>
             <p className="pwd-err"></p>

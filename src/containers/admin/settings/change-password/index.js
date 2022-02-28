@@ -113,7 +113,7 @@ const ChangePassword = () => {
                   className="form-control"
                   onChange={(e) => setOldPassword(e.target.value)}
                 />
-                <span class="show-pwd" onClick={handlePwdVisibility}>
+                <span className="show-pwd" onClick={handlePwdVisibility}>
                   <AiOutlineEye />
                 </span>
                 <p className="old-pwd-err"></p>
@@ -129,7 +129,7 @@ const ChangePassword = () => {
                   className="email form-control"
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
-                <span class="show-pwd" onClick={handlePwdVisibility}>
+                <span className="show-pwd" onClick={handlePwdVisibility}>
                   <AiOutlineEye />
                 </span>
                 <p className="new-pwd-err"></p>

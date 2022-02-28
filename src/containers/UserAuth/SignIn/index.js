@@ -125,7 +125,7 @@ const SignIn = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span class="show-pwd" onClick={handlePwdVisibility}>
+              <span className="show-pwd" onClick={handlePwdVisibility}>
                 <AiOutlineEye />
               </span>
               <p className="pwd-err"></p>

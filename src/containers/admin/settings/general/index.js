@@ -20,7 +20,10 @@ const GeneralSettings = () => {
   const [loading, setLoading] = React.useState(false);
   const [saveSuccess, setSaveSuccess] = React.useState();
   const [saveError, setSaveError] = React.useState();
-  const [image, setImage] = React.useState(null);
+  const [image, setImage] = React.useState({
+    preview: "",
+    raw: "",
+  });
   const hiddenFileInput = React.useRef(null);
 
   const getCurrentUserDetails = async () => {
@@ -42,11 +45,6 @@ const GeneralSettings = () => {
       console.log(error);
     }
   };
-
-  // get user data on load
-  React.useEffect(() => {
-    getCurrentUserDetails();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,7 +71,10 @@ const GeneralSettings = () => {
 
   // records the file input change
   const handleFile = (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    setImage({
+      raw: e.target.files[0],
+      preview: URL.createObjectURL(e.target.files[0]),
+    });
 
     handleFileUpload();
   };
@@ -87,8 +88,6 @@ const GeneralSettings = () => {
   // handles the file uplaod from the filesystem
   const handleFileUpload = () => {
     try {
-      setLoading(true);
-
       const response = axios({
         method: "PATCH",
         url: userEndpoints.avatar,
@@ -100,11 +99,15 @@ const GeneralSettings = () => {
           image,
         },
       });
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+
+  // get user data on load
+  React.useEffect(() => {
+    getCurrentUserDetails();
+  }, []);
 
   return (
     <React.Fragment>
@@ -136,7 +139,10 @@ const GeneralSettings = () => {
               ref={hiddenFileInput}
               style={{ display: "none" }}
             />
-            <img src={image} alt="user profile image" />
+            <img
+              src={image.preview ? image.preview : "/img/tom.png"}
+              alt={`${fullname}'s profile image`}
+            />
             <div onClick={handleFileClick} className="uploader">
               <AiOutlineCamera />
             </div>
