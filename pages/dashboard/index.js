@@ -88,7 +88,10 @@ export default function OverviewPage() {
         };
       });
     } else {
-      alert("navigator is not available");
+      alert(
+        "navigator is not available, please use a device that supports geolocation"
+      );
+      router.push("/");
     }
   }, []);
 
