@@ -2,7 +2,6 @@ import React from "react";
 import DashHeader from "../../../containers/Dashboard/components/DashHeader";
 import styled from "styled-components";
 import { TableWrapper } from "../../Dashboard/components/Table/style/table.styled";
-import Button from "../../../components/Buttons";
 import axios from "axios";
 import { userEndpoints } from "../../../routes/endpoints";
 import dayjs from "dayjs";

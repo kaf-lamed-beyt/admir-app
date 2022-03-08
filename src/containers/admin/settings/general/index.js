@@ -20,10 +20,7 @@ const GeneralSettings = () => {
   const [loading, setLoading] = React.useState(false);
   const [saveSuccess, setSaveSuccess] = React.useState();
   const [saveError, setSaveError] = React.useState();
-  const [image, setImage] = React.useState({
-    preview: "",
-    raw: "",
-  });
+  const [image, setImage] = React.useState();
   const hiddenFileInput = React.useRef(null);
 
   const getCurrentUserDetails = async () => {
@@ -71,10 +68,7 @@ const GeneralSettings = () => {
 
   // records the file input change
   const handleFile = (e) => {
-    setImage({
-      raw: e.target.files[0],
-      preview: URL.createObjectURL(e.target.files[0]),
-    });
+    setImage(e.target.files[0]);
 
     handleFileUpload();
   };
@@ -87,6 +81,9 @@ const GeneralSettings = () => {
 
   // handles the file uplaod from the filesystem
   const handleFileUpload = () => {
+    const data = new FormData();
+    data.append("avatar", image);
+
     try {
       const response = axios({
         method: "PATCH",
@@ -94,11 +91,11 @@ const GeneralSettings = () => {
         headers: {
           "Content-Type": "application/json",
           "x-auth-token": localStorage.getItem("token"),
+          "Access-Control-Allow-Origin": "*",
         },
-        data: {
-          image,
-        },
+        data,
       });
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -140,7 +137,7 @@ const GeneralSettings = () => {
               style={{ display: "none" }}
             />
             <img
-              src={image.preview ? image.preview : "/img/tom.png"}
+              src={image ? URL.createObjectURL(image) : "/img/tom.png"}
               alt={`${fullname}'s profile image`}
             />
             <div onClick={handleFileClick} className="uploader">

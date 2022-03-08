@@ -51,7 +51,6 @@ const Worker = () => {
       const { data } = response.data;
       setUser(data);
       setLoading(false);
-      console.log(data);
     } catch (error) {
       setLoading(false);
       console.log(error);

@@ -20,6 +20,10 @@ export const SettingsWrapper = styled.div`
     border-radius: 50%;
     padding: 3px 3px 3px 3px;
 
+    :hover {
+      cursor: pointer;
+    }
+
     img {
       width: 100%;
       height: 100%;
