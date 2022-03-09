@@ -91,11 +91,9 @@ const GeneralSettings = () => {
         headers: {
           "Content-Type": "application/json",
           "x-auth-token": localStorage.getItem("token"),
-          "Access-Control-Allow-Origin": "*",
         },
         data,
       });
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
