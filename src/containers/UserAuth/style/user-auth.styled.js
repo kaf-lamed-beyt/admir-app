@@ -123,12 +123,21 @@ export const AuthWrapper = styled.div`
     }
   }
 
+  // reset password forms
+  .reset-password {
+    margin-top: -70px;
+  }
+
   @media only screen and (min-width: 0px) and (max-width: 576px) {
     width: 100%;
     padding: 0 20px;
     height: 100%;
     margin-top: 30px;
     transform: translate(0, 20%);
+
+    .reset-password {
+      margin-top: -160px;
+    }
   }
 
   @media only screen and (min-width: 577px) and (max-width: 768px) {

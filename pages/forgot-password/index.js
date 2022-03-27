@@ -16,20 +16,20 @@ import Link from "next/link";
 const ForgotPasswordPage = () => {
   const router = useRouter();
 
-  // a check to know if the user has entered their
-  // email address to receive a secure link to component that'll
-  // the form field which taks in their new password
-  const renderComponents = () => {
-    React.useEffect(() => {
-      {
-        router.pathname === `/${email}` ? (
-          <ResetPassword />
-        ) : (
-          <DefaultResetPassword />
-        );
-      }
-    }, []);
-  };
+  // // a check to know if the user has entered their
+  // // email address to receive a secure link to component that'll
+  // // the form field which taks in their new password
+  // const renderComponents = () => {
+  //   React.useEffect(() => {
+  //     {
+  //       router.pathname === `/${email}` ? (
+  //         <ResetPassword />
+  //       ) : (
+  //         <DefaultResetPassword />
+  //       );
+  //     }
+  //   }, []);
+  // };
 
   return (
     <>

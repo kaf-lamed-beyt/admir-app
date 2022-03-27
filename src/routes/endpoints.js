@@ -9,7 +9,7 @@ export const authEndpoints = {
   recover: `${baseURL}/auth/recover`,
   // I also don't know if this one is forgot account or...
   // perharps it is for the admin
-  forgot: `${baseURL}/auth/forgot/:email/:token`,
+  forgot: `${baseURL}/auth/forgot/`,
   resetPassword: `${baseURL}/auth/reset-password`,
 };
 
