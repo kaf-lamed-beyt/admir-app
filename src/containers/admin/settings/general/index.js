@@ -34,7 +34,7 @@ const GeneralSettings = () => {
       });
 
       const { data } = response.data;
-
+      // console.log(data);
       setFullname(data.fullName);
       setEmail(data.email);
       setPhoneNumber(data.phoneNumber);
@@ -82,14 +82,13 @@ const GeneralSettings = () => {
   // handles the file uplaod from the filesystem
   const handleFileUpload = () => {
     const data = new FormData();
-    data.append("avatar", image);
+    data.append("image", image);
 
     try {
       const response = axios({
         method: "PATCH",
         url: userEndpoints.avatar,
         headers: {
-          "Content-Type": "application/json",
           "x-auth-token": localStorage.getItem("token"),
         },
         data,

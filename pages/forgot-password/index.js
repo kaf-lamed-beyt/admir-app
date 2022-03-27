@@ -19,29 +19,24 @@ const ForgotPasswordPage = () => {
   // a check to know if the user has entered their
   // email address to receive a secure link to component that'll
   // the form field which taks in their new password
-  //   const renderComponents = () => {
-  //     React.useEffect(() => {
-  //       {
-  //         router.pathname ===
-  //         `http://localhost:3000/forgot-password/token=${token}/email=${email}` ? (
-  //           <ResetPassword />
-  //         ) : (
-  //           <DefaultResetPassword />
-  //         );
-  //       }
-  //     }, []);
-  //   };
+  const renderComponents = () => {
+    React.useEffect(() => {
+      {
+        router.pathname === `/${email}` ? (
+          <ResetPassword />
+        ) : (
+          <DefaultResetPassword />
+        );
+      }
+    }, []);
+  };
 
   return (
     <>
       <Head>
         <title>Reset Password &mdash; Admir Technologies</title>
       </Head>
-      {router.pathname === `/forgot-password/` ? (
-        <DefaultResetPassword />
-      ) : (
-        <DefaultResetPassword />
-      )}
+      <DefaultResetPassword />
     </>
   );
 };
@@ -125,47 +120,3 @@ export const DefaultResetPassword = () => {
 
 // this component gets rendered if the condition in the
 // useEffect hook is true
-export const ResetPassword = () => {
-  const [token, setToken] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [newPassword, setNewPassword] = React.useState("");
-
-  const handlePwdVisibility = () => {
-    setPasswordVisibility(passwordVisibility ? false : true);
-  };
-
-  return (
-    <AuthWrapper>
-      <form onSubmit={handleForgot} className="reset-password">
-        <h1>Reset Password</h1>
-        <p>Please enter your new password</p>
-        <InputGroup>
-          <label htmlFor="email">Email address</label>
-          <InputGroup>
-            <label htmlFor="password">Password*</label>
-            <Input
-              name="password"
-              type={passwordVisibility ? "text" : "password"}
-              id="password"
-              placeholder="password should contain uppercase letter"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <span classNameName="show-pwd" onClick={handlePwdVisibility}>
-              show
-            </span>
-            <p className="pwd-err"></p>
-            <p className="forgot-pwd">Forgot password?</p>
-          </InputGroup>
-        </InputGroup>
-        <Button
-          fill="var(--primary)"
-          name="reset-pwd-button"
-          className="reset-pwd"
-        >
-          {!loading ? "Save" : "Saving..."}
-        </Button>
-      </form>
-    </AuthWrapper>
-  );
-};
