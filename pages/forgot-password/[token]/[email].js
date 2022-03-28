@@ -10,7 +10,8 @@ import { useRouter } from "next/router";
 import { AiOutlineEye } from "react-icons/ai";
 import { authEndpoints } from "../../../src/routes/endpoints";
 import Head from "next/head";
-import { SuccessModal, ErrorModal } from "../../../src/components/Modals";
+import { SuccessModal, ErrModal } from "../../../src/components/Modals";
+import axios from "axios";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = React.useState("");
@@ -18,6 +19,7 @@ const ResetPassword = () => {
   const [loading, setLoading] = React.useState(false);
   const [resetPasswordSuccess, setResetPasswordSuccess] = React.useState();
   const [resetPasswordError, setResetPasswordError] = React.useState();
+  const router = useRouter();
 
   // obtaining the query parameters from
   // route path, and validating it to make sure that the
@@ -52,10 +54,11 @@ const ResetPassword = () => {
       });
       setResetPasswordSuccess(response.data.msg);
       setLoading(false);
+      router.push("/");
       setResetPasswordError("");
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      setResetPasswordError(error.response.data.msg);
       setResetPasswordSuccess(null);
     }
   };
@@ -68,13 +71,15 @@ const ResetPassword = () => {
       <Layout>
         {email && token ? (
           <AuthWrapper>
+            {/* <ErrModal message={"make everybody just shut up joorrr!!!"} /> */}
+            <SuccessModal message={"nawa oooooo!!!!"} />
             {resetPasswordSuccess ? (
               <SuccessModal message={resetPasswordSuccess} />
             ) : (
               ""
             )}
             {resetPasswordError ? (
-              <ErrorModal message={resetPasswordError} />
+              <ErrModal message={resetPasswordError} />
             ) : (
               ""
             )}

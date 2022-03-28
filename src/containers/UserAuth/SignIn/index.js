@@ -97,9 +97,9 @@ const SignIn = () => {
           </p>
         </Fade>
       </div>
+      {signInError ? <ErrModal message={signInError} /> : ""}
+      {signInSuccess ? <SuccessModal message={signInSuccess} /> : ""}
       <AuthWrapper>
-        {signInError ? <ErrModal message={signInError} /> : ""}
-        {signInSuccess ? <SuccessModal message={signInSuccess} /> : ""}
         <form className="signin-form" onSubmit={handleSignIn}>
           <Fade direction="up" cascade triggerOnce>
             <h1>Log In</h1>

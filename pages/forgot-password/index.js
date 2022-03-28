@@ -14,8 +14,6 @@ import { ErrModal, SuccessModal } from "../../src/components/Modals";
 import Link from "next/link";
 
 const ForgotPasswordPage = () => {
-  const router = useRouter();
-
   return (
     <>
       <Head>

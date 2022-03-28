@@ -32,10 +32,7 @@ const Sidebar = () => {
             return (
               <ul
                 className={`${
-                  router.pathname === item.path &&
-                  router.pathname.startsWith("/settings/")
-                    ? "active-navLink"
-                    : ""
+                  router.pathname === item.path ? "active-navLink" : ""
                 }`}
               >
                 <Link href={item.path} key={index}>
