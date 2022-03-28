@@ -10,26 +10,11 @@ import { authEndpoints } from "../../src/routes/endpoints";
 import Input from "../../src/components/Inputs";
 import Button from "../../src/components/Buttons";
 import Layout from "../../src/containers/Layouts/HomeLayout";
-import { AuthErrMsg, AuthSuccessMsg } from "../../src/components/Modals";
+import { ErrModal, SuccessModal } from "../../src/components/Modals";
 import Link from "next/link";
 
 const ForgotPasswordPage = () => {
   const router = useRouter();
-
-  // // a check to know if the user has entered their
-  // // email address to receive a secure link to component that'll
-  // // the form field which taks in their new password
-  // const renderComponents = () => {
-  //   React.useEffect(() => {
-  //     {
-  //       router.pathname === `/${email}` ? (
-  //         <ResetPassword />
-  //       ) : (
-  //         <DefaultResetPassword />
-  //       );
-  //     }
-  //   }, []);
-  // };
 
   return (
     <>
@@ -82,8 +67,8 @@ export const DefaultResetPassword = () => {
   return (
     <Layout>
       <AuthWrapper>
-        {resetSuccess ? <AuthSuccessMsg message={resetSuccess} /> : ""}
-        {resetError ? <AuthErrMsg message={resetError} /> : ""}
+        <ErrModal message={"wassup error modal!!!"} />
+        {/* {resetError ? <AuthErrMsg message={resetError} /> : ""} */}
         <form onSubmit={handleForgot} className="reset-password">
           <h1>Forgot Password</h1>
           <p>
