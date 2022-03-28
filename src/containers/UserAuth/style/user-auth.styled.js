@@ -125,7 +125,7 @@ export const AuthWrapper = styled.div`
 
   // reset password forms
   .reset-password {
-    margin-top: -70px;
+    margin-top: -45px;
   }
 
   @media only screen and (min-width: 0px) and (max-width: 576px) {

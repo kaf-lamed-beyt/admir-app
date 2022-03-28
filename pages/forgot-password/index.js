@@ -47,14 +47,14 @@ export const DefaultResetPassword = () => {
         method: "POST",
         url: authEndpoints.recover,
         data: {
-          emailWorkerId: email,
+          email,
         },
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
       setResestSuccess(response.data.msg);
+      setLoading(false);
       setResetError("");
     } catch (error) {
       setLoading(false);
@@ -67,8 +67,8 @@ export const DefaultResetPassword = () => {
   return (
     <Layout>
       <AuthWrapper>
-        <ErrModal message={"wassup error modal!!!"} />
-        {/* {resetError ? <AuthErrMsg message={resetError} /> : ""} */}
+        {resetError ? <ErrModal message={resetError} /> : ""}
+        {resetSuccess ? <SuccessModal message={resetSuccess} /> : ""}
         <form onSubmit={handleForgot} className="reset-password">
           <h1>Forgot Password</h1>
           <p>
@@ -102,6 +102,3 @@ export const DefaultResetPassword = () => {
     </Layout>
   );
 };
-
-// this component gets rendered if the condition in the
-// useEffect hook is true

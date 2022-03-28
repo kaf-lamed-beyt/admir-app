@@ -9,11 +9,15 @@ import Layout from "../../../src/containers/Layouts/HomeLayout";
 import { useRouter } from "next/router";
 import { AiOutlineEye } from "react-icons/ai";
 import { authEndpoints } from "../../../src/routes/endpoints";
+import Head from "next/head";
+import { SuccessModal, ErrorModal } from "../../../src/components/Modals";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = React.useState("");
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [resetPasswordSuccess, setResetPasswordSuccess] = React.useState();
+  const [resetPasswordError, setResetPasswordError] = React.useState();
 
   // obtaining the query parameters from
   // route path, and validating it to make sure that the
@@ -36,61 +40,76 @@ const ResetPassword = () => {
 
       const response = await axios({
         method: "POST",
-        url: authEndpoints.forgot,
+        url: authEndpoints.resetPassword,
         data: {
-          emailWorkerId: email,
+          token,
+          email,
+          password: newPassword,
         },
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
-      // setResestSuccess(response.data.msg);
-      // setResetError("");
+      setResetPasswordSuccess(response.data.msg);
+      setLoading(false);
+      setResetPasswordError("");
     } catch (error) {
       setLoading(false);
-      const { data } = error.response;
-      console.log(data.msg);
-      // setResestSuccess(null);
+      console.log(error);
+      setResetPasswordSuccess(null);
     }
   };
 
   return (
-    <Layout>
-      {!email || !token ? (
-        <Lost />
-      ) : (
-        <AuthWrapper>
-          <form onSubmit={resetPassword} className="reset-password">
-            <h1>Reset Password</h1>
-            <p>Please enter your new password</p>
-            <InputGroup>
-              <label htmlFor="password">Password*</label>
-              <Input
-                name="password"
-                type={passwordVisibility ? "text" : "password"}
-                id="password"
-                placeholder="password should contain uppercase letter"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-              <span className="show-pwd" onClick={handlePwdVisibility}>
-                <AiOutlineEye />
-              </span>
-              <p className="pwd-err"></p>
-              <p className="forgot-pwd">Forgot password?</p>
-            </InputGroup>
-            <Button
-              fill="var(--primary)"
-              name="reset-pwd-button"
-              className="reset-pwd"
-            >
-              {!loading ? "Reset" : "Processing..."}
-            </Button>
-          </form>
-        </AuthWrapper>
-      )}
-    </Layout>
+    <React.Fragment>
+      <Head>
+        <title>Reset your password | Admir Technologies</title>
+      </Head>
+      <Layout>
+        {email && token ? (
+          <AuthWrapper>
+            {resetPasswordSuccess ? (
+              <SuccessModal message={resetPasswordSuccess} />
+            ) : (
+              ""
+            )}
+            {resetPasswordError ? (
+              <ErrorModal message={resetPasswordError} />
+            ) : (
+              ""
+            )}
+            <form onSubmit={resetPassword} className="reset-password">
+              <h1>Reset Password</h1>
+              <p>Please enter your new password</p>
+              <InputGroup>
+                <label htmlFor="password">Password*</label>
+                <Input
+                  name="password"
+                  type={passwordVisibility ? "text" : "password"}
+                  id="password"
+                  placeholder="password should contain uppercase letter"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <span className="show-pwd" onClick={handlePwdVisibility}>
+                  <AiOutlineEye />
+                </span>
+                <p className="pwd-err"></p>
+              </InputGroup>
+              <Button
+                fill="var(--primary)"
+                name="reset-pwd-button"
+                className="reset-pwd"
+              >
+                {!loading ? "Reset" : "Processing..."}
+              </Button>
+            </form>
+          </AuthWrapper>
+        ) : (
+          <Lost />
+        )}
+      </Layout>
+    </React.Fragment>
   );
 };
 
@@ -98,7 +117,14 @@ export default ResetPassword;
 
 const Lost = () => {
   return (
-    <h1 style={{ color: "var(--primary)" }}>
+    <h1
+      style={{
+        color: "var(--primary)",
+        fontWeight: "600",
+        textAlign: "center",
+        marginTop: "80px",
+      }}
+    >
       The page you're trying to get to isn't available
     </h1>
   );
