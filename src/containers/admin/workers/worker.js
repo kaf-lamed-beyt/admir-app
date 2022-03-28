@@ -105,7 +105,7 @@ const Worker = () => {
             ""
           )}
           {workerAccessSuccess ? (
-            <DashboardErrorModal message={workerAccessSuccess} />
+            <DashboardSuccessModal message={workerAccessSuccess} />
           ) : (
             ""
           )}
@@ -145,10 +145,7 @@ const Worker = () => {
                 {user.status === "terminated" ? "Terminated" : "Terminate"}
               </Button>
               {user.status === "terminated" ? null : (
-                <Button
-                  className="activate"
-                  onClick={user.isGranted ? null : () => grantWorkerAccess()}
-                >
+                <Button className="activate" onClick={grantWorkerAccess}>
                   {user.isGranted === true
                     ? "Activated"
                     : loading

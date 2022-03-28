@@ -130,7 +130,7 @@ const Lost = () => {
         marginTop: "80px",
       }}
     >
-      The page you're trying to get to isn't available
+      The page you are trying to get to is not available
     </h1>
   );
 };
