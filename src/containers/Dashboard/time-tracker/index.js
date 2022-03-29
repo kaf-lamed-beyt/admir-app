@@ -100,6 +100,17 @@ const TimeTracker = () => {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
+  // this holds the clockIn and clockOut status of the user's record
+  // if the user has not clocked in or out, these variables
+  // will be used to conditionally render the buttons
+  const clockInStatus = data.map((data) => {
+    data.clockIn;
+  });
+
+  const clockOutStatus = data.map((data) => {
+    data.clockOut;
+  });
+
   const getUserTimeRecords = async () => {
     try {
       setLoading(true);
@@ -113,8 +124,8 @@ const TimeTracker = () => {
         },
       });
       const { data } = response.data;
-      console.log(data);
       setData(data);
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -141,31 +152,39 @@ const TimeTracker = () => {
           <div className="table-title">
             <p>All entries</p>
             <div className="entry-controllers">
-              <Button
-                height="44px"
-                width="150px"
-                fill="var(--secondary)"
-                text_color="#fff"
-                onClick={() => setClockIn(!clockIn)}
-              >
-                <p>
-                  {" "}
-                  <Icon name="plus" /> Clock In
-                </p>
-              </Button>
-              <Button
-                height="44px"
-                width="150px"
-                fill="var(--secondary)"
-                text_color="#fff"
-                className="clock-out"
-                onClick={() => setClockOut(!clockOut)}
-              >
-                <p>
-                  {" "}
-                  <Icon name="plus" /> Clock Out
-                </p>
-              </Button>
+              {clockInStatus ? (
+                ""
+              ) : (
+                <Button
+                  height="44px"
+                  width="150px"
+                  fill="var(--secondary)"
+                  text_color="#fff"
+                  onClick={() => setClockIn(!clockIn)}
+                >
+                  <p>
+                    {" "}
+                    <Icon name="plus" /> Clock In
+                  </p>
+                </Button>
+              )}
+              {clockOutStatus === undefined ? (
+                ""
+              ) : (
+                <Button
+                  height="44px"
+                  width="150px"
+                  fill="var(--secondary)"
+                  text_color="#fff"
+                  className="clock-out"
+                  onClick={() => setClockOut(!clockOut)}
+                >
+                  <p>
+                    {" "}
+                    <Icon name="plus" /> Clock Out
+                  </p>
+                </Button>
+              )}
             </div>
           </div>
           <ClockInEntryCard title="Clock In" open={clockIn} />

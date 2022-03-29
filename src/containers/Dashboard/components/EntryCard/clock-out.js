@@ -20,6 +20,52 @@ export const ClockOutEntryCard = ({ open, title }) => {
   const [loading, setLoading] = React.useState(false);
   const [clockOutSuccess, setClockOutSuccess] = React.useState();
   const [clockOutError, setClockOutError] = React.useState();
+  const [recordId, setRecordId] = React.useState("");
+
+  // to hit the clockout endpoint, we have to
+  // pass the recordId of the clockIn event as a parameter
+  // to the endpoint
+  const getId = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios({
+        method: "GET",
+        url: dashboardDataEndpoints.records,
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+      const { data } = response.data;
+      const id = data.map((data) => {
+        if (data.clockOut === undefined) {
+          return data._id;
+        }
+      });
+
+      console.log(id.toString());
+
+      // setRecordId(data);
+      // console.log(
+      //   data.map((data) => {
+      //     if (data.clockOut === undefined) {
+      //       return data._id;
+      //     }
+      //   })
+      // );
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  // Getting the recordId once the component
+  // is mounted on to the DOM
+  React.useEffect(() => {
+    getId();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +75,7 @@ export const ClockOutEntryCard = ({ open, title }) => {
 
       const response = await axios({
         method: "PATCH",
-        url: dashboardDataEndpoints.clockOut,
+        url: `${dashboardDataEndpoints.clockOut}/${recordId}`,
         data: {
           clockOut: clockOut.toString(),
         },
