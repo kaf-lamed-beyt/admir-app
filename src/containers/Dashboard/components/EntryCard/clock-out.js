@@ -20,7 +20,7 @@ export const ClockOutEntryCard = ({ open, title }) => {
   const [loading, setLoading] = React.useState(false);
   const [clockOutSuccess, setClockOutSuccess] = React.useState();
   const [clockOutError, setClockOutError] = React.useState();
-  const [recordId, setRecordId] = React.useState("");
+  const [timeInfo, setTimeInfo] = React.useState([]);
 
   // to hit the clockout endpoint, we have to
   // pass the recordId of the clockIn event as a parameter
@@ -38,22 +38,14 @@ export const ClockOutEntryCard = ({ open, title }) => {
         },
       });
       const { data } = response.data;
-      const id = data.map((data) => {
-        if (data.clockOut === undefined) {
-          return data._id;
-        }
-      });
+      // const id = data.map((data) => {
+      //   if (data.clockOut === undefined) {
+      //     return data._id;
+      //   }
+      // });
 
-      console.log(id.toString());
-
-      // setRecordId(data);
-      // console.log(
-      //   data.map((data) => {
-      //     if (data.clockOut === undefined) {
-      //       return data._id;
-      //     }
-      //   })
-      // );
+      // console.log(id.toString());
+      setTimeInfo(data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -61,10 +53,27 @@ export const ClockOutEntryCard = ({ open, title }) => {
     }
   };
 
+  const clockOutStatus = timeInfo.map((data) => {
+    if (data.clockOut === undefined) {
+      return data._id;
+    }
+  });
+
+  const id = clockOutStatus.toString();
+
+  // the id variable above still has a trailing comma
+  // in front of it. Using the replaceAll JavaScript method
+  // to get rid of that, so we can pass it as a parameter in
+  // the clockOut API call.
+
+  const recordId = id.replaceAll(",", "");
+
   // Getting the recordId once the component
   // is mounted on to the DOM
   React.useEffect(() => {
     getId();
+
+    console.log(recordId);
   }, []);
 
   const handleSubmit = async (e) => {
