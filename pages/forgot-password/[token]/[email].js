@@ -54,7 +54,10 @@ const ResetPassword = () => {
       });
       setResetPasswordSuccess(response.data.msg);
       setLoading(false);
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      }, 4000);
+      // router.push("/");
       setResetPasswordError("");
     } catch (error) {
       setLoading(false);
