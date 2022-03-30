@@ -139,6 +139,9 @@ const TimeTracker = () => {
     setOpen(false);
   };
 
+  let sortedTimeStamps = timeInfo.map((timeInfo) => timeInfo);
+  sortedTimeStamps.reverse();
+
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Time Tracker" profile_img="/img/tom.png" />
@@ -189,7 +192,7 @@ const TimeTracker = () => {
               firstHeader="Date/Days"
               secondHeader="Clock-in Time"
               thirdHeader="Clock-out Time"
-              reports={timeInfo}
+              reports={sortedTimeStamps}
             />
           )}
         </TrackerContainer>

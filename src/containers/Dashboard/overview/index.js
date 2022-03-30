@@ -63,6 +63,12 @@ const Overview = () => {
     getUserTimeRecords();
   }, []);
 
+  const sortedTimeRecords = timeRecords.map((timeRecords) => timeRecords);
+  sortedTimeRecords.reverse();
+
+  let sortedReports = reports.map((reports) => reports);
+  sortedReports.reverse();
+
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Overview" profile_img="/img/tom.png" />
@@ -102,7 +108,7 @@ const Overview = () => {
               firstHeader="Date/Days"
               secondHeader="Clock-in Time"
               thirdHeader="Clock-out Time"
-              reports={timeRecords}
+              reports={sortedTimeRecords}
             />
           )}
         </div>
@@ -117,7 +123,7 @@ const Overview = () => {
               When you submit reports, they'll appear here.
             </p>
           ) : (
-            <PersonalizedReport reports={reports} />
+            <PersonalizedReport reports={sortedReports} />
           )}
         </div>
       </Tables>

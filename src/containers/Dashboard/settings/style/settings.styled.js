@@ -62,6 +62,11 @@ export const SettingsWrapper = styled.div`
     }
   }
 
+  .modal-container {
+    width: 400px;
+    margin: 0 auto;
+  }
+
   @media only screen and (min-width: 0px) and (max-width: 992px) {
     flex-wrap: wrap;
     margin-top: 70px !important;
