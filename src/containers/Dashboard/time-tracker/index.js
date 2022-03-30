@@ -121,12 +121,15 @@ const TimeTracker = () => {
     }
   };
 
-  const clockOutStamp = timeInfo.map((data) => data.clockOut);
-  const clockInStamp = timeInfo.map((data) => data.clockIn);
+  // this holds the clockOut status of the user's record
+  // it checks to see if the last clockOut timestamp of the user
+  // is undefined. If it is, the clockOut button is rendered. If not, the clockIn
+  // button get's rendered.
+  const clockOutStamp = timeInfo.map((data) => {
+    return data.clockOut;
+  });
 
-  // this holds the clockIn and clockOut status of the user's record
-  // if the user has not clocked in or out, these variables
-  // will be used to conditionally render the buttons
+  const lastItem = clockOutStamp[clockOutStamp.length - 1];
 
   React.useEffect(() => {
     getUserTimeRecords();
@@ -148,7 +151,20 @@ const TimeTracker = () => {
           <div className="table-title">
             <p>All entries</p>
             <div className="entry-controllers">
-              {clockInStamp && !clockOutStamp ? (
+              {lastItem === undefined ? (
+                <Button
+                  height="44px"
+                  width="150px"
+                  fill="var(--secondary)"
+                  text_color="#fff"
+                  onClick={() => setClockOut(!clockOut)}
+                >
+                  <p>
+                    {" "}
+                    <Icon name="plus" /> ClockOut
+                  </p>
+                </Button>
+              ) : (
                 <Button
                   height="44px"
                   width="150px"
@@ -159,20 +175,6 @@ const TimeTracker = () => {
                   <p>
                     {" "}
                     <Icon name="plus" /> Clock In
-                  </p>
-                </Button>
-              ) : (
-                <Button
-                  height="44px"
-                  width="150px"
-                  fill="var(--secondary)"
-                  text_color="#fff"
-                  className="clock-out"
-                  onClick={() => setClockOut(!clockOut)}
-                >
-                  <p>
-                    {" "}
-                    <Icon name="plus" /> Clock Out
                   </p>
                 </Button>
               )}
