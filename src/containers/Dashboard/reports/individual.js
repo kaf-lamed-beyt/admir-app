@@ -24,9 +24,9 @@ const IndividualReport = () => {
     role: "",
   });
 
-  IndividualReport.handleClickOutside = () => {
-    setOpen(open);
-  };
+  // IndividualReport.handleClickOutside = () => {
+  //   setOpen(open);
+  // };
 
   // get current user
   const getCurrentUser = async () => {
@@ -74,14 +74,19 @@ const IndividualReport = () => {
     }
   };
 
+  let sortedReport = reports.map((reports) => reports);
+  sortedReport.reverse();
+
+  console.log(sortedReport);
+
   React.useEffect(() => {
     getCurrentUser();
     getUserReports();
   }, []);
 
-  const sortedReports = reports.sort((a, b) => {
-    dayjs(b.createdAt).format("h") - dayjs(a.createdAt).format("h");
-  });
+  // const sortedReports = reports.sort((a, b) => {
+  //   dayjs(b.createdAt).format("h") - dayjs(a.createdAt).format("h");
+  // });
 
   return (
     <React.Fragment>
@@ -121,13 +126,13 @@ const IndividualReport = () => {
               </Button>
             </div>
             <ReportsEntry title="Report" open={open} />
-            {sortedReports.length === 0 ? (
+            {sortedReport.length === 0 ? (
               <p className="no-data">
                 {currentUser.fullName} the list of reports you submit will show
                 here when you do.
               </p>
             ) : (
-              <PersonalizedReport reports={sortedReports} />
+              <PersonalizedReport reports={sortedReport} />
             )}
           </ReportContainer>
         </Fade>
@@ -136,8 +141,10 @@ const IndividualReport = () => {
   );
 };
 
-const clickOutsideConfig = {
-  handleClickOutside: () => IndividualReport.handleClickOutside,
-};
+// const clickOutsideConfig = {
+//   handleClickOutside: () => IndividualReport.handleClickOutside,
+// };
 
-export default onClickOutside(IndividualReport, clickOutsideConfig);
+// export default onClickOutside(IndividualReport, clickOutsideConfig);
+
+export default IndividualReport;

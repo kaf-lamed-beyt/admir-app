@@ -8,6 +8,7 @@ import axios from "axios";
 import { userEndpoints } from "../../src/routes/endpoints";
 import { PulseLoader } from "react-spinners";
 import { css } from "@emotion/react";
+import { Fade } from "react-awesome-reveal";
 
 const override = css`
   display: block;
@@ -101,9 +102,11 @@ export default function OverviewPage() {
         <title>Dashboard | Overview</title>
       </Head>
       {data ? (
-        <DashLayout>
-          <Overview />
-        </DashLayout>
+        <Fade>
+          <DashLayout>
+            <Overview />
+          </DashLayout>
+        </Fade>
       ) : (
         <div className="loader">
           <PulseLoader color="var(--primary)" loading={loading} />
