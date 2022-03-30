@@ -38,13 +38,6 @@ export const ClockOutEntryCard = ({ open, title }) => {
         },
       });
       const { data } = response.data;
-      // const id = data.map((data) => {
-      //   if (data.clockOut === undefined) {
-      //     return data._id;
-      //   }
-      // });
-
-      // console.log(id.toString());
       setTimeInfo(data);
       setLoading(false);
     } catch (error) {
@@ -72,8 +65,6 @@ export const ClockOutEntryCard = ({ open, title }) => {
   // is mounted on to the DOM
   React.useEffect(() => {
     getId();
-
-    console.log(recordId);
   }, []);
 
   const handleSubmit = async (e) => {

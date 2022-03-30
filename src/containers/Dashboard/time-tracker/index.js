@@ -97,19 +97,8 @@ const TimeTracker = () => {
   const [clockIn, setClockIn] = React.useState(false);
   const [clockOut, setClockOut] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [data, setData] = React.useState([]);
+  const [timeInfo, setTimeInfo] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-
-  // this holds the clockIn and clockOut status of the user's record
-  // if the user has not clocked in or out, these variables
-  // will be used to conditionally render the buttons
-  const clockInStatus = data.map((data) => {
-    data.clockIn;
-  });
-
-  const clockOutStatus = data.map((data) => {
-    data.clockOut;
-  });
 
   const getUserTimeRecords = async () => {
     try {
@@ -124,13 +113,20 @@ const TimeTracker = () => {
         },
       });
       const { data } = response.data;
-      setData(data);
+      setTimeInfo(data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
     }
   };
+
+  const clockOutStamp = timeInfo.map((data) => data.clockOut);
+  const clockInStamp = timeInfo.map((data) => data.clockIn);
+
+  // this holds the clockIn and clockOut status of the user's record
+  // if the user has not clocked in or out, these variables
+  // will be used to conditionally render the buttons
 
   React.useEffect(() => {
     getUserTimeRecords();
@@ -152,9 +148,7 @@ const TimeTracker = () => {
           <div className="table-title">
             <p>All entries</p>
             <div className="entry-controllers">
-              {clockInStatus ? (
-                ""
-              ) : (
+              {clockInStamp && !clockOutStamp ? (
                 <Button
                   height="44px"
                   width="150px"
@@ -167,9 +161,6 @@ const TimeTracker = () => {
                     <Icon name="plus" /> Clock In
                   </p>
                 </Button>
-              )}
-              {clockOutStatus === undefined ? (
-                ""
               ) : (
                 <Button
                   height="44px"
@@ -189,14 +180,14 @@ const TimeTracker = () => {
           </div>
           <ClockInEntryCard title="Clock In" open={clockIn} />
           <ClockOutEntryCard title="Clock Out" open={clockOut} />
-          {data.length === 0 ? (
+          {timeInfo.length === 0 ? (
             <p className="no-data">No time records yet</p>
           ) : (
             <TimeTrackerTable
               firstHeader="Date/Days"
               secondHeader="Clock-in Time"
               thirdHeader="Clock-out Time"
-              reports={data}
+              reports={timeInfo}
             />
           )}
         </TrackerContainer>
