@@ -75,11 +75,8 @@ const GeneralSettings = () => {
       <DashHeader dashboardTitle="General Settings" user="Tom Cruise" />
 
       <SettingsWrapper>
-        <div className="modal-container">
-          <DashboardErrorModal message={"we're all a part of God's body"} />
-          {saveSuccess ? <DashboardSuccessModal message={saveSuccess} /> : ""}
-          {saveError ? <DashboardErrorModal message={saveError} /> : ""}
-        </div>
+        {saveSuccess ? <DashboardSuccessModal message={saveSuccess} /> : ""}
+        {saveError ? <DashboardErrorModal message={saveError} /> : ""}
         <div className="profile-wrapper">
           <img src="/img/user.png" alt="user profile image" />
         </div>

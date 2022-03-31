@@ -163,6 +163,10 @@ export const ChangePasswordForm = styled.form`
         margin-top: 17px;
         margin-left: -25px;
       }
+
+      :hover {
+        cursor: pointer;
+      }
     }
   }
 

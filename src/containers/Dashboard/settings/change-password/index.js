@@ -14,8 +14,8 @@ import {
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
-  const [passwordChangeSuccess, setPasswordChangeSuccess] = React.useState("");
-  const [passwordChangeError, setPasswordChangeError] = React.useState("");
+  const [passwordChangeSuccess, setPasswordChangeSuccess] = React.useState();
+  const [passwordChangeError, setPasswordChangeError] = React.useState();
   const [loading, setLoading] = React.useState(false);
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
 
@@ -71,8 +71,10 @@ const ChangePassword = () => {
         },
       });
       setPasswordChangeSuccess(response.data.msg);
+      setLoading(false);
       setPasswordChangeError("");
     } catch (error) {
+      setLoading(false);
       const { data } = error.response;
       console.log(data);
       setPasswordChangeError(data.msg);
@@ -141,7 +143,7 @@ const ChangePassword = () => {
               fill="var(--secondary)"
               text_color="#fff"
             >
-              {loading ? "Changing password" : "Change Password"}
+              {loading ? "Changing password..." : "Change Password"}
             </Button>
           </ChangePasswordForm>
         </SettingsWrapper>
