@@ -57,7 +57,9 @@ const Worker = () => {
     }
   };
 
-  const grantWorkerAccess = async () => {
+  const grantWorkerAccess = async (e) => {
+    e.preventDefault();
+
     try {
       setLoading(true);
 
@@ -75,8 +77,10 @@ const Worker = () => {
       setWorkerAccessError("");
     } catch (error) {
       setLoading(false);
-      setWorkerAccessError(error.response.msg);
-      setWorkerAccessSuccess(null);
+      console.log(error);
+      // // const { data } = error.response;
+      // setWorkerAccessError(data.msg);
+      // setWorkerAccessSuccess(null);
     }
   };
 
@@ -109,6 +113,7 @@ const Worker = () => {
           ) : (
             ""
           )}
+          <DashboardSuccessModal message={"helooooo"} />
           <div className="user-info">
             <div className="user-img-container">
               <img
@@ -141,16 +146,17 @@ const Worker = () => {
               </div>
             </div>
             <div className="user-actions__controllers">
-              <Button className="terminate">
-                {user.status === "terminated" ? "Terminated" : "Terminate"}
-              </Button>
-              {user.status === "terminated" ? null : (
-                <Button className="activate" onClick={grantWorkerAccess}>
-                  {user.isGranted === true
-                    ? "Activated"
-                    : loading
-                    ? "Activating..."
-                    : "Activate"}
+              {user.status === "terminated" ? (
+                <Button className="terminate">
+                  {user.status === "terminated" ? "Terminated" : "Terminate"}
+                </Button>
+              ) : (
+                <Button
+                  className="activate"
+                  disable={user.status === "active" ? true : false}
+                  onClick={grantWorkerAccess}
+                >
+                  Activate
                 </Button>
               )}
             </div>

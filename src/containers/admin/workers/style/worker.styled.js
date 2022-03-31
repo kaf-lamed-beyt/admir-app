@@ -91,6 +91,7 @@ export const WorkerProfile = styled.div`
       display: flex;
       width: 40%;
       margin-top: 40px;
+      margin-left: -30px;
 
       .terminate {
         border: 1px solid var(--danger);
