@@ -1,4 +1,6 @@
+import axios from "axios";
 import React from "react";
+import Head from "next/head";
 import {
   AuthWrapper,
   InputGroup,
@@ -9,9 +11,7 @@ import Layout from "../../../src/containers/Layouts/HomeLayout";
 import { useRouter } from "next/router";
 import { AiOutlineEye } from "react-icons/ai";
 import { authEndpoints } from "../../../src/routes/endpoints";
-import Head from "next/head";
 import { SuccessModal, ErrModal } from "../../../src/components/Modals";
-import axios from "axios";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = React.useState("");

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@dashboardComponents/*": ["src/Dashboard/components/*"],
+      "@adminComponents/*": ["src/admin/components/*"],
+      "@dashboardRoutes/*": ["src/Dashboard/*"],
+      "@adminRoutes/*": ["src/admin/*"],
+      "@adminLayout/*": ["src/admin/DashLayout/*"],
+      "@layouts/*": ["src/Layouts/*"],
+      "@auth/*": ["src/userAuth/*"],
+      "@context/*": ["src/context/*"],
+      "@endpoints/*": ["src/routes/*"],
+      "@utils/*": ["src/utils/*"],
+      "@styles/*": ["styles/*"]
+    }
+  }
+}
