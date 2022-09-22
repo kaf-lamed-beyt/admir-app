@@ -2,6 +2,14 @@ import React from "react";
 import { Onboarding } from "./style/sidehero.styled";
 import Icon from "../../../../components/Icons";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(
+  () => import("status-modal/dist").then((mod) => mod.Status),
+  {
+    ssr: false,
+  }
+);
 
 const SideHero = () => {
   return (

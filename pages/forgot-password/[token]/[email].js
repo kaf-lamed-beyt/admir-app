@@ -73,8 +73,6 @@ const ResetPassword = () => {
       <Layout>
         {email && token ? (
           <AuthWrapper>
-            {/* <ErrModal message={"make everybody just shut up joorrr!!!"} /> */}
-            <SuccessModal message={"nawa oooooo!!!!"} />
             {resetPasswordSuccess ? (
               <SuccessModal message={resetPasswordSuccess} />
             ) : (

@@ -14,6 +14,12 @@ import {
 } from "../../../../components/Modals";
 import dayjs from "dayjs";
 import { today, yesterday, threeDaysAgo } from "../../../../utils/common";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(
+  () => import("status-modal/dist").then((mod) => mod.Status),
+  { ssr: false }
+);
 
 export const ClockOutEntryCard = ({ open, title }) => {
   const [clockOut, setClockOut] = React.useState("");
@@ -97,11 +103,7 @@ export const ClockOutEntryCard = ({ open, title }) => {
 
   return (
     <EntryWrapper open={open}>
-      {clockOutSuccess ? (
-        <DashboardSuccessModal message={clockOutSuccess} />
-      ) : (
-        ""
-      )}
+      {clockOutSuccess ? <Status message={clockOutSuccess} /> : ""}
       {clockOutError ? <DashboardErrorModal message={clockOutError} /> : ""}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>

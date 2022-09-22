@@ -1,6 +1,7 @@
 import React from "react";
 import { BsCheck2All } from "react-icons/bs";
 import { MdWifiTetheringErrorRounded } from "react-icons/md";
+import propTypes from "prop-types";
 
 export const SuccessModal = ({ message }) => {
   return (
@@ -36,4 +37,12 @@ export const DashboardErrorModal = ({ message }) => {
       <MdWifiTetheringErrorRounded />
     </div>
   );
+};
+
+propTypes.ErrModal = {
+  message: propTypes.string.isRequired,
+};
+
+propTypes.SuccessModal = {
+  message: propTypes.string.isRequired,
 };

@@ -14,6 +14,12 @@ import Button from "../../../../components/Buttons";
 import Select from "react-dropdown-select";
 import { today, yesterday, threeDaysAgo } from "../../../../utils/common";
 import { dashboardDataEndpoints } from "../../../../routes/endpoints";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(
+  () => import("status-modal/dist").then((mod) => mod.Status),
+  { ssr: false }
+);
 
 export const ClockInEntryCard = ({ title, open }) => {
   const [clockIn, setClockIn] = React.useState("");
@@ -50,7 +56,7 @@ export const ClockInEntryCard = ({ title, open }) => {
 
   return (
     <EntryWrapper open={open}>
-      {clockInSuccess ? <DashboardSuccessModal message={clockInSuccess} /> : ""}
+      {clockInSuccess ? <Status message={clockInSuccess} /> : ""}
       {clockInError ? <DashboardErrorModal message={clockInError} /> : ""}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>

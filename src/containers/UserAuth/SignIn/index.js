@@ -10,6 +10,13 @@ import { useRouter } from "next/router";
 import { ErrModal, SuccessModal } from "../../../components/Modals";
 import { AuthContext } from "../../../context/auth-context";
 import { AiOutlineEye } from "react-icons/ai";
+import dynamic from "next/dynamic";
+const Status = dynamic(() => import("status-modal").then((mod) => mod.Status), {
+  ssr: false,
+});
+
+// fixes the 'self is not defined' ref error
+// // import { Status } from "status-modal"; // throws "ReferenceError: self is not defined"
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
@@ -90,15 +97,19 @@ const SignIn = () => {
       <div className="signup-text">
         <Fade triggerOnce>
           <p>
-            Don’t have an account? {""}{" "}
+            Don’t have an account? {""}
             <Link href="/signup">
               <span>Sign Up</span>
             </Link>
           </p>
         </Fade>
       </div>
-      {signInError ? <ErrModal message={signInError} /> : ""}
-      {signInSuccess ? <SuccessModal message={signInSuccess} /> : ""}
+      {signInSuccess && (
+        <Status className="status-modal" message={signInSuccess} />
+      )}
+      {signInError && (
+        <Status className="status-modal" message={signInSuccess} />
+      )}
       <AuthWrapper>
         <form className="signin-form" onSubmit={handleSignIn}>
           <Fade direction="up" cascade triggerOnce>
