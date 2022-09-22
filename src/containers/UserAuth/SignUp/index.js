@@ -11,9 +11,13 @@ import { AuthController, FormInfo } from "../../../components/FormInfo";
 import { userEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
 import router from "next/router";
-import { ErrModal, SuccessModal } from "../../../components/Modals";
 import { AuthContext } from "../../../context/auth-context";
 import { AiOutlineEye } from "react-icons/ai";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(() => import("status-modal").then((mod) => mod.Status), {
+  ssr: false,
+});
 
 const SignUp = () => {
   const [formStep, setFormStep] = React.useState(0);
@@ -125,8 +129,12 @@ const SignUp = () => {
         </Fade>
       </AuthSteps>
       <AuthWrapper>
-        {signUpSuccess ? <SuccessModal message={signUpSuccess} /> : ""}
-        {signUpError ? <ErrModal message={signUpError} /> : ""}
+        {signUpSuccess && (
+          <Status className="status-modal" message={signUpSuccess} />
+        )}
+        {signUpError && (
+          <Status className="status-modal" message={signUpError} />
+        )}
         <form className="signup-form" onSubmit={handleSignUp}>
           {formStep === 0 && (
             <>

@@ -7,10 +7,11 @@ import { CountryPhoneInput } from "../../../../components/Inputs";
 import "react-phone-number-input/style.css";
 import axios from "axios";
 import { userEndpoints } from "../../../../routes/endpoints";
-import {
-  DashboardErrorModal,
-  DashboardSuccessModal,
-} from "../../../../components/Modals";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(() => import("status-modal").then((mod) => mod.Status), {
+  ssr: false,
+});
 
 const GeneralSettings = () => {
   const [fullname, setFullname] = React.useState("");
@@ -75,8 +76,10 @@ const GeneralSettings = () => {
       <DashHeader dashboardTitle="General Settings" user="Tom Cruise" />
 
       <SettingsWrapper>
-        {saveSuccess ? <DashboardSuccessModal message={saveSuccess} /> : ""}
-        {saveError ? <DashboardErrorModal message={saveError} /> : ""}
+        {saveSuccess && (
+          <Status className="status-modal" message={saveSuccess} />
+        )}
+        {saveError && <Status className="status-modal" message={saveError} />}
         <div className="profile-wrapper">
           <img src="/img/user.png" alt="user profile image" />
         </div>

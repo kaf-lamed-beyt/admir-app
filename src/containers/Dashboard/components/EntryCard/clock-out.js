@@ -8,10 +8,6 @@ import Select from "react-dropdown-select";
 import { time } from "../../../../utils/common";
 import axios from "axios";
 import { dashboardDataEndpoints } from "../../../../routes/endpoints";
-import {
-  DashboardSuccessModal,
-  DashboardErrorModal,
-} from "../../../../components/Modals";
 import dayjs from "dayjs";
 import { today, yesterday, threeDaysAgo } from "../../../../utils/common";
 import dynamic from "next/dynamic";
@@ -64,7 +60,6 @@ export const ClockOutEntryCard = ({ open, title }) => {
   // in front of it. Using the replaceAll JavaScript method
   // to get rid of that, so we can pass it as a parameter in
   // the clockOut API call.
-
   const recordId = id.replaceAll(",", "");
 
   // Getting the recordId once the component
@@ -103,8 +98,12 @@ export const ClockOutEntryCard = ({ open, title }) => {
 
   return (
     <EntryWrapper open={open}>
-      {clockOutSuccess ? <Status message={clockOutSuccess} /> : ""}
-      {clockOutError ? <DashboardErrorModal message={clockOutError} /> : ""}
+      {clockOutSuccess && (
+        <Status className="status-modal" message={clockOutSuccess} />
+      )}
+      {clockOutError && (
+        <Status className="status-modal" message={clockOutError} />
+      )}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
         <div className="date-carousel">

@@ -11,11 +11,12 @@ import { BiPhoneCall } from "react-icons/bi";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { SiStatuspal } from "react-icons/si";
 import { FaTasks } from "react-icons/fa";
-import {
-  DashboardSuccessModal,
-  DashboardErrorModal,
-} from "../../../components/Modals";
 import { bool } from "yup";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(() => import("status-modal").then((mod) => mod.Status), {
+  ssr: false,
+});
 
 const Worker = () => {
   const [user, setUser] = React.useState({
@@ -103,17 +104,12 @@ const Worker = () => {
         </div>
       ) : (
         <WorkerProfile>
-          {workerAccessError ? (
-            <DashboardErrorModal message={workerAccessError} />
-          ) : (
-            ""
+          {workerAccessError && (
+            <Status className="status-modal" message={workerAccessError} />
           )}
-          {workerAccessSuccess ? (
-            <DashboardSuccessModal message={workerAccessSuccess} />
-          ) : (
-            ""
+          {workerAccessSuccess && (
+            <Status className="status-modal" message={workerAccessSuccess} />
           )}
-          <DashboardSuccessModal message={"helooooo"} />
           <div className="user-info">
             <div className="user-img-container">
               <img

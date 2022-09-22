@@ -1,10 +1,6 @@
 import React from "react";
 import axios from "axios";
 import propTypes from "prop-types";
-import {
-  DashboardErrorModal,
-  DashboardSuccessModal,
-} from "../../../../components/Modals";
 import { time } from "../../../../utils/common";
 import dayjs from "dayjs";
 import { EntryWrapper } from "./style/entry.styled";
@@ -56,8 +52,12 @@ export const ClockInEntryCard = ({ title, open }) => {
 
   return (
     <EntryWrapper open={open}>
-      {clockInSuccess ? <Status message={clockInSuccess} /> : ""}
-      {clockInError ? <DashboardErrorModal message={clockInError} /> : ""}
+      {clockInSuccess && (
+        <Status className="status-modal" message={clockInSuccess} />
+      )}
+      {clockInError && (
+        <Status className="status-modal" message={clockInError} />
+      )}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
         <div className="date-carousel">

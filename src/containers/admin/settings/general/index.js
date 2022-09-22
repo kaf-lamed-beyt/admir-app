@@ -1,17 +1,18 @@
 import React from "react";
-import DashHeader from "../../../Dashboard/components/DashHeader";
-import { SettingsWrapper, GeneralSettingsForm } from "../style/settings.styled";
-import Button from "../../../../components/Buttons";
-import { Fade } from "react-awesome-reveal";
-import { CountryPhoneInput } from "../../../../components/Inputs";
-import "react-phone-number-input/style.css";
 import axios from "axios";
-import { userEndpoints } from "../../../../routes/endpoints";
-import {
-  DashboardSuccessModal,
-  DashboardErrorModal,
-} from "../../../../components/Modals";
+import Button from "../../../../components/Buttons";
+import dynamic from "next/dynamic";
+import { Fade } from "react-awesome-reveal";
+import "react-phone-number-input/style.css";
 import { AiOutlineCamera } from "react-icons/ai";
+import { userEndpoints } from "../../../../routes/endpoints";
+import DashHeader from "../../../Dashboard/components/DashHeader";
+import { CountryPhoneInput } from "../../../../components/Inputs";
+import { SettingsWrapper, GeneralSettingsForm } from "../style/settings.styled";
+
+const Status = dynamic(() => import("status-modal").then((mod) => mod.Status), {
+  ssr: false,
+});
 
 const GeneralSettings = () => {
   const [fullname, setFullname] = React.useState("");
@@ -108,22 +109,10 @@ const GeneralSettings = () => {
       <DashHeader dashboardTitle="General Settings" user="Tom Cruise" />
       <Fade>
         <SettingsWrapper>
-          {saveSuccess ? (
-            <DashboardSuccessModal
-              message={saveSuccess}
-              className="settings-success"
-            />
-          ) : (
-            ""
+          {saveSuccess && (
+            <Status message={saveSuccess} className="status-modal" />
           )}
-          {saveError ? (
-            <DashboardErrorModal
-              message={saveError}
-              className="settings-error"
-            />
-          ) : (
-            ""
-          )}
+          {saveError && <Status className="status-modal" message={saveError} />}
           <div className="profile-wrapper">
             {/* i want to hide the input element */}
             <input

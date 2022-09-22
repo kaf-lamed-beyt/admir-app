@@ -10,8 +10,11 @@ import { authEndpoints } from "../../src/routes/endpoints";
 import Input from "../../src/components/Inputs";
 import Button from "../../src/components/Buttons";
 import Layout from "../../src/containers/Layouts/HomeLayout";
-import { ErrModal, SuccessModal } from "../../src/components/Modals";
-import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(() => import("status-modal").then((mod) => mod.Status), {
+  ssr: false,
+});
 
 const ForgotPasswordPage = () => {
   return (
@@ -65,8 +68,10 @@ export const DefaultResetPassword = () => {
   return (
     <Layout>
       <AuthWrapper>
-        {resetError ? <ErrModal message={resetError} /> : ""}
-        {resetSuccess ? <SuccessModal message={resetSuccess} /> : ""}
+        {resetError && <Status className="status-modal" message={resetError} />}
+        {resetSuccess && (
+          <Status className="status-modal" message={resetSuccess} />
+        )}
         <form onSubmit={handleForgot} className="reset-password">
           <h1>Forgot Password</h1>
           <p>

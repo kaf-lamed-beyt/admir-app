@@ -7,10 +7,10 @@ import { Fade } from "react-awesome-reveal";
 import { authEndpoints } from "../../../routes/endpoints";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { ErrModal, SuccessModal } from "../../../components/Modals";
 import { AuthContext } from "../../../context/auth-context";
 import { AiOutlineEye } from "react-icons/ai";
 import dynamic from "next/dynamic";
+
 const Status = dynamic(() => import("status-modal").then((mod) => mod.Status), {
   ssr: false,
 });

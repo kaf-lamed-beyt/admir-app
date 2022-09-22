@@ -6,10 +6,11 @@ import { Fade } from "react-awesome-reveal";
 import axios from "axios";
 import { authEndpoints } from "../../../../routes/endpoints";
 import { AiOutlineEye } from "react-icons/ai";
-import {
-  DashboardErrorModal,
-  DashboardSuccessModal,
-} from "../../../../components/Modals";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(() => import("status-modal").then((mod) => mod.Status), {
+  ssr: false,
+});
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = React.useState("");
@@ -84,15 +85,11 @@ const ChangePassword = () => {
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Change Password" user="Tom Cruise" />
-      {passwordChangeSuccess ? (
-        <DashboardSuccessModal message={passwordChangeSucess} />
-      ) : (
-        ""
+      {passwordChangeSuccess && (
+        <Status className="status-modal" message={passwordChangeSucess} />
       )}
-      {passwordChangeError ? (
-        <DashboardErrorModal message={passwordChangeError} />
-      ) : (
-        ""
+      {passwordChangeError && (
+        <Status className="status-modal" message={passwordChangeError} />
       )}
       <Fade>
         <SettingsWrapper>

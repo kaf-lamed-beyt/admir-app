@@ -4,16 +4,17 @@ import {
   userEndpoints,
   dashboardDataEndpoints,
 } from "../../../../routes/endpoints";
-import {
-  DashboardErrorModal,
-  DashboardSuccessModal,
-} from "../../../../components/Modals";
 import { EntryWrapper } from "./style/entry.styled";
 import Icon from "../../../../components/Icons";
 import axios from "axios";
 import { Fade } from "react-awesome-reveal";
 import propTypes from "prop-types";
 import Button from "../../../../components/Buttons";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(() => import("status-modal").then((mod) => mod.Style), {
+  ssr: false,
+});
 
 export const ReportsEntry = ({ title, open }) => {
   const [reportTitle, setReportTile] = React.useState("");
@@ -111,8 +112,10 @@ export const ReportsEntry = ({ title, open }) => {
 
   return (
     <EntryWrapper open={open} className="reports-entry">
-      {reportErorr ? <DashboardErrorModal message={reportErorr} /> : ""}
-      {reportSuccess ? <DashboardSuccessModal message={reportSuccess} /> : ""}
+      {reportErorr && <Status className="status-modal" message={reportErorr} />}
+      {reportSuccess && (
+        <Status className="status-modal" message={reportSuccess} />
+      )}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
         <form onSubmit={submitReport}>

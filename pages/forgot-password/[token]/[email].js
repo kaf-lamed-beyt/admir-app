@@ -11,7 +11,11 @@ import Layout from "../../../src/containers/Layouts/HomeLayout";
 import { useRouter } from "next/router";
 import { AiOutlineEye } from "react-icons/ai";
 import { authEndpoints } from "../../../src/routes/endpoints";
-import { SuccessModal, ErrModal } from "../../../src/components/Modals";
+import dynamic from "next/dynamic";
+
+const Status = dynamic(() => import("status-modal").then((mod) => mod.Status), {
+  ssr: false,
+});
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = React.useState("");
@@ -73,16 +77,8 @@ const ResetPassword = () => {
       <Layout>
         {email && token ? (
           <AuthWrapper>
-            {resetPasswordSuccess ? (
-              <SuccessModal message={resetPasswordSuccess} />
-            ) : (
-              ""
-            )}
-            {resetPasswordError ? (
-              <ErrModal message={resetPasswordError} />
-            ) : (
-              ""
-            )}
+            {resetPasswordSuccess && <Status message={resetPasswordSuccess} />}
+            {resetPasswordError && <Status message={resetPasswordError} />}
             <form onSubmit={resetPassword} className="reset-password">
               <h1>Reset Password</h1>
               <p>Please enter your new password</p>
