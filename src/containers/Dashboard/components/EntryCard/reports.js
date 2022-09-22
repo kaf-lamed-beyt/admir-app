@@ -112,9 +112,9 @@ export const ReportsEntry = ({ title, open }) => {
 
   return (
     <EntryWrapper open={open} className="reports-entry">
-      {reportErorr && <Status className="status-modal" message={reportErorr} />}
+      {reportErorr && <Status className="dash-status" message={reportErorr} />}
       {reportSuccess && (
-        <Status className="status-modal" message={reportSuccess} />
+        <Status className="dash-status" message={reportSuccess} />
       )}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>

@@ -77,9 +77,9 @@ const GeneralSettings = () => {
 
       <SettingsWrapper>
         {saveSuccess && (
-          <Status className="status-modal" message={saveSuccess} />
+          <Status className="dash-status" message={saveSuccess} />
         )}
-        {saveError && <Status className="status-modal" message={saveError} />}
+        {saveError && <Status className="dash-status" message={saveError} />}
         <div className="profile-wrapper">
           <img src="/img/user.png" alt="user profile image" />
         </div>

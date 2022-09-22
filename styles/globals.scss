@@ -33,36 +33,9 @@ body {
   margin-left: 0px;
 }
 
-.dash-error-msg {
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  background: ghostwhite;
-  border-bottom: 2px solid var(--danger);
-  box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.11);
-  height: 45px;
-  width: 300px;
-  font-weight: 500;
-  border-radius: 3px;
-  color: var(--danger);
-  padding-top: 5px;
+.dash-status {
   margin-top: -20px;
   margin-left: 320px;
-  animation: scaleModal 5s ease-in forwards;
-  padding: 7px 8px;
-  opacity: 0;
-  z-index: 10;
-
-  p {
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  svg {
-    color: var(--danger);
-    font-size: 24px;
-    font-weight: 500;
-  }
 
   @media only screen and (min-width: 0px) and (max-width: 576px) {
     margin-left: 38px;
@@ -197,6 +170,16 @@ body {
 ::-webkit-scrollbar {
   width: 7px;
   border-radius: 8px;
+  p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  svg {
+    color: var(--danger);
+    font-size: 24px;
+    font-weight: 500;
+  }
 }
 
 ::-webkit-scrollbar-thumb {

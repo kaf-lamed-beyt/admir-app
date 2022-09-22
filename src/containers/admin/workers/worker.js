@@ -105,10 +105,10 @@ const Worker = () => {
       ) : (
         <WorkerProfile>
           {workerAccessError && (
-            <Status className="status-modal" message={workerAccessError} />
+            <Status className="dash-status" message={workerAccessError} />
           )}
           {workerAccessSuccess && (
-            <Status className="status-modal" message={workerAccessSuccess} />
+            <Status className="dash-status" message={workerAccessSuccess} />
           )}
           <div className="user-info">
             <div className="user-img-container">

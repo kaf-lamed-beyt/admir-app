@@ -53,10 +53,10 @@ export const ClockInEntryCard = ({ title, open }) => {
   return (
     <EntryWrapper open={open}>
       {clockInSuccess && (
-        <Status className="status-modal" message={clockInSuccess} />
+        <Status className="dash-status" message={clockInSuccess} />
       )}
       {clockInError && (
-        <Status className="status-modal" message={clockInError} />
+        <Status className="dash-status" message={clockInError} />
       )}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>

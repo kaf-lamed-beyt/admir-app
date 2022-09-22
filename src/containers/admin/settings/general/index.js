@@ -106,13 +106,13 @@ const GeneralSettings = () => {
 
   return (
     <React.Fragment>
-      <DashHeader dashboardTitle="General Settings" user="Tom Cruise" />
+      <DashHeader dashboardTitle="General Settings" user={fullname} />
       <Fade>
         <SettingsWrapper>
           {saveSuccess && (
-            <Status message={saveSuccess} className="status-modal" />
+            <Status message={saveSuccess} className="dash-status" />
           )}
-          {saveError && <Status className="status-modal" message={saveError} />}
+          {saveError && <Status className="dash-status" message={saveError} />}
           <div className="profile-wrapper">
             {/* i want to hide the input element */}
             <input
