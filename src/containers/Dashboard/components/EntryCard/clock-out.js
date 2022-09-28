@@ -98,12 +98,16 @@ export const ClockOutEntryCard = ({ open, title }) => {
 
   return (
     <EntryWrapper open={open}>
-      {clockOutSuccess && (
+      {clockOutSuccess ? (
         <Status className="dash-status" message={clockOutSuccess} />
-      )}
-      {clockOutError && (
-        <Status className="dash-status" message={clockOutError} />
-      )}
+      ) : null}
+      {clockOutError ? (
+        <Status
+          className="dash-status"
+          message={clockOutError}
+          status="error"
+        />
+      ) : null}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
         <div className="date-carousel">

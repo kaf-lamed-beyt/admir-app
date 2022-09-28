@@ -129,12 +129,8 @@ const SignUp = () => {
         </Fade>
       </AuthSteps>
       <AuthWrapper>
-        {signUpSuccess && (
-          <Status className="status-modal" message={signUpSuccess} />
-        )}
-        {signUpError && (
-          <Status className="status-modal" message={signUpError} />
-        )}
+        {signUpSuccess ? <Status message={signUpSuccess} /> : null}
+        {signUpError ? <Status message={signUpError} status="error" /> : null}
         <form className="signup-form" onSubmit={handleSignUp}>
           {formStep === 0 && (
             <>
@@ -202,7 +198,6 @@ const SignUp = () => {
             />
           )}
           {formStep === 3 && <h3>congrats ${fullname}</h3>}
-
           <SignUpButtons
             step={formStep}
             onClick={() => nextForm()}

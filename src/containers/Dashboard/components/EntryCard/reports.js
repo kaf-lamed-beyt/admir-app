@@ -112,10 +112,12 @@ export const ReportsEntry = ({ title, open }) => {
 
   return (
     <EntryWrapper open={open} className="reports-entry">
-      {reportErorr && <Status className="dash-status" message={reportErorr} />}
-      {reportSuccess && (
+      {reportErorr ? (
+        <Status className="dash-status" message={reportErorr} />
+      ) : null}
+      {reportSuccess ? (
         <Status className="dash-status" message={reportSuccess} />
-      )}
+      ) : null}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
         <form onSubmit={submitReport}>

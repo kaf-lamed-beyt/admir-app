@@ -68,10 +68,8 @@ export const DefaultResetPassword = () => {
   return (
     <Layout>
       <AuthWrapper>
-        {resetError && <Status className="status-modal" message={resetError} />}
-        {resetSuccess && (
-          <Status className="status-modal" message={resetSuccess} />
-        )}
+        {resetError ? <Status message={resetError} status="erorr" /> : null}
+        {resetSuccess ? <Status message={resetSuccess} /> : null}
         <form onSubmit={handleForgot} className="reset-password">
           <h1>Forgot Password</h1>
           <p>

@@ -104,12 +104,16 @@ const Worker = () => {
         </div>
       ) : (
         <WorkerProfile>
-          {workerAccessError && (
-            <Status className="dash-status" message={workerAccessError} />
-          )}
-          {workerAccessSuccess && (
+          {workerAccessError ? (
+            <Status
+              className="dash-status"
+              message={workerAccessError}
+              status="error"
+            />
+          ) : null}
+          {workerAccessSuccess ? (
             <Status className="dash-status" message={workerAccessSuccess} />
-          )}
+          ) : null}
           <div className="user-info">
             <div className="user-img-container">
               <img

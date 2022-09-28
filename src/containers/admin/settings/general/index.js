@@ -109,10 +109,16 @@ const GeneralSettings = () => {
       <DashHeader dashboardTitle="General Settings" user={fullname} />
       <Fade>
         <SettingsWrapper>
-          {saveSuccess && (
+          {saveSuccess ? (
             <Status message={saveSuccess} className="dash-status" />
-          )}
-          {saveError && <Status className="dash-status" message={saveError} />}
+          ) : null}
+          {saveError ? (
+            <Status
+              className="dash-status"
+              message={saveError}
+              status="error"
+            />
+          ) : null}
           <div className="profile-wrapper">
             {/* i want to hide the input element */}
             <input

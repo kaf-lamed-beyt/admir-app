@@ -85,12 +85,16 @@ const ChangePassword = () => {
   return (
     <React.Fragment>
       <DashHeader dashboardTitle="Change Password" user="Tom Cruise" />
-      {passwordChangeSuccess && (
+      {passwordChangeSuccess ? (
         <Status className="dash-status" message={passwordChangeSucess} />
-      )}
-      {passwordChangeError && (
-        <Status className="dash-status" message={passwordChangeError} />
-      )}
+      ) : null}
+      {passwordChangeError ? (
+        <Status
+          className="dash-status"
+          message={passwordChangeError}
+          status="error"
+        />
+      ) : null}
       <Fade>
         <SettingsWrapper>
           <p id="err"></p>

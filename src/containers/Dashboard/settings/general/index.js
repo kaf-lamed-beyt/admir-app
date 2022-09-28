@@ -76,10 +76,12 @@ const GeneralSettings = () => {
       <DashHeader dashboardTitle="General Settings" user="Tom Cruise" />
 
       <SettingsWrapper>
-        {saveSuccess && (
+        {saveSuccess ? (
           <Status className="dash-status" message={saveSuccess} />
-        )}
-        {saveError && <Status className="dash-status" message={saveError} />}
+        ) : null}
+        {saveError ? (
+          <Status className="dash-status" message={saveError} status="error" />
+        ) : null}
         <div className="profile-wrapper">
           <img src="/img/user.png" alt="user profile image" />
         </div>

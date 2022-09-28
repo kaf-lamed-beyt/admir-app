@@ -23,8 +23,8 @@ const SignIn = () => {
   const [password, setPassword] = React.useState("");
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [signInSuccess, setSignInSuccess] = React.useState();
-  const [signInError, setSignInError] = React.useState();
+  const [signInSuccess, setSignInSuccess] = React.useState("");
+  const [signInError, setSignInError] = React.useState("");
   const router = useRouter();
   const authContext = React.useContext(AuthContext);
 
@@ -82,8 +82,10 @@ const SignIn = () => {
           : router.push("/admin");
       }, 200);
     } catch (error) {
+      const message = error.response.data.msg;
+      console.log(message);
       setLoading(false);
-      setSignInError(error.response.data.msg);
+      setSignInError(message);
       setSignInSuccess("");
     }
   };
@@ -104,12 +106,16 @@ const SignIn = () => {
           </p>
         </Fade>
       </div>
-      {signInSuccess && (
+      {signInSuccess ? (
         <Status className="status-modal" message={signInSuccess} />
-      )}
-      {signInError && (
-        <Status className="status-modal" message={signInSuccess} />
-      )}
+      ) : null}
+      {signInError ? (
+        <Status
+          className="status-modal"
+          message={signInSuccess}
+          status="error"
+        />
+      ) : null}
       <AuthWrapper>
         <form className="signin-form" onSubmit={handleSignIn}>
           <Fade direction="up" cascade triggerOnce>

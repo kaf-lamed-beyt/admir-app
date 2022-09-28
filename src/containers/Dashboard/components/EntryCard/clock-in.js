@@ -52,12 +52,12 @@ export const ClockInEntryCard = ({ title, open }) => {
 
   return (
     <EntryWrapper open={open}>
-      {clockInSuccess && (
+      {clockInSuccess ? (
         <Status className="dash-status" message={clockInSuccess} />
-      )}
-      {clockInError && (
-        <Status className="dash-status" message={clockInError} />
-      )}
+      ) : null}
+      {clockInError ? (
+        <Status className="dash-status" message={clockInError} status="error" />
+      ) : null}
       <Fade direction="up" triggerOnce>
         <p className="entry-title">{title}</p>
         <div className="date-carousel">

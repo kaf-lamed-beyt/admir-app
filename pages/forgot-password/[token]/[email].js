@@ -77,8 +77,12 @@ const ResetPassword = () => {
       <Layout>
         {email && token ? (
           <AuthWrapper>
-            {resetPasswordSuccess && <Status message={resetPasswordSuccess} />}
-            {resetPasswordError && <Status message={resetPasswordError} />}
+            {resetPasswordSuccess ? (
+              <Status message={resetPasswordSuccess} />
+            ) : null}
+            {resetPasswordError ? (
+              <Status message={resetPasswordError} status="error" />
+            ) : null}
             <form onSubmit={resetPassword} className="reset-password">
               <h1>Reset Password</h1>
               <p>Please enter your new password</p>

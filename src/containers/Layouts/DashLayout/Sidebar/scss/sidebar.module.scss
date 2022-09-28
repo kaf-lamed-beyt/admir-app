@@ -39,9 +39,9 @@
     .item_wrapper {
       display: flex;
 
-      :nth-last-child() {
-        border: 1px solid blue !important;
-      }
+      // :nth-last-child() {
+      //   border: 1px solid blue !important;
+      // }
 
       svg {
         margin-left: -20px;
