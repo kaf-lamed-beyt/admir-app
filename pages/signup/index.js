@@ -1,7 +1,8 @@
 import React from "react";
-import SignUp from "../../src/containers/UserAuth/SignUp";
 import Head from "next/head";
 import HomeLayout from "../../src/containers/Layouts/HomeLayout";
+import { routes } from "../../src/routes";
+const { register: SignUp } = routes;
 
 const Signup = () => {
   return (

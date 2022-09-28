@@ -3,12 +3,8 @@ import Head from "next/head";
 import HomeLayout from "../src/containers/Layouts/HomeLayout";
 import { AuthContext } from "../src/context/auth-context";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-// import SignIn from "../src/containers/UserAuth/SignIn";
-
-const SignIn = dynamic(() => import("../src/containers/UserAuth/SignIn"), {
-  loading: () => <b>loading...</b>,
-});
+import { routes } from "../src/routes";
+const { login: SignIn } = routes;
 
 export default function HomePage() {
   const authContext = React.useContext(AuthContext);
