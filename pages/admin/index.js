@@ -1,11 +1,12 @@
 import React from "react";
-import Location from "../../src/containers/admin/location";
 import Head from "next/head";
 import DashLayout from "../../src/containers/admin/DashLayout";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { userEndpoints } from "../../src/routes/endpoints";
 import { PulseLoader } from "react-spinners";
+import { routes } from "../../src/routes";
+const { admin: Location } = routes;
 
 export default function AdminPage() {
   const [data, setData] = React.useState();

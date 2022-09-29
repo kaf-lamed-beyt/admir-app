@@ -6,13 +6,15 @@ export const routes = {
   // auth routes
   register: dynamic(() => import("../../src/containers/UserAuth/SignUp")),
   login: dynamic(() => import("../../src/containers/UserAuth/SignIn")),
-  //   user dashboard routes
-  Dashboard: dynamic(() => import("../containers/Dashboard/overview")),
-  DashboardReports: dynamic(() => import("../containers/Dashboard/reports")),
-  DashboardSettings: dynamic(() => import("../containers/Dashboard/settings")),
-  DashboardTimeTracker: dynamic(() =>
-    import("../containers/Dashboard/time-tracker")
-  ),
+  // user dashboard routes
+  dashboard: dynamic(() => import("../containers/Dashboard/overview")),
+  reports: dynamic(() => import("../containers/Dashboard/reports")),
+  settings: dynamic(() => import("../containers/Dashboard/settings")),
+  tracker: dynamic(() => import("../containers/Dashboard/time-tracker")),
 
-  //   admin dash routes
+  // admin dash routes
+  admin: dynamic(() => import("../containers/admin/location")),
+  reports: dynamic(() => import("../containers/admin/reports")),
+  workers: dynamic(() => import("../containers/admin/workers")),
+  settings: dynamic(() => import("../containers/admin/settings")),
 };
