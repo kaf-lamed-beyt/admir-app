@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import HomeLayout from "../../src/containers/Layouts/HomeLayout";
-import { routes } from "../../src/routes";
+import { routes } from "@routes/index";
 const { register: SignUp } = routes;
 
 const Signup = () => {

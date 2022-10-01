@@ -4,10 +4,7 @@ import { ReportContainer } from "../../admin/reports/style/report.styled";
 import Head from "next/head";
 import axios from "axios";
 import DashHeader from "../../../containers/Dashboard/components/DashHeader";
-import {
-  dashboardDataEndpoints,
-  userEndpoints,
-} from "../../../routes/endpoints";
+import { dashboardDataEndpoints, userEndpoints } from "@routes/endpoints";
 import { useRouter } from "next/router";
 import { PuffLoader } from "react-spinners";
 
@@ -71,7 +68,7 @@ export default function IndividualReport() {
   React.useEffect(() => {
     getUniqueReport();
     getUniqueUser();
-  }, []);
+  }, [currentUserId]);
 
   return (
     <React.Fragment>

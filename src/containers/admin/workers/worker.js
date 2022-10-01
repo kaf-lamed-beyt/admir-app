@@ -87,7 +87,7 @@ const Worker = () => {
 
   React.useEffect(() => {
     getUniqueUser();
-  }, []);
+  }, [currentUserId]);
 
   return (
     <React.Fragment>

@@ -3,7 +3,7 @@ import Head from "next/head";
 import HomeLayout from "@layouts/HomeLayout";
 import { AuthContext } from "@context/auth-context";
 import { useRouter } from "next/router";
-import { routes } from "@routes";
+import { routes } from "@routes/index";
 const { login: SignIn } = routes;
 
 export default function HomePage() {

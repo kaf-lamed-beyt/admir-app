@@ -58,8 +58,8 @@ const WorkersTable = () => {
             <tbody>
               {data.map((staff) => {
                 return (
-                  <Link href={`workers/${staff._id}`}>
-                    <tr key={staff.key}>
+                  <Link href={`workers/${staff._id}`} key={staff.key} passHref>
+                    <tr>
                       <td className="fullname">{staff.fullName}</td>
                       <td className="email">{staff.email}</td>
                       <td className="phone">{staff.phoneNumber}</td>

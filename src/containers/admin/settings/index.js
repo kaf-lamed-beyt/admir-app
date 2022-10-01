@@ -13,13 +13,13 @@ const Settings = () => {
       <Fade>
         <SettingsWrapper>
           <div className="settings-card">
-            <Link href="/admin/settings/general">
+            <Link href="/admin/settings/general" passHref>
               <div className="first-card">
                 <FiSettings />
                 <h3>General Settings</h3>
               </div>
             </Link>
-            <Link href="/admin/settings/change-password">
+            <Link href="/admin/settings/change-password" passHref>
               <div className="second-card">
                 <MdOutlinePassword />
                 <h3>Change Password</h3>
