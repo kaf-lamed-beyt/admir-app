@@ -10,6 +10,18 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="theme-color" content="rgba(215, 87, 17, 1)" />
         <link rel="icon" type="image/ico" href="" />
+        <link
+          rel="preload"
+          as="font"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          crossOrigin
+        />
+        <link
+          rel="preload"
+          as="font"
+          href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&family=Gayathri:wght@100;400;700&family=Source+Sans+3:wght@200;300;400;500;600;700;800;900&display=swap"
+          crossOrigin
+        />
         <meta
           name="description"
           content="Geotechnical solutions in civil Engineering."
