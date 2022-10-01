@@ -1,7 +1,9 @@
 import React from "react";
 import Head from "next/head";
 import DashLayout from "../../../src/containers/admin/DashLayout";
-import Settings from "../../../src/containers/admin/settings";
+// import Settings from "@adminRoutes/settings";
+import { routes } from "@routes";
+const { adminSettings: Settings } = routes;
 
 export default function AdminTimeTrackerPage() {
   return (

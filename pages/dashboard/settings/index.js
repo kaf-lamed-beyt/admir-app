@@ -1,9 +1,9 @@
 import Head from "next/head";
 import React from "react";
-import DashLayout from "../../../src/containers/Layouts/DashLayout";
-import Settings from "../../../src/containers/Dashboard/settings";
-import { AuthContext } from "../../../src/context/auth-context";
-import { useRouter } from "next/router";
+import DashLayout from "@layouts/DashLayout";
+// import Settings from "@dashboardRoutes/settings";
+import { routes } from "@routes";
+const { settings: Settings } = routes;
 
 export default function SettingsPage() {
   return (

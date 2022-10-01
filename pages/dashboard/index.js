@@ -1,14 +1,14 @@
+import axios from "axios";
 import Head from "next/head";
 import React from "react";
-import DashLayout from "../../src/containers/Layouts/DashLayout";
-import Overview from "../../src/containers/Dashboard/overview";
+import { routes } from "@routes";
+const { dashboard: Overview } = routes;
+import DashLayout from "@layouts/DashLayout";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../src/context/auth-context";
-import axios from "axios";
 import { userEndpoints } from "../../src/routes/endpoints";
 import { PulseLoader } from "react-spinners";
 import { css } from "@emotion/react";
-import { Fade } from "react-awesome-reveal";
 
 const override = css`
   display: block;
@@ -102,11 +102,9 @@ export default function OverviewPage() {
         <title>Dashboard | Overview</title>
       </Head>
       {data ? (
-        <Fade>
-          <DashLayout>
-            <Overview />
-          </DashLayout>
-        </Fade>
+        <DashLayout>
+          <Overview />
+        </DashLayout>
       ) : (
         <div className="loader">
           <PulseLoader color="var(--primary)" loading={loading} />

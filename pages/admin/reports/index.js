@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import DashLayout from "@adminLayout";
 import { routes } from "@routes";
-const { reports: Reports } = routes;
+const { adminReports: Reports } = routes;
 
 export default function AdminTimeTrackerPage() {
   return (
