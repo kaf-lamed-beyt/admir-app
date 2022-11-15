@@ -100,7 +100,7 @@ const SignIn = () => {
         <Fade triggerOnce>
           <p>
             Don’t have an account? {""}
-            <Link href="/signup">
+            <Link href="/signup" passHref>
               <span>Sign Up</span>
             </Link>
           </p>

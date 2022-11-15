@@ -95,7 +95,7 @@ export const ReportsEntry = ({ title, open }) => {
         longitude: crd.longitude,
       });
 
-      Geocode.setApiKey("AIzaSyAMGgifA5cwnmJ0cwauMcF-s1yJR34X2Jg");
+      Geocode.setApiKey(process.env.NEXT_PUBLIC_KEY);
 
       Geocode.fromLatLng(crd.latitude, crd.longitude).then((response) => {
         const address = response.results[0].formatted_address;
